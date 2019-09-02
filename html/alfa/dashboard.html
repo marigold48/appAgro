@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Dashboard</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+
+	<!--  ==================== Ibrerias externas ==================== -->
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+
+	<script type='text/javascript' src="lib/jquery_321.min.js"></script>
+	<script type='text/javascript' src="lib/bootstrap_337.min.js"></script>
+	<script type='text/javascript' src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<!--  ==================== Ibrerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<!--  ==================== Lbrerias aplicación ================== -->
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/dashboard.js'></script>
+</head>
+
+
+<body onload='initDashboard()'>
+	
+	<nav id="divMenu" class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="javascript:goInfo()">Agro</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="javascript:goExplotacion()">
+					<span id="EXPLOT">Explotación**</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="javascript:goRepositorio()">
+					<span id="REPO">Repositorio**</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="javascript:goCalendario()">
+					<span id="CALEND">Calendario**</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="javascript:goIdioma()">
+					<span id="IDIOMA">Idioma**</span>
+				</a>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<span  id="MODULS">Módulos**</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:goSuelo()">
+							<span id="SUELO">Suelo**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:goPlantas()">
+							<span id="PLANTAS">Plantas**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:goCultivos()">
+							<span id="CULTS">Cultivos**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:goCuaderno()">
+							<span id="QUAD">Cuaderno**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:goClima()">
+							<span id="QUAD">Clima**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:goRiego()">
+							<span id="QUAD">Riego**</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-user">&nbsp;</i>
+					<span id="usrMenu"> User</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:cambiaPwdUser()">
+							<span id="CHPWD">Cambiar password</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:cambiaKeoUser()">
+							<span id="CHKEO">Cambiar idioma</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:cierraSesion()">
+							<span id="EXIT">Cerrar sesión**</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav> 
+
+<!-- Fin del menu --------------------------------------------------->
+    <div class="container">
+      <div id="estaPag" class="row">
+
+		<div>
+			<h1 id="H1EXPL">Explotación</h1>
+			<div class="col-md-4">
+				<img class="img-circle" src="img/zonas.jpg" alt="imagen" width="300" height="300">
+	         <h2 id="H2SUELO">Suelo</h2>
+	         <div id="DIVSUELO">
+	         <p>Este módulo permite la definicion de las <b>Zonas</b> de cultivo.</p>
+
+	         <ul>
+	         	<li>Fincas</li>
+	         	<li>Zonas</li>
+	         	<li>Bancales</li>
+	          </ul>
+	         	
+	         </div>
+
+				<p><a class="btn btn-default" href="javascript:goSuelo()" role="button">
+					<span id="BTNSUELO">Suelo</span>&raquo;</a></p>
+			</div> <!-- col-md-4 -->
+ 
+			<div class="col-md-4">
+				<img class="img-circle" src="img/especies.jpg" alt="imagen" width="300" height="300">
+				<h2 id="H2PLANT">Plantas</h2>
+				<div id="DIVPLANT">
+				<p>Para establecer las <b>especies y variedades</b> a plantar en la explotación.</p>
+					
+				</div>
+				<p><a class="btn btn-default" href="javascript:goPlantas()" role="button">
+					<span id="BTNPLANT">Plantas</span> &raquo;</a></p>
+			</div>  <!-- col-md-4 -->
+
+			<div class="col-md-4">
+				<img class="img-circle" src="img/escenarios.jpg" alt="imagen" width="300" height="300">
+				<h2 id="H2CULT">Cultivos</h2>
+				<div id="DIVCULT">
+				<p><b>Aplicación</b> de especies/variedades sobre los bancales de las zonas definidas en la finca</p>
+					
+				</div>
+				<p><a class="btn btn-default" href="javascript:goCultivos()" role="button">
+					<span id="BTNCULT">Cultivos</span> &raquo;</a></p>
+        </div>  <!-- col-md-4 -->
+      </div> <!-- V-IF -->
+<!-- Final SIN Traducción -------------------------------------------->
+
+		</div> <!-- row -->
+	</div> <!-- /container -->
+
+	
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 slot="header">{{conds.retol}}</h3>
+			<div slot="body">
+				<form	v-if="edit_t === 'USER'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" name="usr"	placeholder="Usuario">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.pwd" type="text" name="pwd" placeholder="Password">
+					<span class="error" v-if="(!conds.valid.pwd.ok)">{{conds.valid.pwd.txt}}</span>
+					<input class="form-control" v-model="item.obj.conf" type="text" name="conf" placeholder="Confirmac.">
+					<span class="error" v-if="(!conds.valid.conf.ok)">{{conds.valid.conf.txt}}</span>
+				</form>
+
+
+				<form	v-if="edit_t === 'CHKEO'" class="form">
+					<select size="8" class="form-control" @change="handleChange">
+						<option v-for="item in items" :value="item._id">{{ item.tag }}</option>
+					</select>
+				</form>
+			</div>
+		</modal>
+	</div> <!-- appEdit -->
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+App Agro (alfa) en http://localhost:3102
+Connected to Database
+GET metas by iam/org: rMenuML/DEMO01
+GET metas by iam/org: rTextosML/DEMO01
+GET metas by iam/org: rClasesML/DEMO01
+GET by _id :5d65de9c6c59440b50feb47d
+GET by _id :5d65dea26c59440b50feb482
+GET by _id :5d65de926c59440b50feb47b
+GET metas by iam/org: rMenuML/DEMO01
+GET metas by iam/org: rTextosML/DEMO01
+GET metas by iam/org: rClasesML/DEMO01
+GET metas by iam/org: Finca/DEMO01
+GET by _id :5d65de926c59440b50feb47b
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d65df056c59440b50feb486
+PUT: 5d65df056c59440b50feb486
+PUT: 5d65df056c59440b50feb486
+POST
+PUT: 5d65df056c59440b50feb486
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+GET metas by iam/org: rMenuML/DEMO01
+GET metas by iam/org: rTextosML/DEMO01
+GET metas by iam/org: rClasesML/DEMO01
+GET metas by iam/org: Finca/DEMO01
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d65de926c59440b50feb47b
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+PUT: 5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+PUT: 5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+GET by _id :5d65df056c59440b50feb486
+GET by _id :5d67afd2c806120dd3060b83
+PUT: 5d65df056c59440b50feb486
+GET metas by iam/org: rMenuML/DEMO01
+GET metas by iam/org: rTextosML/DEMO01
+GET metas by iam/org: rClasesML/DEMO01
+GET metas by iam/org: Finca/DEMO01
+GET by _id :5d65de926c59440b50feb47b
+GET by _id :5d65df056c59440b50feb486

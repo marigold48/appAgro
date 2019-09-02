@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+	<title>Gantt tareas</title>
+
+<!--  ==================== LOCAL ==================  -->
+    <link rel="stylesheet" href="lib/bootstrap_335.min.css">
+    <link rel="stylesheet" href="lib/font-awesome_430.min.css">
+    <script src="lib/jquery_321.min.js"></script>
+    <script src="lib/bootstrap_337.min.js"></script>
+    <script src="lib/vue_2517.js"></script>
+
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Trazo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/tasksGantt.js'></script>
+
+	<style>
+		#divBase {
+			position: absolute;
+			left: 2px;
+			top: 60px;
+			width: 95%; 
+			height: 600px;
+			border: 2px maroon solid;
+		}
+
+		.LAB {color:black;}
+		.DOM {color:red;}
+		.LOC {color:blue;}
+		.AUT {color:green;}
+		.NAC {color:red;}
+		.hoy {background-color:gray}
+
+		.rDrag {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			border-radius: 8px;
+			cursor: move;
+			background-color:steelblue;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		.Task {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			cursor: move;
+			background-color:#abcdef;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		.Epoca {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border-top: 5px gray solid;
+			cursor: move;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		.rNodo {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			cursor: move;
+			background-color:#abcdef;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		tbody > tr {height : 70px;}
+		.table tr th { width: 12.5% !important;}
+		.blanco {background-color:white;}
+	</style>
+</head>
+<body onload="initTasksGantt()">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Gantt tasks</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="javascript:goHome()">Inicio</a></li>
+	      <li><a href="javascript:goCalendario()">Calendario</a></li>
+
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Módulos
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+							<li><a href="javascript:goZonas()">Zonas</a></li>
+							<li><a href="javascript:goEscenarios()">Escenarios</a></li>
+							<li><a href="javascript:goPlantas()">Plantas</a></li>
+		        </ul>
+		      </li>
+			<li class="active"><button type="button" onclick="grabaKairos()"><i class="fa fa-save"></i></button></li>
+
+	    </ul>
+
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="javascript:cambiaPwdUser()">Cambiar password</a></li>
+	          <li><a href="javascript:cierraSesion()">Cerrar sesión</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav> 
+	<div id="divBase"></div>
+
+
+		</div>
+		</div>
+	</div>
+	<div id="appModal"></div>
+</body>
+</html>

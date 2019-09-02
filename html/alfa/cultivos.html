@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+	<title>Cultivos</title>
+
+<!--  ==================== LOCAL ==================  -->
+    <link rel="stylesheet" href="lib/bootstrap_335.min.css">
+    <link rel="stylesheet" href="lib/font-awesome_430.min.css">
+    <script src="lib/jquery_321.min.js"></script>
+    <script src="lib/bootstrap_337.min.js"></script>
+    <script src="lib/vue_2517.js"></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+
+	<script type='text/javascript' src='js/suelo.js'></script>
+	<script type='text/javascript' src='js/plantas.js'></script>
+	<script type='text/javascript' src='js/cultivos.js'></script>
+</head>
+<body onload='initCultivos()'>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><span id="BRAND">Planificación cultivos</span></a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li ><a href="javascript:goHome()"><span id="INICI">Inicio</span></a></li>
+	      <li class="dropdown" >
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	        <span id="MODO">Modo</span>
+	        <span class="caret"></span></a>
+	        <ul id="modoPlantas" class="dropdown-menu">
+	          <li @click="toggle('FRUTA')"><i class="fa fa-check" v-if="modo==='FRUTA'"></i>
+	          <span id="FRUTA"> Frutales**</span></a></li>
+	          <li @click="toggle('HORTA')"><i class="fa fa-check" v-if="modo==='HORTA'"></i>
+	          <span id="HORTA"> Hortalizas**</span></a></li>
+	        </ul>
+	      </li>
+	      <li class="active"><a id="ESCEN" href="javascript:showListaEscenarios()">Escenarios</a></li>
+	      <li><a id="AGROJAR" href="javascript:showListaAgroJars()">Temporadas**</a></li>
+
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		        <span id="MODUL">Módulos**</span>
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+							<li><a href="javascript:goSuelo()"><span id="ZONA">Suelo**</span></a></li>
+							<li><a href="javascript:goPlantas()"><span id="PLANT">Plantas**</span></a></li>
+							<li><a href="javascript:goTareas()"><span id="TASK">Tareas**</span></a></li>
+							<li><a href="javascript:goMatrices()"><span id="MATRIZ">Matrices¨</span></a></li>
+		        </ul>
+		      </li>
+
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		        <span id="EVAL">Evaluación</span>
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+							<li><a href="javascript:goEvalEconomica()"><span id="ECON">Económica</span></a></li>
+							<li><a href="javascript:goIncompatibles()"><span id="INCOMP">Incompatibilidades</span></a></li>
+							<li><a href="javascript:goRotaciones()"><span id="ROTAC">Rotaciones</span></a></li>
+							<li><a href="javascript:goTasksGantt()"><span id="GANTT">Gantt</span></a></li>
+							<li><a href="javascript:goFrappeGantt()"><span id="GANTT2">Gantt SVG</span></a></li>
+		        </ul>
+		      </li>
+
+	    </ul>
+
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="javascript:cambiaPwdUser()"><span id="CHPWD">Cambiar password</span></a></li>
+	          <li><a href="javascript:cierraSesion()"><span id="EXIT">Cerrar sesión</span></a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav> 
+
+	<div style="display:none">
+		<div id="h3Zonas"></div>
+		<div id="h3Bancales"></div>
+		<div id="h3Especies"></div>
+		<div id="appModo"></div>
+	</div>
+
+	<div id="pagCultivos" class="container">
+		<div class="row">
+		<div class="col-md-3">
+			<h3 id="H3ZONA">Zonas</h3>
+
+		<div id="lstFincas">
+			<form class="form">
+			<select class="form-control" v-model="idAct">
+				<option class="form-control" @click="getUnaFinca(item._id)" v-for="item in items" v-bind:value="item._id">
+					{{ item.meta.tag }}
+				</option>
+			</select>
+			</form>
+		</div>
+
+		<div id="lstZonas">
+			<form class="form">
+			<select class="form-control" v-model="idAct">
+				<option class="form-control" @click="showHijos(item.id0)" v-for="item in items" v-bind:value="item.id0">
+					{{ item.tag }}
+				</option>
+			</select>
+			</form>
+		</div>
+	
+		<div id="divBancales" style="border:2px gray solid;margin:8px">
+			<table v-if="items.length > 0" class="table">
+				<tr v-for="item in items" >
+					<td v-on:click.stop="plantaBancal(item.id0)">{{item.tag}}</td>
+					<td>{{item.obj.area}}</td>
+					<td v-if="item.obj.apoyos_id" ><i class="fa fa-tree" @click="goApoyos(item.obj.apoyos_id)"></i></td>
+				</tr>
+			</table>
+			<span id="NOBANCAL" v-else>No hay Bancales de esta Zona</span>
+		</div>
+		</div> <!--md3 -->
+
+
+		<div class="col-md-6">
+			<div id="divEscenarios">
+			<h3 style="display:inline-block"> Escenario {{tagEscenario}}</h3>
+			<button @click="nuevoEscenario()" class="btn btn-default pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+			<button @click="borraEscenario()" class="btn btn-danger pull-right btn-mas"><i class="fa fa-trash"> </i></button>
+			<h5 v-if="bancal">Bancal: <b>{{bancal.tag}}</b></h5>
+			<h5 v-else >Bancal: <b>Ninguno</b></h5>
+			<table v-if="items.length > 0" class="table">
+				<tr v-for="item in items" >
+					<td>{{item.obj.tagZ}}</td>
+					<td>{{item.obj.fechaI}}</td>
+					<td>{{item.obj.fechaF}}</td>
+					<td>{{item.obj.tagP}}</td>
+					<td><i class="fa fa-pencil" @click="editCultivo(item)"></i></td>
+				</tr>
+			</table>
+			<span id="NOCULT" v-else>No hay Cultivos de este Escenario</span>
+			</div>
+
+		</div> <!-- md6 -->
+
+		<div class="col-md-3">
+
+		<div id="lstGrupo">
+			<h3 id="H3HORTA" v-if="modo==='HORTA'" >Hortalizas</h3>
+			<h3 id="H3FRUTA" v-else="modo==='FRUTA'" >Frutales</h3>
+			<form  v-if="items.length" class="form">
+			<select class="form-control" v-model="idAct">
+				<option class="form-control" @click="showHijos()" v-for="item in items" v-bind:value="item.id0">
+					{{ item.tag }}
+				</option>
+			</select>
+			</form>
+			
+			<span id="NOGRUPO" v-else>No hay Grupos creados</span>
+		</div>
+
+		<div id="h3Espec"></div>
+
+		<div id="divEspec">
+
+			<form  v-if="items.length" class="form">
+			<select class="form-control" v-model="idAct">
+				<option class="form-control" @click="showHijos(item.id0)" v-for="item in items" v-bind:value="item.id0">
+					{{ item.tag }}
+				</option>
+			</select>
+			</form>
+
+
+			<!--div v-if="Especies.length > 0">
+				<div style="width: 70%; padding: 8px;border:2px gray solid;margin:3px" v-for="Especie in Especies" >
+					<span v-on:click.stop="showitems(Especie.id0)"><br><b>{{Especie.tag}}</b></span>
+				</div>
+			</div -->
+			<span id="NOESPEC" v-else>No hay Especies registradas en este Grupo</span>
+		</div>
+
+		<div id="h3Vardd">
+			<!--h3  style="display:inline-block">Variedades de <b>{{planta}}</b></h3 -->
+		</div>
+		<div id="divVardd" style="max-height:600px;overflow: auto">
+			<div v-if="items.length > 0">
+				<div v-for="item in items" >
+					<div style="align-text:center;border:2px gray solid;margin:3px">
+						<img @click="plantarVardd(item.id0)" style="width:60%" v-bind:src="item.obj.img" alt="foto"><br>
+						<b>{{item.tag}}</b>
+					</div>
+				</div>
+			</div>
+			<span id="NOVARD" v-else>No hay Variedades de esta Especie</span>
+		</div>
+
+		</div> <!-- md3 -->
+
+		</div> <!-- row -->
+	</div> <!-- container -->
+
+
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+<!------------------------------------------------------------------>
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 v-if="conds" slot="header">{{conds.retol}}</h3>
+
+			<div slot="body">
+				<form	v-if="edit_t === 'USER'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" name="usr"	placeholder="Usuario">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.pwd" type="text" name="pwd" placeholder="Password">
+					<span class="error" v-if="(!conds.valid.pwd.ok)">{{conds.valid.pwd.txt}}</span>
+					<input class="form-control" v-model="item.obj.conf" type="text" name="conf" placeholder="Confirmac.">
+					<span class="error" v-if="(!conds.valid.conf.ok)">{{conds.valid.conf.txt}}</span>
+				</form>
+
+				<form	v-else-if="edit_t === 'LISTA'" class="form" action="javascript:cargaEscenario()">
+					<select size="8" :model="idAct" class="form-control">
+						<option v-for="item in items" @click="idAct = item._id" value="item._id">{{ item.meta.tag }}</option>
+					</select>
+					<input class="form-control" type="submit" value="Cargar escenario">
+				</form>
+
+				<form	v-else-if="edit_t === 'LISTA_AJ'" class="form" action="javascript:cargaEscenario()">
+					<select size="8" :model="idAct" class="form-control">
+						<option v-for="item in items" @click="idAct = item._id" value="item._id">{{ item.meta.tag }}</option>
+					</select>
+					<input class="form-control" type="button" value="Crear Temporada" onclick="javascript:nuevoAgroJar()">
+					<input class="form-control" type="button" value="+ Escenario" onclick="javascript:addEsc2AgroJar()">
+					<input class="form-control" type="submit" value="Cargar Temporada">
+				</form>
+
+				<form	v-else-if="edit_t === 'CULTIVO'" class="form">
+					<input class="form-control" v-model="item.obj.tagZ" type="text" name="tagZ" placeholder="Tag Zona">
+					<span class="error" v-if="(!conds.valid.tagZ.ok)">{{conds.valid.tagZ.txt}}</span>
+					<input class="form-control" v-model="item.obj.tagP" type="text" name="tagP" placeholder="Tag Planta">
+					<span class="error" v-if="(!conds.valid.tagP.ok)">{{conds.valid.tagP.txt}}</span>
+					<input class="form-control" v-model="item.obj.fechaI" type="text" name="FechaI" placeholder="Fecha inicio">
+					<span class="error" v-if="(!conds.valid.fechaI.ok)">{{conds.valid.fechaI.txt}}</span>
+					<input class="form-control" v-model="item.obj.fechaF" type="text" name="fechaF" placeholder="Fecha final">
+					<span class="error" v-if="(!conds.valid.fechaF.ok)">{{conds.valid.fechaF.txt}}</span>
+					<input class="form-control" v-model="item.obj.area" disabled type="text" name="area" placeholder="Area">
+					<input class="form-control" v-model="item.obj.coste" type="text" name="coste" placeholder="Coste semilla">
+					<span class="error" v-if="(!conds.valid.coste.ok)">{{conds.valid.coste.txt}}</span>
+					<input class="form-control" v-model="item.obj.dPlts" type="text" name="dPlts" placeholder="Dist. plantas">
+					<span class="error" v-if="(!conds.valid.dPlts.ok)">{{conds.valid.dPlts.txt}}</span>
+					<input class="form-control" v-model="item.obj.dLins" type="text" name="dLins" placeholder="Dist. lineas">
+					<span class="error" v-if="(!conds.valid.dLins.ok)">{{conds.valid.dLins.txt}}</span>
+					<input class="form-control" v-model="item.obj.venta" type="text" name="venta" placeholder="PVP">
+					<span class="error" v-if="(!conds.valid.venta.ok)">{{conds.valid.venta.txt}}</span>
+					<input class="form-control" v-model="item.obj.rendm" type="text" name="rendm" placeholder="Rendimiento">
+					<span class="error" v-if="(!conds.valid.rendm.ok)">{{conds.valid.rendm.txt}}</span>
+					<input class="form-control" type="button" value="Editar Tareas" onclick="javascript:editTasksCult()">
+				</form>
+
+
+		</div>
+		</modal>
+
+	</div> <!-- appEdit -->
+
+
+
+</body>
+</html>

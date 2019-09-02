@@ -1,0 +1,10 @@
+App Agro (beta) en http://localhost:3202
+Connected to Database
+GET metas by iam/org: rMenuML/CAPOLAT
+GET metas by iam/org: rTextosML/CAPOLAT
+GET metas by iam/org: rClasesML/CAPOLAT
+POST
+GET metas by iam/org: rMenuML/CAPOLAT
+GET metas by iam/org: rTextosML/CAPOLAT
+GET metas by iam/org: rClasesML/CAPOLAT
+GET by _id :5ce18eb76099340c034b195f
