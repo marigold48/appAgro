@@ -1,14 +1,4 @@
 /*Step 1*/
-@import 'mapbox-gl.css';
-@import 'UI-elements/header.css';
-@import 'UI-elements/burger.css';
-@import 'UI-elements/indicators.css';
-@import 'UI-elements/sidebar.css';
-@import 'UI-elements/inputText.css';
-
-html, body {
-    font-family: 'Montserrat', sans-serif;
-}
 
 body {
     margin: 0;
@@ -17,9 +7,4 @@ body {
     width: 100%;
     background-color: black;
     color:white;
-}
-#map {
-    position: absolute;
-    height: 100%;
-    width: 100%;
 }
