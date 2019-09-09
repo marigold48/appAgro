@@ -47,6 +47,9 @@ function getPathsDB(piam,peco){
 	return params;
 }
 */
+
+import utils  from '/k1/libK1_Utils.mjs'
+
 var vgApp = {
 	paramsXHR : {
 		fase : 'alfa',
@@ -71,7 +74,7 @@ var vgApp = {
 }
 
 function goHome(){
-	window.location = 'dashboard.html?idSess='+vgk.params.idSess;
+	window.location = 'dashboard.html?idSess='+utils.vgk.params.idSess;
 }
 function goInfo(){
 	window.open('agroInfo.html','_blank');
@@ -82,113 +85,116 @@ function goRepositorio(){
 }
 
 function goExplotacion(){
-	window.location = 'explotacion.html?idSess='+vgk.params.idSess;
+	window.location = 'explotacion.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goIdioma(){
-	window.location = 'idioma.html?idSess='+vgk.params.idSess;
+	window.location = 'idioma.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goTopologias(){
-	window.location = 'topologias.html?idSess='+vgk.params.idSess;
+	window.location = 'topologias.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goClima(){
-	window.location = 'clima.html?idSess='+vgk.params.idSess;
+	window.location = 'clima.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goRiego(){
-	window.location = 'riego.html?idSess='+vgk.params.idSess;
+	window.location = 'riego.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goMenusML(){
-	window.location = 'menusML.html?idSess='+vgk.params.idSess;
+	window.location = 'menusML.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goApoyos(_id){
 	if (! _id) return;
-	else window.open('apoyos.html?idSess='+vgk.params.idSess+'&_id='+_id,'_blank');
+	else window.open('apoyos.html?idSess='+utils.vgk.params.idSess+'&_id='+_id,'_blank');
 }
 function goSuelo(){
-	window.location = 'suelo.html?idSess='+vgk.params.idSess;
+	alert(utils.vgk.GRANO);
+	window.location = 'suelo.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goPlantas(){
-	window.location = 'plantas.html?idSess='+vgk.params.idSess;
+	window.location = 'plantas.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goLaminas(){
-	window.location = 'laminas.html?idSess='+vgk.params.idSess;
+	window.location = 'laminas.html?idSess='+utils.vgk.params.idSess;
 }
 function goCuaderno(){
-	window.location = 'cuaderno.html?idSess='+vgk.params.idSess;
+	window.location = 'cuaderno.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goFrappeGantt(){
-	if (vgk.escenario_id){
-		window.open('frappeGantt.html?idSess='+vgk.params.idSess+'&_id='+vgk.escenario_id,'_blank');
+	if (utils.vgk.escenario_id){
+		window.open('frappeGantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id,'_blank');
 	}
-	else if (vgk.grafoTasks_id){
-		window.open('frappeGantt.html?idSess='+vgk.params.idSess+'&_id='+vgk.grafoTasks_id,'_blank');
+	else if (utils.vgk.grafoTasks_id){
+		window.open('frappeGantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
 	}
 	else alert('No hay escenario / Grafo de tasks');
 }
 
 function goTasksGantt(){
-	if (vgk.escenario_id){
-		window.open('tasks_Gantt.html?idSess='+vgk.params.idSess+'&_id='+vgk.escenario_id,'_blank');
+	if (utils.vgk.escenario_id){
+		window.open('tasks_Gantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id,'_blank');
 	}
-	else if (vgk.grafoTasks_id){
-		window.open('tasks_Gantt.html?idSess='+vgk.params.idSess+'&_id='+vgk.grafoTasks_id,'_blank');
+	else if (utils.vgk.grafoTasks_id){
+		window.open('tasks_Gantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
 	}
 	else alert('No hay escenario / Grafo de tasks');
 }
 
 function goRotaciones(){
-	window.open('rotaciones.html?idSess='+vgk.params.idSess,'_blank');
+	window.open('rotaciones.html?idSess='+utils.vgk.params.idSess,'_blank');
 }
 
 function goTareas(){
-	window.open('tareas.html?idSess='+vgk.params.idSess,'_blank');
+	window.open('tareas.html?idSess='+utils.vgk.params.idSess,'_blank');
 }
 
 function goTasksGrafo(_id){
-	window.open('tasks_Grafo.html?idSess='+vgk.params.idSess+'&_id='+_id,'_blank');
+	window.open('tasks_Grafo.html?idSess='+utils.vgk.params.idSess+'&_id='+_id,'_blank');
 
 }
 function goCalendario(){
-	window.open('calendario.html?idSess='+vgk.params.idSess,'_blank');
+	window.open('calendario.html?idSess='+utils.vgk.params.idSess,'_blank');
 
 }
 
 function goIncompatibles(){
-	window.open('incompatibles.html?idSess='+vgk.params.idSess,'_blank');
+	window.open('incompatibles.html?idSess='+utils.vgk.params.idSess,'_blank');
 }
 
 function goMatrices(){
-	window.location = 'matrices.html?idSess='+vgk.params.idSess;
+	window.location = 'matrices.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goCultivos(){
-	window.location = 'cultivos.html?idSess='+vgk.params.idSess;
+	window.location = 'cultivos.html?idSess='+utils.vgk.params.idSess;
 }
 
 function goCroquis(_id){
-	window.location = 'croquis.html?idSess='+vgk.params.idSess+'&_id='+_id;
+	window.location = 'croquis.html?idSess='+utils.vgk.params.idSess+'&_id='+_id;
 }
 
 function goMapaFinca(){
-	window.location = 'mapa.html?idSess='+vgk.params.idSess+'&_id='+vgk.finca_id;
+	window.location = 'mapa.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.finca_id;
 }
 
 function goBarrasClick(){
-	window.open('BarrasClick.html?idSess='+vgk.params.idSess, '_blank');
+	window.open('BarrasClick.html?idSess='+utils.vgk.params.idSess, '_blank');
 }
 function goEvalEconomica(){
-	if (!vgk.escenario_id){alert('No hay escenario');return;}
-	window.open('evalEconomica.html?idSess='+vgk.params.idSess+'&_id='+vgk.escenario_id, '_blank');
+	if (!utils.vgk.escenario_id){alert('No hay escenario');return;}
+	window.open('evalEconomica.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id, '_blank');
 }
 
 function goTarta(){
-	window.open('Tarta.html?idSess='+vgk.params.idSess, '_blank');
+	window.open('Tarta.html?idSess='+utils.vgk.params.idSess, '_blank');
 }
+
+export default {goSuelo}

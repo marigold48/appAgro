@@ -1,18 +1,19 @@
-import utils from '/k1/libK1_Utils.mjs';
-import sess from '/k1/libK1_Sesion.mjs'
-import vapps from '/k1/libK1_vApps.js'
+
+import utils  from '/k1/libK1_Utils.mjs'
+import sess   from '/k1/libK1_Sesion.mjs'
+import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
-
+import local  from '/js/agro_VGlob.js'
 //------------------------------------------------------------------- Init
 
 function actualizaH1(){
 
 	var retol = utils.r$('H1EXPL').innerHTML;
 	utils.r$('H1EXPL').innerHTML = retol +' '+utils.vgk.user.org;
+	alert('OK');
 }
 function sesionDashboardOK(xhr){
-	alert('OK');
 //	setAppMenu(vgk.sesion.keo);
 //	setAppPag(vgk.sesion.keo,vgk.sesion.org);
 	idioma.ajaxGetMenuPag('Dashboard');
@@ -32,3 +33,5 @@ function initDashboard(){
 }
 
 window.onload = initDashboard; 
+
+window.goSuelo = local.goSuelo;
