@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pbas Clases</title>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+
+	<script type='text/javascript' src="lib/vue_2517.js"></script>
+
+	<!--  ==================== Librerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script>
+
+		class A {
+			constructor(msg){
+				this.msg = msg;
+			}
+
+			mensaje(){
+				alert(this.msg);
+			}
+
+			getMsg(){
+				return this.msg;
+			}
+		}
+
+		class B extends A {
+			constructor(msg){
+				super(msg);
+			}
+		}
+
+		class C extends B {
+			constructor(msg){
+				super(msg);
+			}
+		}
+
+		class D extends C {
+			constructor(msg){
+				super(msg);
+				this.inicio();
+			}
+
+			inicio(){
+				var msg2 = this.getMsg()
+				this.msg = 'C:'+msg2;
+			}
+
+		}
+
+		class E extends D {
+			constructor(msg){
+				super(msg);
+			}
+		}
+
+		class F extends E {
+			constructor(msg){
+				super(msg);
+			}
+		}
+		function init(){
+			var appMalla = new Vue({
+				el: "#appMalla",
+				data:{
+			    tabla : []
+			  }
+			})
+
+			var info = new F('Hola, mundo!')
+			info.mensaje();
+			console.log(info.getMsg());
+		}
+	</script>
+</head>
+
+<body onload='init()'>
+	<div id="appMalla">
+		<div>{{tabla.length}}</div>
+		<table>
+			<tr v-for="fila in tabla">
+				<td v-for="campo in fila">{{campo}}</td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+</html>

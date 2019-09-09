@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta tag='viewport' content='width=device-width, item-scalable=no'>
+	<title>Arbolado</title>
+
+	<!--  ==================== Librerias externas ==================== -->
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+
+	<script type='text/javascript' src="lib/jquery_321.min.js"></script>
+	<script type='text/javascript' src="lib/bootstrap_337.min.js"></script>
+	<script type='text/javascript' src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+<style type="text/css">
+.item {
+	cursor: pointer;
+}
+ul {
+	padding-left: 2em;
+	line-height: 1.5em;
+	list-style-type: none;
+}
+.itemTramo {
+	margin-left:5px;
+	border: 1px solid blue;
+}
+</style>
+	<!--  ==================== Librerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+
+	<!--  ==================== Lbrerias aplicación ================== -->
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+
+	<script type='text/javascript' src='js/pkg_Arbolado.js'></script>
+	<script type='text/javascript' src='js/mod_arbolado.js'></script>
+
+<title>Arbolado</title>
+
+</head>
+<body onload="javascript:initEsqma()">
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Esquema arbolado</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="javascript:goHome()">Inicio</a></li>
+
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:cambiaPwdUser()">Cambiar password</a></li>
+						<li><a href="javascript:cierraSesion()">Cerrar sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav> 
+
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-3">
+			<ul id="esquema">
+				<item class="item" :model="treeData"> </item>
+			</ul>
+		</div> <!-- md-3 -->
+
+		<div class="col-md-9">
+			<div id="tramo">
+				<span class="itemTramo" v-for="item in items">{{item.tag}}</span>
+			</div>
+		</div> <!-- md-9 -->
+
+	</div> <!--row -->
+</div> <!-- container -->
+
+<script type="text/x-template" id="item-template">
+	<li style =" margin-top:2px;border-left:1px solid gray">
+		<div>
+			<span	@click="toggle" class="btn btn-info btn-xs" v-if="isFolder && open"><i class="fa fa-minus"></i></span>
+			<span	@click="toggle" class="btn btn-info btn-xs" v-else-if="isFolder && !open"><i class="fa fa-plus"></i></span>
+			 <b>{{ model.tag }}	</b> {{ model.descrip }}
+			<span class="btn btn-warning btn-xs pull-right"	@click="editItem"><i class="fa fa-pencil"></i></span>
+		</div>
+		<ul v-show="open" v-if="isFolder">
+			<item
+				class="item"
+				v-for="(model, index) in model.hijos"
+				:key="index"
+				:model="model">
+			</item>
+			<li class="btn btn-default btn-xs " @click="addChild()">+</li>
+		</ul>
+	</li>
+</script>
+
+	<!-- appModal -->
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 slot="header">{{conds.retol}}</h3>
+			<div slot="body">
+				<form	v-if="edit_t === 'USER'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" name="usr"	placeholder="Usuario">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.pwd" type="text" name="pwd" placeholder="Password">
+					<span class="error" v-if="(!conds.valid.pwd.ok)">{{conds.valid.pwd.txt}}</span>
+					<input class="form-control" v-model="item.obj.conf" type="text" name="conf" placeholder="Confirmac.">
+					<span class="error" v-if="(!conds.valid.conf.ok)">{{conds.valid.conf.txt}}</span>
+				</form>
+
+			<form v-else-if="edit_t === 'ESQMA'" class="form" action="javascript:grabaNuevoUser()">
+				<input v-model="item.id0" type="hidden" name="id0">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="descripc" placeholder="Descripción">
+				<input class="form-control" v-model="item.obj.codBancal" type="text" name="codBancal" placeholder="codBancal">
+				<input class="form-control" v-model="item.obj.lineas" type="text" name="lineas" placeholder="lineas">
+				<input class="form-control" v-model="item.obj.vardds[0].A" type="text" name="vardds" placeholder="vardds">
+			</form>
+
+			<form v-else-if="edit_t === 'LINEA'" class="form" action="javascript:grabaNuevoUser()">
+				<input v-model="item.id0" type="hidden" name="id0">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="descripc" placeholder="Descripción">
+				<input class="form-control" v-model="item.obj.tramos" type="text" name="tramos" placeholder="tramos">
+			</form>
+			<form v-else-if="edit_t === 'TRAMO'" class="form" action="javascript:grabaNuevoUser()">
+				<input v-model="item.id0" type="hidden" name="id0">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="descripc" placeholder="descripc">
+			</form>
+
+		</div>
+		</modal>
+	</div>
+
+</body>
+</html>

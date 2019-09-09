@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Gantt</title>
+<!--  ==================== LOCAL ==================  -->
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+	<link rel="stylesheet" href="lib/frappe-gantt.css" />
+
+	<script type='text/javascript'src="lib/jquery_321.min.js"></script>
+	<script type='text/javascript'src="lib/bootstrap_337.min.js"></script>
+	<script type='text/javascript'src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src="lib/frappe-gantt.js"></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Trazo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/frappeGantt.js'></script>
+
+	<style>
+		body {
+			font-family: sans-serif;
+			background: #ccc;
+		}
+		.container {
+			width: 80%;
+			margin: 0 auto;
+		}
+		.details-container{width: :130%;}
+
+		/* custom class */
+		.gantt .bar-milestone .bar {
+			fill: tomato;
+		}
+		.gantt .epoca .bar {
+			fill: gray;
+		}
+	</style>
+</head>
+<body onload="initTasksGantt()">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Gantt tasks</a>
+		 </div>
+		 <ul class="nav navbar-nav">
+			<li><a href="javascript:goHome()">Inicio</a></li>
+			<li><a href="javascript:goCalendario()">Calendario</a></li>
+
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Módulos
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+							<li><a href="javascript:goZonas()">Zonas</a></li>
+							<li><a href="javascript:goEscenarios()">Escenarios</a></li>
+							<li><a href="javascript:goPlantas()">Plantas</a></li>
+				  </ul>
+				</li>
+
+				<li class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Escala
+				  <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+							<li><a href="javascript:viewChange('06H')">6 Horas</a></li>
+							<li><a href="javascript:viewChange('12H')">12 Horas</a></li>
+							<li><a href="javascript:viewChange('DIA')">Dia</a></li>
+							<li><a href="javascript:viewChange('SEM')">Semana</a></li>
+							<li><a href="javascript:viewChange('MES')">Mes</a></li>
+				  </ul>
+				</li>
+			<li class="active"><button type="button" onclick="grabaKairos()"><i class="fa fa-save"></i></button></li>
+
+		 </ul>
+
+		 <ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+			  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+			  <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				 <li><a href="javascript:cambiaPwdUser()">Cambiar password</a></li>
+				 <li><a href="javascript:cierraSesion()">Cerrar sesión</a></li>
+			  </ul>
+			</li>
+		 </ul>
+	  </div>
+	</nav> 
+
+	<div class="container">
+		<h2 id="escTag">Escenario:</h2>
+		<div class="gantt-target"></div>
+	</div>
+
+	<div id="appModal"></div>
+</body>
+</html>

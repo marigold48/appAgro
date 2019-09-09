@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Idioma</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+
+	<!--  ==================== Ibrerias externas ==================== -->
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+
+	<script type='text/javascript' src="lib/jquery_321.min.js"></script>
+	<script type='text/javascript' src="lib/bootstrap_337.min.js"></script>
+	<script type='text/javascript' src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<!--  ==================== Ibrerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<!--  ==================== Lbrerias aplicación ================== -->
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/pkg_Idioma.js'></script>
+	<script type='text/javascript' src='js/mod_idioma.js'></script>
+</head>
+
+
+<body onload='initIdioma()'>
+
+	<nav  id="divMenu" class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<span  id="BRAND">Brand</span>
+			</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="javascript:adminClasesML()">
+					<span id="CLASES">Clases**</span>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:adminMenusML()">
+					<span id="MENUS">Menus**</span>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:adminTextosML()">
+					<span id="TEXTOS">Textos**</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="javascript:adminTopolsML()">
+					<span id="TOPOL">Topols**</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="javascript:cambiaOrg()">
+					<span id="CAMBIO">Cambia Org**</span>
+				</a>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<span  id="REGEN">Regenera**</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:creaClasesML()">
+							<span id="REGK">Clases**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:creaMenusRepo()">
+							<span id="REGM">Menus**</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:creaTextosRepo()">
+							<span id="REGT">Textos**</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-user">&nbsp;</i>
+					<span id="usrMenu"> User</span>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:cambiaPwdUser()">
+							<span id="CHANGEPWD" >Cambiar password</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:cierraSesion()">
+							<span v-if="!keo">Cerrar sesión</span>
+							<span v-else>{{tags.user.logout}}</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- Fin del menu --------------------------------------------------->
+ 
+	<div id="pagIdioma" class="container">
+		<div id="LOREM">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</div>
+		<div  v-if="visible==='CLASES'" class="row">
+			<div class="col-md-4">
+				<h3 id="H3INIT" style="display:inline-block">H3 Langs</h3>
+				<button @click="nuevoLang()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<div style="border:2px gray solid;margin:8px">
+					<table v-if="langs.length > 0" class="table">
+						<tr v-for="lang in langs" >
+							<td>{{lang.tag}}</td>
+							<td>{{lang.obj.keo}}</td>
+							<td>{{lang.obj.flag}}</td>
+							<td style="text-align: right;">
+								<span class="pull-right">
+								<button @click="editLang(lang.id0)" class="btn btn-success"><i class="fa fa-pencil"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<h3 id="H3INIT2">H3 Clases</h3>
+				<div style="border:2px gray solid;margin:8px">
+					<table v-if="nodos.length > 0" class="table">
+						<tr v-for="nodo in nodos" >
+							<td>{{nodo.tag}}</td>
+							<td>{{nodo.obj.clase}}</td>
+							<td>{{nodo.obj.retol[keo]}}</td>
+							<td style="text-align: right;">
+								<span class="pull-right">
+								<button @click="editNodo(nodo.id0)" class="btn btn-success"><i class="fa fa-pencil"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>  <!-- md-4 -->
+
+			<div class="col-md-8">
+				<h3  v-if="nodoC" style="display:inline-block">{{nodoC.tag}}</h3>
+				<button v-if="nodoC" @click="grabaNodoC()" class="btn btn-success pull-right btn-mas"><i class="fa fa-save"> </i></button>
+				<div v-if="malla.length > 0" style="border:2px gray solid;margin:8px">
+					<table  class="table table-bordered">
+							<tr>
+								<th>{{malla[0].clau}}</th>
+								<th>{{malla[0].lang}}</th>
+								<th>{{malla[0].text}}</th>
+								<th></th>
+							</tr>
+						<tr v-if="ix>0" v-for="(cell,ix) in malla" @click="editCelda(ix)">
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length">{{cell.clau}}</td>
+							<td><b>{{cell.lang}}</b></td>
+							<td>{{cell.text}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div> <!-- row -->
+<!----------------------------------------------------------------->
+		<div  v-if="visible==='MENUS'" class="row">
+			<div class="col-md-4">
+				<h3 id="H3MENUML" style="display:inline-block">H3 Menus</h3>
+				<button @click="nuevoMenuML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<div style="border:2px gray solid;margin:8px">
+					<table v-if="menus.length > 0" class="table">
+						<tr v-for="(menu,ix) in menus" >
+							<td @click="setMenuML(ix)">{{menu.meta.tag}}</td>
+							<td style="text-align: right;">
+								<span class="pull-right">
+								<button @click="borraMenuML(ix)" class="btn btn-success"><i class="fa fa-trash"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>  <!-- md-4 -->
+			<div class="col-md-8">
+				<h3 v-if="menuML" style="display:inline-block">{{menuML}}</h3>
+				<button v-if="menuML" @click="grabaMenuML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-save"> </i></button>
+				<button v-if="menuML" @click="addOpcML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<button v-if="menuML" @click="editMenuML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-pencil"> </i></button>
+				<div v-if="malla.length > 0" style="border:2px gray solid;margin:8px">
+					<table  class="table  table-bordered">
+						<thead>
+							<tr>
+								<th>{{malla[0].tag}}</th>
+								<th>{{malla[0].cod}}</th>
+								<th>{{malla[0].keo}}</th>
+								<th>{{malla[0].txt}}</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tr v-if="ix>0" v-for="(cell,ix) in malla" >
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length">{{cell.tag}}</td>
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length">{{cell.cod}}</td>
+							<td><b>{{cell.keo}}</b></td>
+							<td @click="editCeldaOpc(ix)">{{cell.txt}}</td>
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length" style="text-align: right;">
+								<span class="pull-right">
+								<button @click="editTxtML(cell.id0)" class="btn btn-success"><i class="fa fa-pencil"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>  <!-- md-8 -->
+
+		</div> <!-- row -->
+
+<!----------------------------------------------------------------->
+
+		<div  v-if="visible==='TEXTOS'" class="row">
+			<div class="col-md-4">
+				<h3 id="H3TXTML" style="display:inline-block">H3 Textos</h3>
+				<button @click="nuevoTextosML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<div style="border:2px gray solid;margin:8px">
+					<table v-if="texts.length > 0" class="table">
+						<tr v-for="(text,ix) in texts" >
+							<td @click="setTextosML(ix)">{{text.meta.tag}}</td>
+							<td style="text-align: right;">
+								<span class="pull-right">
+								<button @click="borraTextosML(ix)" class="btn btn-success"><i class="fa fa-trash"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>  <!-- md-4 -->
+			<div class="col-md-8">
+				<h3 v-if="textML" style="display:inline-block">{{textML}}</h3>
+				<button v-if="textML" @click="grabaTextosML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-save"> </i></button>
+				<button v-if="textML" @click="addTxtML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<button v-if="textML" @click="editTextosML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-pencil"> </i></button>
+				<div v-if="malla.length > 0" style="border:2px gray solid;margin:8px">
+					<table  class="table table-bordered">
+						<thead>
+							<tr>
+								<th>{{malla[0].tag}}</th>
+								<th>{{malla[0].cod}}</th>
+								<th>{{malla[0].keo}}</th>
+								<th>{{malla[0].txt}}</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tr v-if="ix>0" v-for="(cell,ix) in malla" >
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length">{{cell.tag}}</td>
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length">{{cell.cod}}</td>
+							<td><b>{{cell.keo}}</b></td>
+							<td @click="editCeldaTxt(ix)">{{cell.txt.substr(0,50)}}</td>
+							<td v-if="ix % langs.length === 1" :rowspan="langs.length" style="text-align: right;">
+								<span class="pull-right">
+								<button @click="editTxtML(cell.id0)" class="btn btn-success"><i class="fa fa-pencil"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>  <!-- md-8 -->
+
+		</div> <!-- row -->
+
+<!----------------------------------------------------------------->
+		<div  v-if="visible==='TOPOLS'" class="row">
+			<div class="col-md-4">
+				<h3 id="H3TOPOLS" style="display:inline-block">H3 Topols</h3>
+				<button @click="nuevoTextosML()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+				<div style="border:2px gray solid;margin:8px">
+					<table v-if="metas.length > 0" class="table">
+						<tr v-for="(topol,ix) in metas" >
+							<td @click="setTopolsML(ix)">{{topol.meta.tag}}</td>
+							<td>{{topol.meta.iam}}</td>
+							<td>{{topol.meta.org}}</td>
+							<td style="text-align: right;">
+								<span class="pull-right">
+								<button @click="borraTopolML(ix)" class="btn btn-success"><i class="fa fa-trash"> </i></button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>  <!-- md-4 -->
+			<div class="col-md-8">
+				<h3 v-if="metaML">{{metaML}}</h3>
+				<textarea class="form-control" id="topolJSON"></textarea>
+			</div>  <!-- md-8 -->
+
+		</div> <!-- row -->
+
+
+	</div> <!-- container -->
+
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 slot="header">{{conds.retol}}</h3>
+			<div slot="body">
+				<form	v-if="edit_t === 'LANG'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" placeholder="Tag">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.keo" type="text" placeholder="Codigo">
+					<span class="error" v-if="(!conds.valid.keo.ok)">{{conds.valid.keo.txt}}</span>
+					<input class="form-control" v-model="item.obj.flag" type="text" name="conf" placeholder="Bandera">
+					<span class="error" v-if="(!conds.valid.flag.ok)">{{conds.valid.flag.txt}}</span>
+				</form>
+
+				<form	v-if="edit_t === 'NODO'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" placeholder="Tag">
+					<span class="error" v-if="(!conds.valid[0].ok)">{{conds.valid[0].txt}}</span>
+					<input class="form-control" v-model="item.obj.clase" type="text" placeholder="Clase">
+					<span class="error" v-if="(!conds.valid[1].ok)">{{conds.valid[1].txt}}</span>
+					<input class="form-control" v-model="item.obj.retol" type="text" name="conf" placeholder="Rotulo">
+					<span class="error" v-if="(!conds.valid[2].ok)">{{conds.valid[2].txt}}</span>
+				</form>
+
+				<form	v-if="edit_t === 'TXTML'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" placeholder="Tag">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.cod" type="text" placeholder="Codigo">
+					<span class="error" v-if="(!conds.valid.cod.ok)">{{conds.valid.cod.txt}}</span>
+				</form>
+
+				<form	v-if="edit_t === 'BIGML'" class="form">
+					<textarea class="form-control" v-model="item.lng[keoML]" type="text"></textarea>
+
+				</form>
+
+			</div>
+		</modal>
+	</div> <!-- appEdit -->
+
+
+</body>
+</html>

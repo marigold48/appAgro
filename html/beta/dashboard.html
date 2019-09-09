@@ -17,13 +17,24 @@
 
 	<link rel="stylesheet" href="css/vueModal.css">
 
+	<!--  ==================== Ibrerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
 
 	<!--  ==================== Lbrerias aplicación ================== -->
-	<script type='module' src='js/dashboard.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/mod_dashboard.js'></script>
 </head>
 
 
-<body>
+<body onload='initDashboard()'>
 	
 	<nav id="divMenu" class="navbar navbar-inverse">
 		<div class="navbar-header">
@@ -79,16 +90,6 @@
 							<span id="QUAD">Cuaderno**</span>
 						</a>
 					</li>
-					<li>
-						<a href="javascript:goClima()">
-							<span id="QUAD">Clima**</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:goRiego()">
-							<span id="QUAD">Riego**</span>
-						</a>
-					</li>
 				</ul>
 			</li>
 		</ul>
@@ -127,7 +128,7 @@
       <div id="estaPag" class="row">
 
 		<div>
-			<h1 id="H1EXPL">Explotación</h1>
+			<h1 id="H1EXPL">Explotación : Capolat</h1>
 			<div class="col-md-4">
 				<img class="img-circle" src="img/zonas.jpg" alt="imagen" width="300" height="300">
 	         <h2 id="H2SUELO">Suelo</h2>

@@ -1,0 +1,37 @@
+
+.indicators-container {
+    margin-top: 18rem;
+}
+
+@media (max-width: 600px) {
+  .indicators-container-mb {
+    margin-top: 14rem;
+  }
+}
+
+.indicators-container, .indicator {
+    font-size: .9rem;
+    color: rgb(68, 68, 68);
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.indicator-value-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+    border-bottom: 1px solid black;
+}
+
+.indicator-value {
+    font-size: 3rem;
+    margin-right: .5rem;
+}

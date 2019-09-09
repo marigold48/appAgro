@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+	<title>Calendario</title>
+
+<!--  ==================== LOCAL ==================  -->
+    <link rel="stylesheet" href="lib/bootstrap_335.min.css">
+    <link rel="stylesheet" href="lib/font-awesome_430.min.css">
+    <script src="lib/jquery_321.min.js"></script>
+    <script src="lib/bootstrap_337.min.js"></script>
+    <script src="lib/vue_2517.js"></script>
+
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Trazo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/calendario.js'></script>
+
+	<style>
+
+		tbody > tr {height : 70px;}
+		.table tr th { width: 12.5% !important;}
+		.table tr th td { width: 100% !important;height:100% !important;}
+		.LAB {color:black;}
+		.DOM {color:red;}
+		.LOC {color:blue;}
+		.AUT {color:green;}
+		.NAC {color:red;}
+		.hoy {background-color:gray}
+		strong {cursor:pointer;}
+	</style>
+</head>
+
+<body onload="initCalendario()">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Calendario</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="javascript:goHome()">Inicio</a></li>
+	      <li><a href="javascript:showListaKairos()">Kairos</a></li>
+	    </ul>
+
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="javascript:cambiaPwdUser()">Cambiar password</a></li>
+	          <li><a href="javascript:cierraSesion()">Cerrar sesión</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav> 
+
+	<div class="container">
+		<div class="row">
+		<div class="col-md-12">
+
+		<div id="divMes">
+			<button  type="button" class="btn pull-left blanco" @click="atrasTodo()"><h1><i class="fa fa-angle-double-left"></i></h1></button>
+			<button  type="button" class="btn pull-left blanco" @click="atras()"><h1><i class="fa fa-angle-left"></i></h1></button>
+			<button  type="button" class="btn pull-right blanco" @click="avantTodo()"><h1><i class="fa fa-angle-double-right"></i></h1></button>
+			<button  type="button" class="btn pull-right blanco" @click="avant()"><h1><i class="fa fa-angle-right"></i></h1></button>
+			<h1 class="text-center">{{tag}}</h1>
+			<table v-if="items.length > 0" class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="width:3%!important;">Sem</th>
+						<th  class="text-center" v-for="head in heads" >{{head}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,idx) in items" >
+						<td><button type="button" @click="verSemana(item.W)">{{item.W % 52}}</button></td>
+						<td style="height:100%" v-bind:class="[item.L.dF, {hoy:item.L.hoy}]" @click="setDia(item.L.id0)" v-if="item.L">
+							<div style="height:80%"><strong>{{item.L.tag}}</strong></div>
+							<div><small>{{item.L.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%" v-bind:class="[item.M.dF, {hoy:item.M.hoy}]" @click="setDia(item.M.id0)" v-if="item.M">
+							<div style="height:80%"><strong>{{item.M.tag}}</strong></div>
+							<div><small>{{item.M.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%" v-bind:class="[item.X.dF, {hoy:item.X.hoy}]" @click="setDia(item.X.id0)" v-if="item.X">
+							<div style="height:80%"><strong>{{item.X.tag}}</strong></div>
+							<div><small>{{item.X.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%" v-bind:class="[item.J.dF, {hoy:item.J.hoy}]" @click="setDia(item.J.id0)" v-if="item.J">
+							<div style="height:80%"><strong>{{item.J.tag}}</strong></div>
+							<div><small>{{item.J.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%" v-bind:class="[item.V.dF, {hoy:item.V.hoy}]" @click="setDia(item.V.id0)" v-if="item.V">
+							<div style="height:80%"><strong>{{item.V.tag}}</strong></div>
+							<div><small>{{item.V.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%" v-bind:class="[item.S.dF, {hoy:item.S.hoy}]" @click="setDia(item.S.id0)" v-if="item.S">
+							<div style="height:80%"><strong>{{item.S.tag}}</strong></div>
+							<div><small>{{item.S.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+						<td style="height:100%;color:red" v-bind:class="[item.D.dF, {hoy:item.D.hoy}]" @click="setDia(item.D.id0)" v-if="item.D">
+							<div style="height:80%"><strong>{{item.D.tag}}</strong></div>
+							<div><small>{{item.D.retol}}</small></div>
+						</td>
+						<td v-else></td>
+
+
+					</tr>
+				</tbody>
+			</table>
+		</div>  <!-- divMes -->
+
+		<div id="divSem" style="display:none">
+			<button  type="button" class="btn pull-left blanco" @click="atras()"><h1><i class="fa fa-angle-left"></i></h1></button>
+			<button  type="button" class="btn pull-right blanco" @click="avant()"><h1><i class="fa fa-angle-right"></i></h1></button>
+			<h1 class="text-center">{{tag}}</h1>
+			<table v-if="items.length > 0" class="table table-bordered">
+				<thead>
+					<tr>
+						<th  class="text-center" v-for="head in heads" >{{head}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,idx) in items" >
+
+						<td v-if="item.L && item.L.tasks.length">
+							<big>{{item.L.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.L.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.L" @click="showMes(item.L)"><big>{{item.L.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.M && item.M.tasks.length">
+							<big>{{item.M.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.M.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.M" @click="showMes(item.M)"><big>{{item.M.tag}}</big></td>
+						<td v-else></td>
+
+						<td v-if="item.X && item.X.tasks.length">
+							<big>{{item.X.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.X.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.X" @click="showMes(item.X)"><big>{{item.X.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.J && item.J.tasks.length">
+							<big>{{item.J.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.J.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.J" @click="showMes(item.J)"><big>{{item.J.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.V && item.V.tasks.length">
+							<big>{{item.V.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.V.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.V" @click="showMes(item.V)"><big>{{item.V.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.S && item.S.tasks.length">
+							<big>{{item.S.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.S.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.S"  @click="showMes(item.S)"><big>{{item.S.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.S && item.D.tasks.length">
+							<big>{{item.S.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.S.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.D"  @click="showMes(item.D)" style="color:red"><b><big>{{item.D.tag}}</big></b></td>
+						<td v-else></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		</div> <!-- md-12 -->
+		</div> <!-- row -->
+	</div>  <!-- container -->
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 slot="header">{{conds.retol}}</h3>
+			<div slot="body">
+				<form	v-if="edit_t === 'USER'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" name="usr"	placeholder="Usuario">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.pwd" type="text" name="pwd" placeholder="Password">
+					<span class="error" v-if="(!conds.valid.pwd.ok)">{{conds.valid.pwd.txt}}</span>
+					<input class="form-control" v-model="item.obj.conf" type="text" name="conf" placeholder="Confirmac.">
+					<span class="error" v-if="(!conds.valid.conf.ok)">{{conds.valid.conf.txt}}</span>
+				</form>
+				<form	v-else-if="edit_t === 'LISTA'" class="form" action="javascript:cargaKairos()">
+					<select size="8" :model="idAct" class="form-control">
+						<option v-for="item in items" @click="idAct = item._id" value="item._id">{{ item.meta.tag }}</option>
+					</select>
+					<input class="form-control" type="button" onclick="javascript:nuevoKairos()" value="Nuevo Kairos">
+					<input class="form-control" type="submit" value="Cargar Kairos">
+				</form>
+
+				<form	v-if="edit_t === 'DIA'" class="form">
+					<div style="color:blue;text-align: center;font-size: 250%"><b>{{item.obj.dd}}</b></div>
+					<input class="form-control" v-model="item.obj.retol" type="text" name="retol" placeholder="retol">
+			
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="LAB">Laborable</label>
+					</div>
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="DOM">Domingo</label>
+					</div>
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="LOC">Fest. local</label>
+					</div>
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="AUt">Fest. autonomía</label>
+					</div>
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="NAC">Fest. nacional</label>
+					</div>
+					<div class="radio">
+						<label><input v-model="item.obj.dF" type="radio" name="fest" value="ESP">Dia especial</label>
+					</div>
+						
+				</form>
+
+			</div> <!-- slot body -->
+		</modal>
+	</div> <!-- appModal -->
+</body>
+</html>

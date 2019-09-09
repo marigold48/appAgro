@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+	<title>Gantt tareas</title>
+
+<!--  ==================== LOCAL ==================  -->
+    <link rel="stylesheet" href="lib/bootstrap_335.min.css">
+    <link rel="stylesheet" href="lib/font-awesome_430.min.css">
+    <script src="lib/jquery_321.min.js"></script>
+    <script src="lib/bootstrap_337.min.js"></script>
+    <script src="lib/vue_2517.js"></script>
+
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Trazo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/pkg_tasksGantt.js'></script>
+	<script type='text/javascript' src='js/mod_tasksGantt.js'></script>
+
+	<style>
+		#divBase {
+			position: absolute;
+			left: 2px;
+			top: 60px;
+			width: 95%; 
+			height: 600px;
+			border: 2px maroon solid;
+		}
+		.rDrag {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			border-radius: 8px;
+			cursor: move;
+			background-color:steelblue;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		.Task {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			cursor: move;
+			background-color:#abcdef;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		.rNodo {
+			position: absolute;
+			padding: 5px;
+			text-align: center;
+			border: none;
+			cursor: move;
+			background-color:#abcdef;
+			overflow : hidden;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			-khtml-user-select: none;     
+			user-select: none;
+		}
+
+		tbody > tr {height : 70px;}
+		.table tr th { width: 12.5% !important;}
+		.blanco {background-color:white;}
+	</style>
+</head>
+<body onload="initTasksGantt()">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Grafo tasks</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="javascript:goHome()">Inicio</a></li>
+	      <li><a href="javascript:goCalendario()">Calendario</a></li>
+
+	      <li class="dropdown" >
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ver
+	        <span class="caret"></span></a>
+	        <ul id="appModo" class="dropdown-menu">
+					<li><a href="javascript:showGantt()">Gantt</a></li>
+					<li><a href="javascript:showAlmanaque()">Almanaque</a></li>
+	        </ul>
+	      </li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Módulos
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+							<li><a href="javascript:goZonas()">Zonas</a></li>
+							<li><a href="javascript:goEscenarios()">Escenarios</a></li>
+							<li><a href="javascript:goPlantas()">Plantas</a></li>
+		        </ul>
+		      </li>
+			<li class="active"><button type="button" onclick="updateTasksGrafo()"><i class="fa fa-save"></i></button></li>
+
+	    </ul>
+
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user">&nbsp;</i><span id="usrMenu"> User</span>
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="javascript:cambiaPwdUser()">Cambiar password</a></li>
+	          <li><a href="javascript:cierraSesion()">Cerrar sesión</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</nav> 
+	<div id="divBase"></div>
+
+	<div class="container">
+		<div class="row">
+		<div class="col-md-12">
+		<div id="divMes" style="display:none">
+			<button  type="button" class="btn pull-left blanco" @click="atrasTodo()"><h1><i class="fa fa-angle-double-left"></i></h1></button>
+			<button  type="button" class="btn pull-left blanco" @click="atras()"><h1><i class="fa fa-angle-left"></i></h1></button>
+			<button  type="button" class="btn pull-right blanco" @click="avantTodo()"><h1><i class="fa fa-angle-double-right"></i></h1></button>
+			<button  type="button" class="btn pull-right blanco" @click="avant()"><h1><i class="fa fa-angle-right"></i></h1></button>
+			<h1 class="text-center">{{tag}}</h1>
+			<table v-if="items.length > 0" class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="width:3%!important;">Sem</th>
+						<th  class="text-center" v-for="head in heads" >{{head}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,idx) in items" >
+						<td><button type="button" @click="verSemana(item.W)">{{item.W % 52}}</button></td>
+						<td style="background-color:#cccccc" v-if="item.L && item.L.tasks"><big>{{item.L.tag}}</big></td>
+						<td v-else-if="item.L"><big>{{item.L.tag}}</big></td>
+						<td v-else></td>
+
+						<td style="background-color:#cccccc" v-if="item.M && item.M.tasks"><big>{{item.M.tag}}</big></td>
+						<td v-else-if="item.M"><big>{{item.M.tag}}</big></td>
+						<td v-else></td>
+
+						<td style="background-color:#cccccc" v-if="item.X && item.X.tasks"><big>{{item.X.tag}}</big></td>
+						<td v-else-if="item.X"><big>{{item.X.tag}}</big></td>
+						<td v-else></td>
+
+						<td style="background-color:#cccccc" v-if="item.J && item.J.tasks"><big>{{item.J.tag}}</big></td>
+						<td v-else-if="item.J"><big>{{item.J.tag}}</big></td>
+						<td v-else></td>
+
+						<td style="background-color:#cccccc" v-if="item.V && item.V.tasks"><big>{{item.V.tag}}</big></td>
+						<td v-else-if="item.V"><big>{{item.V.tag}}</big></td>
+						<td v-else></td>
+
+						<td style="background-color:#cccccc" v-if="item.S && item.S.tasks"><big>{{item.S.tag}}</big></td>
+						<td v-else-if="item.S"><big>{{item.S.tag}}</big></td>
+						<td v-else></td>
+
+						<td v-if="item.D" style="color:red"><b><big>{{item.D.tag}}</big></b></td>
+						<td v-else></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="divSem" style="display:none">
+			<table v-if="items.length > 0" class="table table-bordered">
+				<thead>
+					<tr>
+						<th  class="text-center" v-for="head in heads" >{{head}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,idx) in items" >
+
+						<td v-if="item.L && item.L.tasks.length">
+							<big>{{item.L.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.L.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.L"><big>{{item.L.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.M && item.M.tasks.length">
+							<big>{{item.M.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.M.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.M"><big>{{item.M.tag}}</big></td>
+						<td v-else></td>
+
+						<td v-if="item.X && item.X.tasks.length">
+							<big>{{item.X.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.X.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.X"><big>{{item.X.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.J && item.J.tasks.length">
+							<big>{{item.J.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.J.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.J"><big>{{item.J.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.V && item.V.tasks.length">
+							<big>{{item.V.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.V.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.V"><big>{{item.V.tag}}</big></td>
+						<td v-else></td>
+
+						<td  v-if="item.S && item.S.tasks.length">
+							<big>{{item.S.tag}}</big>
+							<button type="button" onclick="showTasks(task.id0)" v-for="task in item.S.tasks">{{task.tag}}</button>
+						</td>
+						<td v-else-if="item.S"><big>{{item.S.tag}}</big></td>
+						<td v-else></td>
+
+						<td v-if="item.D" style="color:red"><b><big>{{item.D.tag}}</big></b></td>
+						<td v-else></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		</div>
+		</div>
+	</div>
+	<div id="appModal"></div>
+</body>
+</html>
