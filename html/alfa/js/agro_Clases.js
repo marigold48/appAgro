@@ -21,7 +21,7 @@ The final regex literal:
 Para permitir espacios y no punto: [\w ]
 */
 
-import utils  from '/k1/libK1_Utils.mjs'
+import utils  from '/k1/libK1_Utils.js'
 import topol  from '/k1/libK1_Topol.js'
 import tiempo from '/k1/libK1_Tiempo.js'
 
@@ -249,7 +249,7 @@ class Horta extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Horta';
-		this.meta.org = vgk.user.org;
+		this.meta.org = utils.vgk.user.org;
 	}
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
@@ -258,7 +258,7 @@ class Horta extends topol.rArbol {
 	}
 }
 
-class GrpHorta extends topol.rNodo {
+export class GrpHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'GrpHorta';
@@ -301,7 +301,7 @@ class GrpHorta extends topol.rNodo {
 
 
 
-class EspHorta extends topol.rNodo {
+export class EspHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'EspHorta';
@@ -353,7 +353,7 @@ class EspHorta extends topol.rNodo {
 
 }
 
-class VarHorta extends topol.rNodo {
+export class VarHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'VarHorta';
@@ -439,7 +439,7 @@ class Fruta extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Fruta';
-		this.meta.org = vgk.user.org;
+		this.meta.org = utils.vgk.user.org;
 	}
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
@@ -923,7 +923,7 @@ class Apoyos extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Apoyos';
-		this.meta.org = vgk.user.org;
+		this.meta.org = utils.vgk.user.org;
 	}
 
 	objDB2Clase(objDB){
@@ -1559,7 +1559,7 @@ class Compras extends topol.rMalla {
 	constructor (nombre,nodos){
 		super(nombre,nodos);
 		this.meta.iam = 'Compras';
-		this.meta.org = vgk.user.org;
+		this.meta.org = utils.vgk.user.org;
 	}
 
 	getOferta(){
@@ -1664,4 +1664,4 @@ function addClases2Clases(){
 	addClasesQuadern(); // agro_CCPAE.js
 }
 
-export default {Finca,Zona,Bancal}
+export default {Finca,Zona,Bancal,Horta,GrpHorta,EspHorta,VarHorta}

@@ -1,10 +1,10 @@
 // http://geojson.io/#map=18/42.07766/1.75020
-import utils  from '/k1/libK1_Utils.mjs'
-import ajax   from '/k1/libK1_Ajax.mjs'
+import utils  from '/k1/libK1_Utils.js'
+import ajax   from '/k1/libK1_Ajax.js'
 import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 
-import local  from '/js/agro_VGlob.mjs'
+import local  from '/js/agro_VGlob.js'
 import agro  from  '/js/agro_Clases.js'
 import {InfoFinca,Zona,Bancal} from '/js/agro_Clases.js'
 

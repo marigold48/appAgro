@@ -48,7 +48,7 @@ function getPathsDB(piam,peco){
 }
 */
 
-import utils  from '/k1/libK1_Utils.mjs'
+import {vgk}  from '/k1/libK1_Utils.js'
 
 var vgApp = {
 	paramsXHR : {
@@ -73,128 +73,132 @@ var vgApp = {
 	}
 }
 
-function goHome(){
-	window.location = 'dashboard.html?idSess='+utils.vgk.params.idSess;
-}
-function goInfo(){
-	window.open('agroInfo.html','_blank');
-}
+export function goPag(pag,_id){
+	var idSess = vgk.params.idSess;
+	alert(idSess);
+	switch (pag){
+		case 'DASH': 
+			window.location = 'dashboard.html?idSess='+idSess;
+			break;
 
-function goRepositorio(){
-	window.open('repositorio.html','_blank');
-}
+		case 'INFO':
+			window.open('agroInfo.html','_blank');
+			break;
 
-function goExplotacion(){
-	window.location = 'explotacion.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'REPO':
+			window.open('repositorio.html','_blank');
+			break;
 
-function goIdioma(){
-	window.location = 'idioma.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'EXPLOT':
+			window.location = 'explotacion.html?idSess='+idSess;
+			break;
 
-function goTopologias(){
-	window.location = 'topologias.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'IDIOMA':
+			window.location = 'idioma.html?idSess='+idSess;
+			break;
 
-function goClima(){
-	window.location = 'clima.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'TOPOLS':
+			window.location = 'topologias.html?idSess='+idSess;
+			break;
 
-function goRiego(){
-	window.location = 'riego.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'CLIMA':
+			window.location = 'clima.html?idSess='+idSess;
+			break;
 
-function goMenusML(){
-	window.location = 'menusML.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'RIEGO':
+			window.location = 'riego.html?idSess='+idSess;
+			break;
 
-function goApoyos(_id){
-	if (! _id) return;
-	else window.open('apoyos.html?idSess='+utils.vgk.params.idSess+'&_id='+_id,'_blank');
-}
-function goSuelo(){
-	alert(utils.vgk.GRANO);
-	window.location = 'suelo.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'MENUS':
+			window.location = 'menusML.html?idSess='+idSess;
+			break;
 
-function goPlantas(){
-	window.location = 'plantas.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'APOYOS':
+			if (!_id) return;
+			else window.open('apoyos.html?idSess='+idSess+'&_id='+_id,'_blank');
+			break;
 
-function goLaminas(){
-	window.location = 'laminas.html?idSess='+utils.vgk.params.idSess;
-}
-function goCuaderno(){
-	window.location = 'cuaderno.html?idSess='+utils.vgk.params.idSess;
-}
+		case 'SUELO':
+			window.location = 'suelo.html?idSess='+idSess;
+			break;
 
-function goFrappeGantt(){
-	if (utils.vgk.escenario_id){
-		window.open('frappeGantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id,'_blank');
+		case 'PLANTAS':
+			window.location = 'plantas.html?idSess='+idSess;
+			break;
+
+		case 'CUADERNO':
+			window.location = 'cuaderno.html?idSess='+idSess;
+			break;
+
+		case 'FRAPPE':
+			if (utils.vgk.escenario_id){
+				window.open('frappeGantt.html?idSess='+idSess+'&_id='+utils.vgk.escenario_id,'_blank');
+			}
+			else if (utils.vgk.grafoTasks_id){
+				window.open('frappeGantt.html?idSess='+idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
+			}
+			else alert('No hay escenario / Grafo de tasks');
+			break;
+
+		case 'GANTT':
+			if (utils.vgk.escenario_id){
+				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+utils.vgk.escenario_id,'_blank');
+			}
+			else if (utils.vgk.grafoTasks_id){
+				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
+			}
+			break;
+
+		case 'ROTAC':
+			window.open('rotaciones.html?idSess='+idSess,'_blank');
+			break;
+
+		case 'TAREAS':
+			window.open('tareas.html?idSess='+idSess,'_blank');
+			break;
+
+		case 'TASKSG':
+			window.open('tasks_Grafo.html?idSess='+idSess+'&_id='+_id,'_blank');
+			break;
+
+		case 'CALEND':
+			window.open('calendario.html?idSess='+idSess,'_blank');
+			break;
+
+		case 'INCOMP':
+			window.open('incompatibles.html?idSess='+idSess,'_blank');
+			break;
+
+		case 'MATRIZ':
+			window.location = 'matrices.html?idSess='+idSess;
+			break;
+
+
+		case 'CULTS':
+			window.location = 'cultivos.html?idSess='+idSess;
+			break;
+
+		case 'CROQUIS':
+			window.location = 'croquis.html?idSess='+idSess+'&_id='+_id;
+			break;
+
+		case 'MAPAF':
+			window.location = 'mapa.html?idSess='+idSess+'&_id='+utils.vgk.finca_id;
+			break;
+
+		case 'BARRAS':
+			window.open('BarrasClick.html?idSess='+idSess, '_blank');
+			break;
+
+		case 'ECONOM':
+			if (!vgk.escenario_id){alert('No hay escenario');return;}
+			window.open('evalEconomica.html?idSess='+idSess+'&_id='+vgk.escenario_id, '_blank');
+			break;
+
+		case 'TARTA':
+			window.open('Tarta.html?idSess='+idSess, '_blank');
+			break;
 	}
-	else if (utils.vgk.grafoTasks_id){
-		window.open('frappeGantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
-	}
-	else alert('No hay escenario / Grafo de tasks');
 }
 
-function goTasksGantt(){
-	if (utils.vgk.escenario_id){
-		window.open('tasks_Gantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id,'_blank');
-	}
-	else if (utils.vgk.grafoTasks_id){
-		window.open('tasks_Gantt.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
-	}
-	else alert('No hay escenario / Grafo de tasks');
-}
-
-function goRotaciones(){
-	window.open('rotaciones.html?idSess='+utils.vgk.params.idSess,'_blank');
-}
-
-function goTareas(){
-	window.open('tareas.html?idSess='+utils.vgk.params.idSess,'_blank');
-}
-
-function goTasksGrafo(_id){
-	window.open('tasks_Grafo.html?idSess='+utils.vgk.params.idSess+'&_id='+_id,'_blank');
-
-}
-function goCalendario(){
-	window.open('calendario.html?idSess='+utils.vgk.params.idSess,'_blank');
-
-}
-
-function goIncompatibles(){
-	window.open('incompatibles.html?idSess='+utils.vgk.params.idSess,'_blank');
-}
-
-function goMatrices(){
-	window.location = 'matrices.html?idSess='+utils.vgk.params.idSess;
-}
-
-function goCultivos(){
-	window.location = 'cultivos.html?idSess='+utils.vgk.params.idSess;
-}
-
-function goCroquis(_id){
-	window.location = 'croquis.html?idSess='+utils.vgk.params.idSess+'&_id='+_id;
-}
-
-function goMapaFinca(){
-	window.location = 'mapa.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.finca_id;
-}
-
-function goBarrasClick(){
-	window.open('BarrasClick.html?idSess='+utils.vgk.params.idSess, '_blank');
-}
-function goEvalEconomica(){
-	if (!utils.vgk.escenario_id){alert('No hay escenario');return;}
-	window.open('evalEconomica.html?idSess='+utils.vgk.params.idSess+'&_id='+utils.vgk.escenario_id, '_blank');
-}
-
-function goTarta(){
-	window.open('Tarta.html?idSess='+utils.vgk.params.idSess, '_blank');
-}
-
-export default {goSuelo}
+export default {vgApp}

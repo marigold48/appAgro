@@ -1,10 +1,10 @@
 
-import utils  from '/k1/libK1_Utils.mjs'
-import sess   from '/k1/libK1_Sesion.mjs'
+import utils  from '/k1/libK1_Utils.js'
+import sess   from '/k1/libK1_Sesion.js'
 import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
-import local  from '/js/agro_VGlob.js'
+import {goPag} from '/js/agro_VGlob.js'
 //------------------------------------------------------------------- Init
 
 function actualizaH1(){
@@ -34,4 +34,4 @@ function initDashboard(){
 
 window.onload = initDashboard; 
 
-window.goSuelo = local.goSuelo;
+window.goPag = goPag;
