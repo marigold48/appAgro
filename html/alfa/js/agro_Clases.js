@@ -20,6 +20,11 @@ The final regex literal:
 /^(?=(?:.*[a-z]){2})(?:(?!^[\W_]|[\W_]{2}|[\W_]$)[\w.]){3,25}$/i
 Para permitir espacios y no punto: [\w ]
 */
+
+import utils  from '/k1/libK1_Utils.mjs'
+import topol  from '/k1/libK1_Topol.js'
+import tiempo from '/k1/libK1_Tiempo.js'
+
 function inputOK(formato,texto){
 	var regexp = null;
 	switch (formato){
@@ -49,11 +54,11 @@ function inputOK(formato,texto){
 	else return true;
 }
 //------------------------------------------------------------------- Fincas
-class Finca extends rArbol {
+class Finca extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Finca';
-		this.meta.org = vgk.user.org;
+		this.meta.org = utils.vgk.user.org;
 	}
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
@@ -78,7 +83,7 @@ class Finca extends rArbol {
 }
 
 //------------------------------------------------------------------- InfoFinca
-class InfoFinca extends rNodo {
+export class InfoFinca extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'InfoFinca';
@@ -135,7 +140,7 @@ class InfoFinca extends rNodo {
 }
 
 //------------------------------------------------------------------- Zonas
-class Zona extends rNodo {
+export class Zona extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Zona';
@@ -180,7 +185,7 @@ class Zona extends rNodo {
 }
 
 //------------------------------------------------------------------- Bancales
-class Bancal extends rNodo {
+export class Bancal extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Bancal';
@@ -240,7 +245,7 @@ class Bancal extends rNodo {
 
 //=================================================================== PLANTAS
 //------------------------------------------------------------------- Horta
-class Horta extends rArbol {
+class Horta extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Horta';
@@ -253,7 +258,7 @@ class Horta extends rArbol {
 	}
 }
 
-class GrpHorta extends rNodo {
+class GrpHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'GrpHorta';
@@ -296,7 +301,7 @@ class GrpHorta extends rNodo {
 
 
 
-class EspHorta extends rNodo {
+class EspHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'EspHorta';
@@ -348,7 +353,7 @@ class EspHorta extends rNodo {
 
 }
 
-class VarHorta extends rNodo {
+class VarHorta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'VarHorta';
@@ -430,7 +435,7 @@ class VarHorta extends rNodo {
 
 }
 //------------------------------------------------------------------- Fruta
-class Fruta extends rArbol {
+class Fruta extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Fruta';
@@ -442,7 +447,7 @@ class Fruta extends rArbol {
 	}
 }
 
-class GrpFruta extends rNodo {
+class GrpFruta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'GrpFruta';
@@ -484,7 +489,7 @@ class GrpFruta extends rNodo {
 }
 
 
-class EspFruta extends rNodo {
+class EspFruta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'EspFruta';
@@ -536,7 +541,7 @@ class EspFruta extends rNodo {
 	}
 }
 
-class VarFruta extends rNodo {
+class VarFruta extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'VarFruta';
@@ -689,7 +694,7 @@ class Planton extends VarFruta {
 // y los NUDOs, con las carateristicas de ambos nodos, permiten evaluar el cultivo
 // Basado en MallaTree
 
-class Escenario extends rMallaTree {
+class Escenario extends topol.rMallaTree {
 	constructor (nombre,nodos){
 		super(nombre,nodos);
 		this.meta.iam = 'Escenario';
@@ -710,7 +715,7 @@ class Escenario extends rMallaTree {
 	}
 }
 
-class RaizEsc extends rNodo {
+class RaizEsc extends topol.rNodo {
 	constructor (tag){
 		super(tag);
 		this.iam = 'RaizEsc';
@@ -767,7 +772,7 @@ class AgroJar extends Escenario {
 // Los nodos ROW y COL son los nodos del bancal y la planta.
 // El cultivo es el NUDO que los une.
 
-class Cultivo extends rNudo {
+class Cultivo extends topol.rNudo {
 	constructor(tag,vardd,bancal){
 		super(tag,vardd,bancal,0,0);
 		this.iam = 'Cultivo';
@@ -914,7 +919,7 @@ class CultFruta extends Cultivo {
 // L3T1N1 L3T1N2 ... L3T2N1 L3T2N2 ... L3T3N1 L3T3N2 ...
 // etc etc
 //------------------------------------------------------------------- Apoyos arbolado
-class Apoyos extends rArbol {
+class Apoyos extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Apoyos';
@@ -952,7 +957,7 @@ class Apoyos extends rArbol {
 
 }
 
-class NodoApoyos extends rNodo{
+class NodoApoyos extends topol.rNodo{
 	constructor(tag){
 		super(tag);
 		this.iam = 'NodoApoyos';
@@ -971,7 +976,7 @@ class NodoApoyos extends rNodo{
 	}
 }
 
-class NodoLinea extends rNodo{
+class NodoLinea extends topol.rNodo{
 	constructor(tag){
 		super(tag);
 		this.iam = 'NodoLinea';
@@ -988,7 +993,7 @@ class NodoLinea extends rNodo{
 	}
 }
 
-class NodoTramo extends rNodo{
+class NodoTramo extends topol.rNodo{
 	constructor(tag){
 		super(tag);
 		this.iam = 'NodoTramo';
@@ -1017,7 +1022,7 @@ class NodoTramo extends rNodo{
 	El almanaque/agenda usa la libreria del kernel libK1_Tiempo.js
 */
 //------------------------------------------------------------------- Grafo Tasks
-class GrafoTasks extends rGrafo{
+class GrafoTasks extends topol.rGrafo{
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam='GrafoTasks';
@@ -1063,7 +1068,7 @@ class GrafoTasks extends rGrafo{
 }
 
 //------------------------------------------------------------------- Task Links (arcos)
-class TaskLnk extends rArco {
+class TaskLnk extends topol.rArco {
 	constructor(tag,nodo0,nodo1,n){
 		super(tag,nodo0,nodo1,n);
 		this.iam = "TaskLnk";
@@ -1099,7 +1104,7 @@ class TaskLnk extends rArco {
 
 }
 //------------------------------------------------------------------- Tasks (nodos/drags)
-class Task extends rDrag {
+class Task extends topol.rDrag {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Task';
@@ -1158,7 +1163,7 @@ class Task extends rDrag {
 
 }
 
-class Epoca extends rDrag {
+class Epoca extends topol.rDrag {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Epoca';
@@ -1181,7 +1186,7 @@ class Epoca extends rDrag {
 
 //=================================================================== RIEGO
 //------------------------------------------------------------------- Riego
-class Riego extends rGrafo{
+class Riego extends topol.rGrafo{
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam='Riego';
@@ -1194,7 +1199,7 @@ class Riego extends rGrafo{
 }
 
 //------------------------------------------------------------------- Canal (arcos)
-class Canal extends rArco {
+class Canal extends topol.rArco {
 	constructor(tag,nodo0,nodo1,n){
 		super(tag,nodo0,nodo1,n);
 		this.iam = "Canal";
@@ -1230,7 +1235,7 @@ class Canal extends rArco {
 
 }
 //------------------------------------------------------------------- Items Rec (nodos/drags)
-class ItemRec extends rDrag {
+class ItemRec extends topol.rDrag {
 	constructor(tag){
 		super(tag);
 		this.iam = 'ItemRec';
@@ -1271,7 +1276,7 @@ class ItemRec extends rDrag {
 }
 //=================================================================== ALMANAQUE
 //------------------------------------------------------------------- Almanaque Agro
-class rAlmanak extends rKronos {
+class rAlmanak extends tiempo.rKronos {
 	constructor (tag,nodos,jar){
 		super(tag,nodos,jar);
 		this.meta.iam = 'rAlmanak';
@@ -1385,7 +1390,7 @@ class rAlmanak extends rKronos {
 
 //=================================================================== GANTT TASKS
 //------------------------------------------------------------------- Gantt Tasks
-class GanttTasks extends rGrafo {
+class GanttTasks extends topol.rGrafo {
 	constructor(tag,nodos,agroJar){
 		super(tag,nodos);
 		this.meta.iam='GanttTasks';
@@ -1433,7 +1438,7 @@ class GanttTasks extends rGrafo {
 //=================================================================== Explotacion
 
 
-class Explt extends rArbol {
+class Explt extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Explt';
@@ -1469,7 +1474,7 @@ class Explt extends rArbol {
 
 }
 
-class ItemExplt extends rNodo {
+class ItemExplt extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'ItemExplt'
@@ -1512,7 +1517,7 @@ class ItemExplt extends rNodo {
 
 //=================================================================== MATRIZ COMPRAS
 //------------------------------------------------------------------- Proveedor
-class Proveedor extends rNodo{
+class Proveedor extends topol.rNodo{
 	constructor(tag){
 		super(tag);
 		this.iam = 'Proveedor';
@@ -1526,7 +1531,7 @@ class Proveedor extends rNodo{
 }
 
 //------------------------------------------------------------------- Producto
-class Producto extends rNodo{
+class Producto extends topol.rNodo{
 	constructor(tag){
 		super(tag);
 		this.iam = 'Producto';
@@ -1538,7 +1543,7 @@ class Producto extends rNodo{
 }
 
 //------------------------------------------------------------------- Oferta
-class Oferta extends rNudo {
+class Oferta extends topol.rNudo {
 	constructor(tag,nRow,nCol,n,valor){
 		super(tag,nRow,nCol,n,valor);
 		this.iam = 'Oferta';
@@ -1550,7 +1555,7 @@ class Oferta extends rNudo {
 }
 
 //------------------------------------------------------------------- Compras
-class Compras extends rMalla {
+class Compras extends topol.rMalla {
 	constructor (nombre,nodos){
 		super(nombre,nodos);
 		this.meta.iam = 'Compras';
@@ -1658,3 +1663,5 @@ function addClases2Clases(){
 	addClasesRiego();
 	addClasesQuadern(); // agro_CCPAE.js
 }
+
+export default {Finca,Zona,Bancal}
