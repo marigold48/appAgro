@@ -11,7 +11,6 @@ function actualizaH1(){
 
 	var retol = utils.r$('H1EXPL').innerHTML;
 	utils.r$('H1EXPL').innerHTML = retol +' '+utils.vgk.user.org;
-	alert('OK');
 }
 function sesionDashboardOK(xhr){
 //	setAppMenu(vgk.sesion.keo);

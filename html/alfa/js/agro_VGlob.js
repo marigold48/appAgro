@@ -75,59 +75,47 @@ var vgApp = {
 
 export function goPag(pag,_id){
 	var idSess = vgk.params.idSess;
-	alert(idSess);
 	switch (pag){
-		case 'DASH': 
-			window.location = 'dashboard.html?idSess='+idSess;
+		case 'APOYOS':
+			if (!_id) return;
+			else window.open('apoyos.html?idSess='+idSess+'&_id='+_id,'_blank');
 			break;
 
-		case 'INFO':
-			window.open('agroInfo.html','_blank');
+		case 'BARRAS':
+			window.open('BarrasClick.html?idSess='+idSess, '_blank');
 			break;
 
-		case 'REPO':
-			window.open('repositorio.html','_blank');
-			break;
-
-		case 'EXPLOT':
-			window.location = 'explotacion.html?idSess='+idSess;
-			break;
-
-		case 'IDIOMA':
-			window.location = 'idioma.html?idSess='+idSess;
-			break;
-
-		case 'TOPOLS':
-			window.location = 'topologias.html?idSess='+idSess;
+		case 'CALEND':
+			window.open('calendario.html?idSess='+idSess,'_blank');
 			break;
 
 		case 'CLIMA':
 			window.location = 'clima.html?idSess='+idSess;
 			break;
 
-		case 'RIEGO':
-			window.location = 'riego.html?idSess='+idSess;
-			break;
-
-		case 'MENUS':
-			window.location = 'menusML.html?idSess='+idSess;
-			break;
-
-		case 'APOYOS':
-			if (!_id) return;
-			else window.open('apoyos.html?idSess='+idSess+'&_id='+_id,'_blank');
-			break;
-
-		case 'SUELO':
-			window.location = 'suelo.html?idSess='+idSess;
-			break;
-
-		case 'PLANTAS':
-			window.location = 'plantas.html?idSess='+idSess;
+		case 'CROQUIS':
+			window.location = 'croquis.html?idSess='+idSess+'&_id='+_id;
 			break;
 
 		case 'CUADERNO':
 			window.location = 'cuaderno.html?idSess='+idSess;
+			break;
+
+		case 'CULTS':
+			window.location = 'cultivos.html?idSess='+idSess;
+			break;
+
+		case 'DASH': 
+			window.location = 'dashboard.html?idSess='+idSess;
+			break;
+
+		case 'ECONOM':
+			if (!vgk.escenario_id){alert('No hay escenario');return;}
+			window.open('evalEconomica.html?idSess='+idSess+'&_id='+vgk.escenario_id, '_blank');
+			break;
+
+		case 'EXPLOT':
+			window.location = 'explotacion.html?idSess='+idSess;
 			break;
 
 		case 'FRAPPE':
@@ -149,54 +137,63 @@ export function goPag(pag,_id){
 			}
 			break;
 
-		case 'ROTAC':
-			window.open('rotaciones.html?idSess='+idSess,'_blank');
-			break;
-
-		case 'TAREAS':
-			window.open('tareas.html?idSess='+idSess,'_blank');
-			break;
-
-		case 'TASKSG':
-			window.open('tasks_Grafo.html?idSess='+idSess+'&_id='+_id,'_blank');
-			break;
-
-		case 'CALEND':
-			window.open('calendario.html?idSess='+idSess,'_blank');
+		case 'IDIOMA':
+			window.location = 'idioma.html?idSess='+idSess;
 			break;
 
 		case 'INCOMP':
 			window.open('incompatibles.html?idSess='+idSess,'_blank');
 			break;
 
-		case 'MATRIZ':
-			window.location = 'matrices.html?idSess='+idSess;
-			break;
-
-
-		case 'CULTS':
-			window.location = 'cultivos.html?idSess='+idSess;
-			break;
-
-		case 'CROQUIS':
-			window.location = 'croquis.html?idSess='+idSess+'&_id='+_id;
+		case 'INFO':
+			window.open('agroInfo.html','_blank');
 			break;
 
 		case 'MAPAF':
 			window.location = 'mapa.html?idSess='+idSess+'&_id='+utils.vgk.finca_id;
 			break;
 
-		case 'BARRAS':
-			window.open('BarrasClick.html?idSess='+idSess, '_blank');
+		case 'MATRIZ':
+			window.location = 'matrices.html?idSess='+idSess;
 			break;
 
-		case 'ECONOM':
-			if (!vgk.escenario_id){alert('No hay escenario');return;}
-			window.open('evalEconomica.html?idSess='+idSess+'&_id='+vgk.escenario_id, '_blank');
+		case 'MENUS':
+			window.location = 'menusML.html?idSess='+idSess;
+			break;
+
+		case 'PLANTAS':
+			window.location = 'plantas.html?idSess='+idSess;
+			break;
+
+		case 'REPO':
+			window.open('repositorio.html','_blank');
+			break;
+
+		case 'RIEGO':
+			window.location = 'riego.html?idSess='+idSess;
+			break;
+
+		case 'ROTAC':
+			window.open('rotaciones.html?idSess='+idSess,'_blank');
+			break;
+
+		case 'SUELO':
+			window.location = 'suelo.html?idSess='+idSess;
+			break;
+
+		case 'TAREAS':
+			window.open('tareas.html?idSess='+idSess,'_blank');
 			break;
 
 		case 'TARTA':
 			window.open('Tarta.html?idSess='+idSess, '_blank');
+			break;
+		case 'TASKSG':
+			window.open('tasks_Grafo.html?idSess='+idSess+'&_id='+_id,'_blank');
+			break;
+
+		case 'TOPOLS':
+			window.location = 'topologias.html?idSess='+idSess;
 			break;
 	}
 }

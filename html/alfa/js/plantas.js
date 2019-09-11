@@ -37,7 +37,9 @@ import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
 import src    from '/js/plantasSrc.js'
+import {goPag} from '/js/agro_VGlob.js'
 
+window.goPag = goPag;
 //------------------------------------------------------------------- Init
 function sesionPlantasOK(sesion){
 	utils.vgk.postLoadTextos = src.initAppsPlantas;

@@ -6,6 +6,10 @@ import idioma from '/k1/libK1_Idioma.js'
 import src    from '/js/cultivosSrc.js'
 import plant  from '/js/plantasSrc.js'
 import suelo  from '/js/sueloSrc.js'
+import {goPag} from '/js/agro_VGlob.js'
+
+window.goPag = goPag;
+
 //------------------------------------------------------------------- Init
 function sesionCultivosOK(sesion){
 	utils.vgk.postLoadTextos = plant.initAppsPlantas;
