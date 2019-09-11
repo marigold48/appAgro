@@ -40,6 +40,8 @@ import src    from '/js/plantasSrc.js'
 import {goPag} from '/js/agro_VGlob.js'
 
 window.goPag = goPag;
+window.editTasksSeed = src.editTasksSeed;
+
 //------------------------------------------------------------------- Init
 function sesionPlantasOK(sesion){
 	utils.vgk.postLoadTextos = src.initAppsPlantas;

@@ -640,7 +640,7 @@ function ecoGrabaTasksSeed(xhr){
 	grupo.obj.tasks_id = tasksId;
 	utils.vgk.plantas.updtNodoSelf(grupo);
 	updatePlantas();
-	goTasksGrafo(tasksId);
+	goPag('TASKSG', tasksId);
 }
 
 // Se ejecuta tanto para crear un Tasks Seed, como para regenerarlo
@@ -651,24 +651,24 @@ function creaTasksSeed(tasksId){
 	var nodos = [];
 	var arcos = [];
 			
-	var nodo1 = new Task('Preparar');
+	var nodo1 = new agro.Task('Preparar');
 	nodo1.dim = {x:100,y:140,w:120,h:60};
 	nodos.push(nodo1);
 
-	var nodo2 = new Task('Plantar');
+	var nodo2 = new agro.Task('Plantar');
 	nodo2.dim = {x:320,y:140,w:120,h:60};
 	nodos.push(nodo2);
 
-	var nodo3 = new Task('Cosechar');
+	var nodo3 = new agro.Task('Cosechar');
 	nodo3.dim = {x:540,y:140,w:120,h:60};
 	nodos.push(nodo3);
 
 
-	var arco12 = new TaskLnk('Arco 12',nodo1,nodo2,0);
+	var arco12 = new agro.TaskLnk('Arco 12',nodo1,nodo2,0);
 	arco12.obj.gap = 288* 3; // 3 dias
 	arcos.push(arco12);
 	
-	var arco23 = new TaskLnk('Arco 23',nodo2,nodo3,0);
+	var arco23 = new agro.TaskLnk('Arco 23',nodo2,nodo3,0);
 	arco23.obj.gap = 288 * 5; // 5 dias
 	arcos.push(arco23);
 
@@ -677,7 +677,7 @@ function creaTasksSeed(tasksId){
 	var id0 = utils.vgk.appListaGrupo.idAct;
 	var grupo = utils.vgk.plantas.getNodoById(id0);
 	
-	utils.vgk.grafoTasks = new GrafoTasks('Tasks_'+grupo.tag,todos);
+	utils.vgk.grafoTasks = new agro.GrafoTasks('Tasks_'+grupo.tag,todos);
 
 	var params = local.vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
@@ -703,7 +703,7 @@ function editTasksSeed(){
 		var ok = confirm('No hay tareas. Crearlas?');
 		if (ok) creaTasksSeed();
 	}
-	else goTasksGrafo(tasksId);
+	else goPag('TASKSG',tasksId);
 	utils.vgk.appModal.showModal = false;
 }
 
@@ -721,4 +721,4 @@ function resetTasksSeed(){
 	utils.vgk.appModal.showModal = false;
 }
 
-export default {initAppsPlantas,ajaxGetPlantas}
+export default {initAppsPlantas,ajaxGetPlantas,editTasksSeed}

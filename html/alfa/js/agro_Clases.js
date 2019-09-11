@@ -1668,5 +1668,6 @@ export default {
 	Finca,Zona,Bancal,
 	Horta,GrpHorta,EspHorta,VarHorta,
 	RaizEsc,EscHorta,EscFruta,
-	CultHorta,CultFruta
+	CultHorta,CultFruta,
+	Task,TaskLnk,GrafoTasks
 }
