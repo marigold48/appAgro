@@ -533,4 +533,4 @@ function prePegado(e){
 
 //------------------------------------------------------------------- SET Menu
 
-export default {initAppsSuelo,ajaxGetFincas}
+export default {initAppsSuelo,ajaxGetFincas,renderBancales}

@@ -37,7 +37,8 @@ import vapps  from '/k1/libK1_vApps.js'
 import topol  from '/k1/libK1_Topol.js'
 
 import local  from '/js/agro_VGlob.js'
-import agro  from  '/js/agro_Clases.js'
+import agro   from  '/js/agro_Clases.js'
+import cult   from  '/js/cultivosSrc.js'
 
 import {GrpHorta,EspHorta,VarHorta} from '/js/agro_Clases.js'
 
@@ -185,7 +186,7 @@ function initAppsPlantas(){
 				plantarVardd : function(id0){
 					var vardd = utils.vgk.plantas.getNodoById(id0);
 					utils.vgk.appEscenarios.vardd = vardd;
-					crearCultivo();
+					cult.crearCultivo();
 				},
 			}
 		})

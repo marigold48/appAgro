@@ -204,7 +204,7 @@ export class Bancal extends topol.rNodo {
 	}
 
 	getNodoCol(){
-		var nodo = new rNodo(this.tag);
+		var nodo = new topol.rNodo(this.tag);
 		nodo.id0 = this.id0;
 		nodo.rol = 'COL';
 		nodo.obj = {
@@ -376,7 +376,7 @@ export class VarHorta extends topol.rNodo {
 	}
 
 	getNodoRow(){
-		var nodo = new rNodo(this.tag);
+		var nodo = new topol.rNodo(this.tag);
 		nodo.id0 = this.id0;
 		nodo.rol = 'ROW';
 		nodo.obj = {
@@ -1664,4 +1664,9 @@ function addClases2Clases(){
 	addClasesQuadern(); // agro_CCPAE.js
 }
 
-export default {Finca,Zona,Bancal,Horta,GrpHorta,EspHorta,VarHorta}
+export default {
+	Finca,Zona,Bancal,
+	Horta,GrpHorta,EspHorta,VarHorta,
+	RaizEsc,EscHorta,EscFruta,
+	CultHorta,CultFruta
+}
