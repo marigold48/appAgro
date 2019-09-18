@@ -21,3 +21,4 @@ function initTasksGrafo(){
 }
 
 window.onload = initTasksGrafo;
+window.updateTasksGrafo = src.updateTasksGrafo;

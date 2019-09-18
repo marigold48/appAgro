@@ -6,10 +6,16 @@ import idioma from '/k1/libK1_Idioma.js'
 import src    from '/js/cultivosSrc.js'
 import plant  from '/js/plantasSrc.js'
 import suelo  from '/js/sueloSrc.js'
+import agro   from '/js/agro_Clases.js'
 import {goPag} from '/js/agro_VGlob.js'
 
 window.goPag = goPag;
-
+window.showListaEscenarios = src.showListaEscenarios;
+window.cargaEscenario = src.cargaEscenario;
+window.RaizEsc = agro.RaizEsc;
+window.Task =agro.Task;
+window.TaskLnk = agro.TaskLnk;
+window.CultHorta = agro.CultHorta;
 //------------------------------------------------------------------- Init
 function sesionCultivosOK(sesion){
 	utils.vgk.postLoadTextos = plant.initAppsPlantas;

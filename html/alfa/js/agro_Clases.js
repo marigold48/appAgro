@@ -715,7 +715,7 @@ class Escenario extends topol.rMallaTree {
 	}
 }
 
-class RaizEsc extends topol.rNodo {
+export class RaizEsc extends topol.rNodo {
 	constructor (tag){
 		super(tag);
 		this.iam = 'RaizEsc';
@@ -870,7 +870,7 @@ class Cultivo extends topol.rNudo {
 
 }
 
-class CultHorta extends Cultivo {
+export class CultHorta extends Cultivo {
 	constructor (tag,vardd,bancal){
 		super(tag,vardd,bancal);
 		this.iam = 'CultHorta';

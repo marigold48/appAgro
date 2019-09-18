@@ -88,7 +88,7 @@ function updateTasksGrafo(){
 		utils.vgk.grafoTasks.meta.org = utils.vgk.user.org;
 	};
 
-	var params = vgApp.paramsXHR;
+	var params = local.vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateTasksGrafo;
 	params.txt = utils.o2s(utils.vgk.grafoTasks.clase2ObjDB());
@@ -207,4 +207,4 @@ function initTasksGrafo(){
 	validaSesion('usrMenu',sesionTareasOK); // libK1_sesion.js
 }
 
-export default {get1TasksGrafo,initTasksGrafo}
+export default {get1TasksGrafo,initTasksGrafo,updateTasksGrafo}

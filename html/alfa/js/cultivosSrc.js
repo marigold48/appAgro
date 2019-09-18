@@ -7,6 +7,7 @@ import agro  from  '/js/agro_Clases.js'
 import plant  from '/js/plantasSrc.js'
 import suelo  from '/js/sueloSrc.js'
 
+
 function initAppsSuelo4Cult(){
 	if (utils.r$('lstFincas')){
 		utils.vgk.appListaFincas = new Vue({
@@ -153,7 +154,7 @@ function ecoUpdateTasksCult(xhr){
 
 function ecoDuplicaTasks(xhr){
 	var loTopol = JSON.parse(xhr.responseText);
-	utils.vgk.grafoTasks = new GrafoTasks('x',[]);
+	utils.vgk.grafoTasks = new agro.GrafoTasks('x',[]);
 	utils.vgk.grafoTasks.objDB2Clase(loTopol);
 	utils.vgk.grafoTasks.cambiaIds();
 
@@ -177,7 +178,7 @@ function duplicaTasksIds(tasks_id){
 	params.eco = ecoDuplicaTasks;
 	params.topolId = tasks_id;
 
-	ajaxDuplicaTopol(params);
+	ajax.ajaxDuplicaTopol(params);
 	return false;
 }
 
@@ -209,7 +210,7 @@ function editApoyos(){
 //------------------------------------------------------------------- Cultivos
 
 function editCultivo(cult){
-	editaItem('CULTIVO',cult,grabaCultivo,borraCultivo);
+	vapps.editaItem('CULTIVO',cult,grabaCultivo,borraCultivo);
 }
 
 function borraCultivo(cult){
@@ -226,9 +227,9 @@ function addCultivo(cultivo){
 	var tasksGrp = grupo.obj.tasks_id;
 
 	var vardd = utils.vgk.appEscenarios.vardd.getNodoRow();
-	console.log('addCultivo: '+utils.o2s(vardd));
+//	console.log('addCultivo: '+utils.o2s(vardd));
 	var bancal = utils.vgk.appEscenarios.bancal.getNodoCol();
-	console.log('addCultivo: '+utils.o2s(bancal));
+//	console.log('addCultivo: '+utils.o2s(bancal));
 
 
 	utils.vgk.escenario.addNodoCol(bancal);
@@ -237,7 +238,7 @@ function addCultivo(cultivo){
 
 	var nodos = utils.vgk.escenario.nodos;
 	nodos.map(function(nodo){
-		console.log(utils.o2s(nodo));
+//		console.log(utils.o2s(nodo));
 	})
 
 	utils.vgk.appEscenarios.actualiza(utils.vgk.escenario);
@@ -403,9 +404,9 @@ function ecoGet1Escenario(xhr){
 	utils.vgk.escenario_id = loTopol._id;
 
 	switch(loTopol.meta.iam){
-		case 'AgroJar': utils.vgk.escenario = new AgroJar("",[]); break;
-		case 'EscHorta': utils.vgk.escenario = new EscHorta("",[]); break;
-		case 'EscFruta': utils.vgk.escenario = new EscFruta("",[]); break;
+		case 'AgroJar': utils.vgk.escenario = new agro.AgroJar("",[]); break;
+		case 'EscHorta': utils.vgk.escenario = new agro.EscHorta("",[]); break;
+		case 'EscFruta': utils.vgk.escenario = new agro.EscFruta("",[]); break;
 	}
 	utils.vgk.escenario.objDB2Clase(loTopol);
 	var nodos = utils.vgk.escenario.nodos;
@@ -564,5 +565,6 @@ function actualizaVueAppsPlantas(){
 export default {
 	initAppsSuelo4Cult,initAppEscenarios,
 	ajaxGetEscenarios,ajaxGetAgroJars,
-	crearCultivo
+	crearCultivo,
+	showListaEscenarios,cargaEscenario
 }
