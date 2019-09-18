@@ -1669,5 +1669,6 @@ export default {
 	Horta,GrpHorta,EspHorta,VarHorta,
 	RaizEsc,EscHorta,EscFruta,
 	CultHorta,CultFruta,
-	Task,TaskLnk,GrafoTasks
+	Task,TaskLnk,GrafoTasks,
+	rAlmanak
 }
