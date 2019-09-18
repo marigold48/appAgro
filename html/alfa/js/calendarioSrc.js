@@ -4,10 +4,14 @@ import ajax   from '/k1/libK1_Ajax.js'
 import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 import topol  from '/k1/libK1_Topol.js'
+import tempo  from '/k1/libK1_Tiempo.js'
 
 import local  from '/js/agro_VGlob.js'
 import agro   from  '/js/agro_Clases.js'
 
+import {rDia} from '/k1/libK1_Tiempo.js'
+
+window.rDia = rDia;
 
 function initAppsAlmanak(){
 	if(utils.r$('divMes')){
@@ -40,7 +44,10 @@ function initAppsAlmanak(){
 			atrasTodo : function(){
 				this.mes = 0;
 				showAlmanak(this.mes);
-				}
+				},
+			setDia : function(id0){
+				setDia(id0); //mod_calendario.js
+			}
 		}
 		})
 	}	
@@ -133,13 +140,13 @@ function grabaDia(){
 function setDia(id0){
 	var dia = utils.vgk.almanak.getNodoById(id0);
 	if (!utils.vgk.kairos_id){ console.log('No hay Kairos');return;}
-	editaItem('DIA',dia,grabaDia,borraDia);
+	vapps.editaItem('DIA',dia,grabaDia,borraDia);
 }
 //------------------------------------------------------------------- Crear Lista de Kairos
 function ecoGet1Kairos(xhr){
 	var loTopol = JSON.parse(xhr.responseText);
 	utils.vgk.kairos_id = loTopol._id;
-	utils.vgk.kairos = new rKairos("",[]);
+	utils.vgk.kairos = new tempo.rKairos("",[]);
 	utils.vgk.kairos.objDB2Clase(loTopol);
 	var crons = utils.vgk.kairos.nodos;
 	crons.map(function(cron){
@@ -155,7 +162,7 @@ function get1Kairos(_id){
 	params.eco = ecoGet1Kairos;
 	params.topolId = _id;
 
-	ajaxGet1Topol(params);
+	ajax.ajaxGet1Topol(params);
 	utils.vgk.appModal.show = false;
 	return false;
 }
@@ -177,20 +184,20 @@ function updateKairos(){
 	var params = local.vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateKairos; 
-	params.txt = o2s(utils.vgk.kairos.clase2ObjDB());
+	params.txt = utils.o2s(utils.vgk.kairos.clase2ObjDB());
 	params.topolId = utils.vgk.kairos_id;
-	ajaxPutTopol(params);
+	ajax.ajaxPutTopol(params);
 }
 
 
 function nuevoKairos(){
 	var nom = prompt('Nombre?');
 	if (!nom) return;
-	utils.vgk.kairos = new rKairos(nom,[]);
+	utils.vgk.kairos = new tempo.rKairos(nom,[]);
 	var params = local.vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoKairos; 
-	params.txt = o2s(utils.vgk.kairos.clase2ObjDB());
+	params.txt = utils.o2s(utils.vgk.kairos.clase2ObjDB());
 	ajaxPostTopol(params);
 }
 
@@ -219,4 +226,4 @@ function showListaKairos(){
 	utils.vgk.appModal.show = true;
 }
 
-export default {initAppsAlmanak,ajaxGetKairos,showAlmanak}
+export default {initAppsAlmanak,ajaxGetKairos,showAlmanak,showListaKairos,cargaKairos}

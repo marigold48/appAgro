@@ -7,6 +7,9 @@ import idioma from '/k1/libK1_Idioma.js'
 import src    from '/js/calendarioSrc.js'
 import agro   from  '/js/agro_Clases.js'
 
+window.showListaKairos = src.showListaKairos;
+window.cargaKairos = src.cargaKairos;
+window.inputOK = agro.inputOK;
 //------------------------------------------------------------------- Init
 function sesionCalendarioOK(sesion){
 	idioma.ajaxGetClasesPag();
@@ -24,7 +27,6 @@ function sesionCalendarioOK(sesion){
 function initCalendario(){
 	vapps.initAppsGlobal();
 	src.initAppsAlmanak();
-//	initAppsKronos();
 
 	sess.validaSesion('usrMenu',sesionCalendarioOK);// libK1_Sesion.js
 }

@@ -25,34 +25,7 @@ import utils  from '/k1/libK1_Utils.js'
 import topol  from '/k1/libK1_Topol.js'
 import tiempo from '/k1/libK1_Tiempo.js'
 
-function inputOK(formato,texto){
-	var regexp = null;
-	switch (formato){
-		case 'TAG':
-			regexp = new RegExp(/^[A-z0-9-_ ]{3,25}$/);
-			break;
-		case 'COD':
-			regexp = new RegExp(/^[A-Z0-9-_.]{2,15}$/);
-			break;
-		case 'DSC':
-			regexp = new RegExp(/^[A-z0-9-_ .:;]{2,150}$/);
-			break;
-		case 'INT':
-			regexp = new RegExp(/^\+?(0|[1-9]\d*)$/);
-			break;
-		case 'DEC':
-			regexp = new RegExp(/^\d+\.\d{0,8}$/);
-			break;
-		case 'IMG':
-			regexp = new RegExp(/^([A-z0-9-_]+\/)*([A-z0-9-_]+\.(gif|jpg|jpeg|tiff|png))$/);
-			break;
-	
-	}
 
-	console.log(formato+' | '+texto+' : '+regexp.test(texto));
-	if (regexp) return regexp.test(texto);
-	else return true;
-}
 //------------------------------------------------------------------- Fincas
 class Finca extends topol.rArbol {
 	constructor(tag,nodos){
