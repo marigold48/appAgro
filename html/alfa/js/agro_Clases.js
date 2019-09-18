@@ -1068,7 +1068,7 @@ class GrafoTasks extends topol.rGrafo{
 }
 
 //------------------------------------------------------------------- Task Links (arcos)
-class TaskLnk extends topol.rArco {
+export class TaskLnk extends topol.rArco {
 	constructor(tag,nodo0,nodo1,n){
 		super(tag,nodo0,nodo1,n);
 		this.iam = "TaskLnk";
@@ -1104,7 +1104,7 @@ class TaskLnk extends topol.rArco {
 
 }
 //------------------------------------------------------------------- Tasks (nodos/drags)
-class Task extends topol.rDrag {
+export class Task extends topol.rDrag {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Task';
