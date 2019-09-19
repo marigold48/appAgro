@@ -50,7 +50,7 @@ function getPathsDB(piam,peco){
 
 import {vgk}  from '/k1/libK1_Utils.js'
 
-var vgApp = {
+export var vgApp = {
 	paramsXHR : {
 		fase : 'alfa',
 		url : 'http://' + window.location.hostname,
@@ -198,4 +198,3 @@ export function goPag(pag,_id){
 	}
 }
 
-export default {vgApp}

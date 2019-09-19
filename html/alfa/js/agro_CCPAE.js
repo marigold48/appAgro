@@ -41,8 +41,11 @@ Nota: El present quadern compleix les disposicions del RD 1311/2012
 que regula la informació mínima que cal registrar sobre l’ús de productes fitosanitaris.
 */
 
+import utils from '/k1/libK1_Utils.js'
+import topol from '/k1/libK1_Topol.js'
+
 // Quadern
-class Quadern extends rArbol {
+class Quadern extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Quadern';
@@ -90,7 +93,7 @@ class Quadern extends rArbol {
 }
 
 //------------------------------------------------------------------- Campanya (Nodo Raiz)
-class Campanya extends rNodo {
+class Campanya extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Campanya';
@@ -107,12 +110,12 @@ class Campanya extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Campanya');
+		var nodoML = new topol.rNodoClase('Campanya');
 		nodoML.obj.clase = 'Campanya'
 		nodoML.obj.retol =  {ES : 'Campaña',CAT :'Campanya'};
 		nodoML.obj.valid = {
@@ -128,7 +131,7 @@ class Campanya extends rNodo {
 }
 
 // Portada. Propietario y tecnico
-class Reg00 extends rNodo {
+export class Reg00 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg00';
@@ -146,12 +149,12 @@ class Reg00 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg00');
+		var nodoML = new topol.rNodoClase('Reg00');
 		nodoML.obj.clase = 'Reg00'
 		nodoML.obj.retol =  {ES : 'Reg00',CAT :'Reg00'};
 		nodoML.obj.valid = {
@@ -169,7 +172,7 @@ class Reg00 extends rNodo {
 //------------------------------------------------------------------- Registro 1
 // 1. Relació de personal i maquinària de tractaments.
 // Plantilla
-class Reg01A extends rNodo {
+export class Reg01A extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg01A';
@@ -188,12 +191,12 @@ class Reg01A extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg01A');
+		var nodoML = new topol.rNodoClase('Reg01A');
 		nodoML.obj.clase = 'Reg01A'
 		nodoML.obj.retol =  {ES : 'Reg01A',CAT :'Reg01A'};
 		nodoML.obj.valid = {
@@ -209,7 +212,7 @@ class Reg01A extends rNodo {
 }
 
 // Contratados
-class Reg01B extends rNodo {
+export class Reg01B extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg01B';
@@ -228,12 +231,12 @@ class Reg01B extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg01B');
+		var nodoML = new topol.rNodoClase('Reg01B');
 		nodoML.obj.clase = 'Reg01B'
 		nodoML.obj.retol =  {ES : 'Reg01B',CAT :'Reg01B'};
 		nodoML.obj.valid = {
@@ -248,7 +251,7 @@ class Reg01B extends rNodo {
 	}
 }
 // Empresas
-class Reg01C extends rNodo {
+export class Reg01C extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg01C';
@@ -266,12 +269,12 @@ class Reg01C extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg01C');
+		var nodoML = new topol.rNodoClase('Reg01C');
 		nodoML.obj.clase = 'Reg01C'
 		nodoML.obj.retol =  {ES : 'Reg01C',CAT :'Reg01C'};
 		nodoML.obj.valid = {
@@ -287,7 +290,7 @@ class Reg01C extends rNodo {
 }
 
 // Maquinaria tratamientos propia
-class Reg01D extends rNodo {
+export class Reg01D extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg01D';
@@ -306,12 +309,12 @@ class Reg01D extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg01D');
+		var nodoML = new topol.rNodoClase('Reg01D');
 		nodoML.obj.clase = 'Reg01D'
 		nodoML.obj.retol =  {ES : 'Reg01D',CAT :'Reg01D'};
 		nodoML.obj.valid = {
@@ -327,7 +330,7 @@ class Reg01D extends rNodo {
 }
 
 // Maquinaria tratamientos llogada
-class Reg01E extends rNodo {
+export class Reg01E extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg01E';
@@ -346,12 +349,12 @@ class Reg01E extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg01E');
+		var nodoML = new topol.rNodoClase('Reg01E');
 		nodoML.obj.clase = 'Reg01E'
 		nodoML.obj.retol =  {ES : 'Reg01E',CAT :'Reg01E'};
 		nodoML.obj.valid = {
@@ -368,7 +371,7 @@ class Reg01E extends rNodo {
 
 //------------------------------------------------------------------- Registro 2
 // 2. Identificació de les parcel·les de cultiu ecològic.
-class Reg02 extends rNodo {
+export class Reg02 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg02';
@@ -398,12 +401,12 @@ class Reg02 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg02');
+		var nodoML = new topol.rNodoClase('Reg02');
 		nodoML.obj.clase = 'Reg02'
 		nodoML.obj.retol =  {ES : 'Reg02',CAT :'Reg02'};
 		nodoML.obj.valid = {
@@ -446,7 +449,7 @@ ZV Zona censurada
 
 //------------------------------------------------------------------- Registro 3
 // 3. Registres de treballs i adobats
-class Reg03 extends rNodo {
+export class Reg03 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg03';
@@ -471,12 +474,12 @@ class Reg03 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg03');
+		var nodoML = new topol.rNodoClase('Reg03');
 		nodoML.obj.clase = 'Reg03'
 		nodoML.obj.retol =  {ES : 'Reg03',CAT :'Reg03'};
 		nodoML.obj.valid = {
@@ -532,7 +535,7 @@ class Reg03 extends rNodo {
 */
 
 // 4. Registre de tractaments fitosanitaris i altres mètodes de lluita
-class Reg04 extends rNodo {
+export class Reg04 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg04';
@@ -560,12 +563,12 @@ class Reg04 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg04');
+		var nodoML = new topol.rNodoClase('Reg04');
 		nodoML.obj.clase = 'Reg04'
 		nodoML.obj.retol =  {ES : 'Reg04',CAT :'Reg04'};
 		nodoML.obj.valid = {
@@ -583,7 +586,7 @@ class Reg04 extends rNodo {
 //------------------------------------------------------------------- Registro 5
 // 5. Registre d’altres tractaments fitosanitaris
 // 5A- Registre d'ús de llavor tractada
-class Reg05A extends rNodo {
+export class Reg05A extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg05A';
@@ -606,12 +609,12 @@ class Reg05A extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg05A');
+		var nodoML = new topol.rNodoClase('Reg05A');
 		nodoML.obj.clase = 'Reg05A'
 		nodoML.obj.retol =  {ES : 'Reg05A',CAT :'Reg05A'};
 		nodoML.obj.valid = {
@@ -627,7 +630,7 @@ class Reg05A extends rNodo {
 }
 
 // 5B- tractaments postcollita / en locals d'emmagatzematge / en els mitjans de transport
-class Reg05B extends rNodo {
+export class Reg05B extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg05B';
@@ -653,12 +656,12 @@ class Reg05B extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg05B');
+		var nodoML = new topol.rNodoClase('Reg05B');
 		nodoML.obj.clase = 'Reg05B'
 		nodoML.obj.retol =  {ES : 'Reg05B',CAT :'Reg05B'};
 		nodoML.obj.valid = {
@@ -688,7 +691,7 @@ class Reg05B extends rNodo {
 */
 
 // 6. Registre d’anàlisi de residus de productes fitosanitaris
-class Reg06 extends rNodo {
+export class Reg06 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg06';
@@ -710,12 +713,12 @@ class Reg06 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg06');
+		var nodoML = new topol.rNodoClase('Reg06');
 		nodoML.obj.clase = 'Reg06'
 		nodoML.obj.retol =  {ES : 'Reg06',CAT :'Reg06'};
 		nodoML.obj.valid = {
@@ -758,7 +761,7 @@ class Reg06 extends rNodo {
 */
 
 // 7. Registre de compra de matèries primeres
-class Reg07 extends rNodo {
+export class Reg07 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg07';
@@ -778,12 +781,12 @@ class Reg07 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg07');
+		var nodoML = new topol.rNodoClase('Reg07');
 		nodoML.obj.clase = 'Reg07'
 		nodoML.obj.retol =  {ES : 'Reg07',CAT :'Reg07'};
 		nodoML.obj.valid = {
@@ -820,7 +823,7 @@ class Reg07 extends rNodo {
 */
 
 // 8. Registre de venda de productes
-class Reg08 extends rNodo {
+export class Reg08 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg08';
@@ -840,12 +843,12 @@ class Reg08 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg08');
+		var nodoML = new topol.rNodoClase('Reg08');
 		nodoML.obj.clase = 'Reg08'
 		nodoML.obj.retol =  {ES : 'Reg08',CAT :'Reg08'};
 		nodoML.obj.valid = {
@@ -884,7 +887,7 @@ class Reg08 extends rNodo {
 	indicarem el rendiment en kg/ha del producte recol·lectat.
 */
 // 9. Registre de totals recol·lectats i càlcul de rendiments
-class Reg09 extends rNodo {
+export class Reg09 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg09';
@@ -905,12 +908,12 @@ class Reg09 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg09');
+		var nodoML = new topol.rNodoClase('Reg09');
 		nodoML.obj.clase = 'Reg09'
 		nodoML.obj.retol =  {ES : 'Reg09',CAT :'Reg09'};
 		nodoML.obj.valid = {
@@ -939,7 +942,7 @@ Hi ha parcel·les que totalment o parcialment es troben en zones específiques?
 	[Fincas]
 */
 // 10. Altres dades i incidències
-class Reg10A extends rNodo {
+export class Reg10A extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg10A';
@@ -955,12 +958,12 @@ class Reg10A extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg10A');
+		var nodoML = new topol.rNodoClase('Reg10A');
 		nodoML.obj.clase = 'Reg10A'
 		nodoML.obj.retol =  {ES : 'Reg10A',CAT :'Reg10A'};
 		nodoML.obj.valid = {
@@ -975,7 +978,7 @@ class Reg10A extends rNodo {
 	}
 }
 
-class Reg10B extends rNodo {
+export class Reg10B extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg10B';
@@ -991,12 +994,12 @@ class Reg10B extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg10B');
+		var nodoML = new topol.rNodoClase('Reg10B');
 		nodoML.obj.clase = 'Reg10B'
 		nodoML.obj.retol =  {ES : 'Reg10B',CAT :'Reg10B'};
 		nodoML.obj.valid = {
@@ -1013,7 +1016,7 @@ class Reg10B extends rNodo {
 
 //------------------------------------------------------------------- Registro 11
 // 11. Registre de reclamacions de clients
-class Reg11 extends rNodo {
+export class Reg11 extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Reg11';
@@ -1033,12 +1036,12 @@ class Reg11 extends rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Reg11');
+		var nodoML = new topol.rNodoClase('Reg11');
 		nodoML.obj.clase = 'Reg11'
 		nodoML.obj.retol =  {ES : 'Reg11',CAT :'Reg11'};
 		nodoML.obj.valid = {
@@ -1137,7 +1140,7 @@ function mkQuadern0(){
 	console.log(raiz.tag);
 
 // Portada
-	var portada = new rNodo('0: Portada');
+	var portada = new topol.rNodo('0: Portada');
 	quadern0.addNodoHijo(raiz,portada);
 	console.log(portada.tag);
 
@@ -1151,12 +1154,12 @@ function mkQuadern0(){
 
 // 1. Relació de personal i maquinària de tractaments.
 
-	var pers_maq = new rNodo('1: Personal i maquinària');
+	var pers_maq = new topol.rNodo('1: Personal i maquinària');
 	quadern0.addNodoHijo(raiz,pers_maq);
 	console.log(o2s(pers_maq));
 
 
-	var plant = new rNodo('1A: Personal plantilla');
+	var plant = new topol.rNodo('1A: Personal plantilla');
 	quadern0.addNodoHijo(pers_maq,plant);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01A('R1A-'+i); nodo.obj.orden = 'A-'+i;
@@ -1164,7 +1167,7 @@ function mkQuadern0(){
 	}
 	console.log(o2s(plant));
 
-	var contr = new rNodo('1B: Personal contractat');
+	var contr = new topol.rNodo('1B: Personal contractat');
 	quadern0.addNodoHijo(pers_maq,contr);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01B('R1B-'+i); nodo.obj.orden = 'B-'+i;
@@ -1172,7 +1175,7 @@ function mkQuadern0(){
 	}
 	console.log(o2s(contr));
 
-	var empr = new rNodo('1C: Empresas serveis');
+	var empr = new topol.rNodo('1C: Empresas serveis');
 	quadern0.addNodoHijo(pers_maq,empr);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01C('R1C-'+i); nodo.obj.orden = 'C-'+i;
@@ -1180,7 +1183,7 @@ function mkQuadern0(){
 	}
 	console.log(o2s(empr));
 
-	var maqProp = new rNodo('1D: Maquinaria propia');
+	var maqProp = new topol.rNodo('1D: Maquinaria propia');
 	quadern0.addNodoHijo(pers_maq,maqProp);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01D('R1D-'+i); nodo.obj.orden = 'D-'+i;
@@ -1188,7 +1191,7 @@ function mkQuadern0(){
 	}
 	console.log(o2s(maqProp));
 
-	var maqLlog = new rNodo('1E: Maquinaria llogada');
+	var maqLlog = new topol.rNodo('1E: Maquinaria llogada');
 	quadern0.addNodoHijo(pers_maq,maqLlog);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01E('R1E-'+i); nodo.obj.orden = 'E-'+i;
@@ -1197,7 +1200,7 @@ function mkQuadern0(){
 	console.log(o2s(maqLlog));
 
 // 2. Identificació de les parcel·les de cultiu ecològic.
-	var parcelas = new rNodo('2: Parcelas ecologicas');
+	var parcelas = new topol.rNodo('2: Parcelas ecologicas');
 	quadern0.addNodoHijo(raiz,parcelas);
 	
 	// Pendiente de poner loop a los bancales
@@ -1209,7 +1212,7 @@ function mkQuadern0(){
 	console.log(o2s(parcelas));
 
 // 3. Registres de treballs i adobats
-	var tascas = new rNodo('3: Treballs i adobats');
+	var tascas = new topol.rNodo('3: Treballs i adobats');
 	quadern0.addNodoHijo(raiz,tascas);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg03('R3-'+i);
@@ -1218,7 +1221,7 @@ function mkQuadern0(){
 	console.log(o2s(tascas));
 
 // 4. Registre de tractaments fitosanitaris i altres mètodes de lluita
-	var tratFS = new rNodo('4: Tractaments fitosanitaris');
+	var tratFS = new topol.rNodo('4: Tractaments fitosanitaris');
 	quadern0.addNodoHijo(raiz,tratFS);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg04('R4-'+i);
@@ -1227,12 +1230,12 @@ function mkQuadern0(){
 	console.log(o2s(tratFS));
 
 // 5. Registre d’altres tractaments fitosanitaris
-	var otrosTFS = new rNodo('5: Altres tractaments fitosanitaris');
+	var otrosTFS = new topol.rNodo('5: Altres tractaments fitosanitaris');
 	quadern0.addNodoHijo(raiz,otrosTFS);
 	console.log(o2s(otrosTFS));
 
 // 5A- Registre d'ús de llavor tractada
-	var tfsLlavor = new rNodo('5A: Llavor tractada');
+	var tfsLlavor = new topol.rNodo('5A: Llavor tractada');
 	quadern0.addNodoHijo(otrosTFS,tfsLlavor);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg05A('R5A-'+i);
@@ -1241,7 +1244,7 @@ function mkQuadern0(){
 	console.log(o2s(tfsLlavor));
 
 // 5B- tractaments postcollita / en locals d'emmagatzematge / en els mitjans de transport
-	var tfsPost = new rNodo('5B: Postcollita, locals i transport');
+	var tfsPost = new topol.rNodo('5B: Postcollita, locals i transport');
 	quadern0.addNodoHijo(otrosTFS,tfsPost);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg05B('R5B-'+i);
@@ -1250,7 +1253,7 @@ function mkQuadern0(){
 	console.log(o2s(tfsPost));
 
 // 6. Registre d’anàlisi de residus de productes fitosanitaris
-	var resid = new rNodo('6: Anàlisi de residus');
+	var resid = new topol.rNodo('6: Anàlisi de residus');
 	quadern0.addNodoHijo(raiz,resid);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg06('R6-'+i);
@@ -1259,7 +1262,7 @@ function mkQuadern0(){
 	console.log(o2s(resid));
 
 // 7. Registre de compra de matèries primeres
-	var compra = new rNodo('7: Compra de matèries primeres');
+	var compra = new topol.rNodo('7: Compra de matèries primeres');
 	quadern0.addNodoHijo(raiz,compra);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg07('R7-'+i);
@@ -1268,7 +1271,7 @@ function mkQuadern0(){
 	console.log(o2s(compra));
 
 // 8. Registre de venda de productes
-	var venta = new rNodo('8: Venda de productes');
+	var venta = new topol.rNodo('8: Venda de productes');
 	quadern0.addNodoHijo(raiz,venta);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg08('R8-'+i);
@@ -1277,7 +1280,7 @@ function mkQuadern0(){
 	console.log(o2s(venta));
 
 // 9. Registre de totals recol·lectats i càlcul de rendiments
-	var total = new rNodo('9: Totals i rendiments');
+	var total = new topol.rNodo('9: Totals i rendiments');
 	quadern0.addNodoHijo(raiz,total);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg09('R9-'+i);
@@ -1286,11 +1289,11 @@ function mkQuadern0(){
 	console.log(o2s(total));
 
 // 10. Altres dades i incidències
-	var otrosDatos = new rNodo('10: Altres dades i incidències');
+	var otrosDatos = new topol.rNodo('10: Altres dades i incidències');
 	quadern0.addNodoHijo(raiz,otrosDatos);
 	console.log(o2s(otrosDatos));
 
-	var ambient = new rNodo('10A: Dades ambientals');
+	var ambient = new topol.rNodo('10A: Dades ambientals');
 	quadern0.addNodoHijo(otrosDatos,ambient);
 
 	var publ = new Reg10A('Area publica');
@@ -1311,7 +1314,7 @@ function mkQuadern0(){
 
 	console.log(o2s(ambient));
 
-	var incid = new rNodo('10B: Incidències');
+	var incid = new topol.rNodo('10B: Incidències');
 	quadern0.addNodoHijo(otrosDatos,incid);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg10B('R10B-'+i);
@@ -1320,7 +1323,7 @@ function mkQuadern0(){
 	console.log(o2s(incid));
 
 // 11. Registre de reclamacions de clients
-	var recl = new rNodo('11: Reclamacions de clients');
+	var recl = new topol.rNodo('11: Reclamacions de clients');
 	quadern0.addNodoHijo(raiz,recl);
 	for (var i=1;i<5;i++){
 		var nodo = new Reg11('R11-'+i);

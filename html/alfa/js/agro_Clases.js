@@ -1447,7 +1447,7 @@ class Explt extends topol.rArbol {
 
 }
 
-class ItemExplt extends topol.rNodo {
+export class ItemExplt extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'ItemExplt'
@@ -1643,5 +1643,6 @@ export default {
 	RaizEsc,EscHorta,EscFruta,
 	CultHorta,CultFruta,
 	Task,TaskLnk,GrafoTasks,
-	rAlmanak
+	rAlmanak,
+	Explt
 }
