@@ -8,8 +8,12 @@
 	<script type='text/javascript' src='js/agro_VGlob.js'></script>
 */
 
-import utils from '/k1/libK1_Utils.js';
+import utils from '/k1/libK1_Utils.js'
 import sess from '/k1/libK1_Sesion.js'
+
+import {vgApp} from '/js/agro_VGlob.js'
+
+window.vgApp = vgApp;
 
 function modSwitch(ok,tipo){
 	if (!ok){

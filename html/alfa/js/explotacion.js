@@ -4,12 +4,12 @@ import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
 import src    from '/js/explotacionSrc.js'
-import {vgApp} from '/js/agro_VGlob.js'
 import {ItemExplt} from '/js/agro_Clases.js'
 import {Reg00,Reg01A,Reg01B,Reg01C,Reg01D,Reg01E} from '/js/agro_CCPAE.js'
-
+import {vgApp,goPag} from '/js/agro_VGlob.js'
 
 window.vgApp = vgApp;
+window.goPag = goPag;
 
 window.ItemExplt = ItemExplt;
 window.Reg00 = Reg00;

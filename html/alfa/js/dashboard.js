@@ -4,7 +4,11 @@ import sess   from '/k1/libK1_Sesion.js'
 import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
-import {goPag} from '/js/agro_VGlob.js'
+import {vgApp,goPag} from '/js/agro_VGlob.js'
+
+window.vgApp = vgApp;
+window.goPag = goPag;
+
 //------------------------------------------------------------------- Init
 
 function actualizaH1(){
