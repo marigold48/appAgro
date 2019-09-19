@@ -36,9 +36,8 @@ import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 import topol  from '/k1/libK1_Topol.js'
 
-import local  from '/js/agro_VGlob.js'
 import agro   from  '/js/agro_Clases.js'
-import cult   from  '/js/cultivosSrc.js'
+//import cult   from  '/js/cultivosSrc.js'
 
 import {GrpHorta,EspHorta,VarHorta} from '/js/agro_Clases.js'
 
@@ -430,13 +429,13 @@ function getRepoAgro(modo){
 	var stmt = "select * from agro where tipo='"+modo+"' order by tag;";
 	var stmtB64 = Base64.encode(stmt);
 	var body = {
-		id : 1234567, //local.vgApp.encript.sessId,
-		path : local.vgApp.sqlite.pathDB,
+		id : 1234567, //vgApp.encript.sessId,
+		path : vgApp.sqlite.pathDB,
 		db   : 'repoAlfaAgro.sqlite',
 		stmt : stmtB64
 	}
-	var params = local.vgApp.paramsXHR;
-	params.base = local.vgApp.sqlite.base;
+	var params = vgApp.paramsXHR;
+	params.base = vgApp.sqlite.base;
 	params.eco = ecoGetRepoAgro; 
 
 	ajax.ajaxCmdShell(params,body);
@@ -459,7 +458,7 @@ function ecoupdatePlantas(xhr){
 	console.log('Horta grabada');
 }
 function updatePlantas(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoupdatePlantas; 
 	params.iam = 'Horta';
@@ -484,7 +483,7 @@ function creaNuevoHorta(){
 	raiz.rol = 'RAIZ';
 	var horta = new agro.Horta('Hortalizas',[raiz]);
 	horta.meta.org = utils.vgk.user.org;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoHorta; 
 	params.iam = 'Horta';
@@ -504,7 +503,7 @@ function ecoCargaHorta(xhr){
 }
 
 function cargaHorta(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoCargaHorta;
 	params.topolId = _id;
@@ -521,7 +520,7 @@ function ecoUpdateFruta(xhr){
 	console.log('Fruta grabada');
 }
 function updateFruta(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateFruta; 
 	params.iam = 'Fruta';
@@ -547,7 +546,7 @@ function creaNuevoFruta(){
 	raiz.rol = 'RAIZ';
 	var fruta = new Fruta('Frutales',[raiz]);
 	fruta.meta.org = utils.vgk.user.org;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoFruta; 
 	params.iam = 'Fruta';
@@ -567,7 +566,7 @@ function ecoCargaFruta(xhr){
 }
 
 function cargaFruta(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoCargaFruta;
 	params.topolId = _id;
@@ -605,7 +604,7 @@ function ecoGetPlantas(xhr){
 
 function ajaxGetPlantas() {
 	var modo = utils.vgk.appModoPlantas.modo;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 //	params.base = '/metas/';
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetPlantas;
@@ -623,7 +622,7 @@ function ecoBorraTasks(xhr){
 	console.log('Tareas borradas');
 }
 function borraTasks(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraTasks; 
 	params.iam = 'GrafoTasks';
@@ -679,7 +678,7 @@ function creaTasksSeed(tasksId){
 	
 	utils.vgk.grafoTasks = new agro.GrafoTasks('Tasks_'+grupo.tag,todos);
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGrabaTasksSeed; 
 	params.iam = 'GrafoTasks';

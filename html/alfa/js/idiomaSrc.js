@@ -4,8 +4,6 @@ import clases from '/k1/libK1_Clases.js'
 import topol  from '/k1/libK1_Topol.js'
 
 
-import local  from '/js/agro_VGlob.js'
-
 //------------------------------------------------------------------- Cambio Org
 /*
 	Se busca el documento previo de la Clase y Org tratadas (getMetasByOrg). 
@@ -22,7 +20,7 @@ function ecoGetOldDocument(xhr){
 	var loTopol = JSON.parse(xhr.responseText);  // array de documentos de la org pedida
 	console.log('Docs encontrados: '+loTopol.length);
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoCambioOrg; 
 
@@ -104,7 +102,7 @@ function cambiaOrg(){
 		case 'TEXTOS' : iam = 'rTextosML'; break;
 
 	}
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetOldDocument;
 	params.iam = iam;
@@ -199,7 +197,7 @@ function updateClasesML(){
 		utils.vgk.clasesML.meta.org = utils.vgk.user.org;
 	};
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateClasesML;
 	params.txt = utils.o2s(utils.vgk.clasesML.clase2ObjDB());
@@ -220,7 +218,7 @@ function ecoGet1ClasesML(xhr){
 
 function get1ClasesML(_id){
 	utils.vgk.clasesML_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1ClasesML;
 	params.topolId = _id;
@@ -244,7 +242,7 @@ function grabaDatosClasesML(){
 		utils.vgk.clasesML = new ClasesML(raiz.tag,[raiz]);
 		utils.vgk.clasesML.meta.org = utils.vgk.user.org;
 	
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro/';
 		params.eco = ecoNuevaClasesML; 
 		params.iam = 'rClasesML';
@@ -261,7 +259,7 @@ function creaClasesML(otro){
 	utils.vgk.clasesML = mkClasesML();
 	addClases2Clases();
 	
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoClasesML; 
 	params.iam = 'rClasesML';
@@ -296,7 +294,7 @@ function ecoGetClasesML(xhr){
 }
 
 function ajaxGetClasesML() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetClasesML;
 	params.iam = 'rClasesML';
@@ -354,7 +352,7 @@ function ecoGetMenusRepo(xhr){
 		else{
 			console.log(fila.pagina);
 			if (topol){
-				var params = local.vgApp.paramsXHR;
+				var params = vgApp.paramsXHR;
 				params.base = '/alfaAgro';
 				params.eco = ecoNouTextosRepo; 
 				params.txt = utils.o2s(topol.clase2ObjDB());
@@ -374,13 +372,13 @@ function creaMenusRepo(){
 	var stmt = "select * from menus order by 1,2;";
 	var stmtB64 = Base64.encode(stmt);
 	var body = {
-		id : 1234567, //local.vgApp.encript.sessId,
-		path : local.vgApp.sqlite.pathDB,
+		id : 1234567, //vgApp.encript.sessId,
+		path : vgApp.sqlite.pathDB,
 		db   : 'idiomas.sqlite',
 		stmt : stmtB64
 	}
-	var params = local.vgApp.paramsXHR;
-	params.base = local.vgApp.sqlite.base;
+	var params = vgApp.paramsXHR;
+	params.base = vgApp.sqlite.base;
 	params.eco = ecoGetMenusRepo; 
 
 	ajaxCmdShell(params,body);
@@ -400,7 +398,7 @@ function nuevoMenuML(){
 	if (tag){
 		utils.vgk.menuML = new rMenuML(tag,[]);
 		utils.vgk.menuML.meta.org = utils.vgk.user.org;
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro';
 		params.eco = ecoNouMenuML; 
 		params.iam = 'rMenuML';
@@ -415,7 +413,7 @@ function ecoBorraMenuML(xhr){
 }
 
 function borraMenuML(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraMenuML;
 	params.topolId = _id;
@@ -436,7 +434,7 @@ function ecoGet1MenuML(xhr){
 
 function get1MenuML(_id){
 	utils.vgk.menuML = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1MenuML;
 	params.topolId = _id;
@@ -460,7 +458,7 @@ function ecoGetMenusML(xhr){
 }
 
 function ajaxGetMenusML() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetMenusML;
 	params.iam = 'rMenuML';
@@ -480,7 +478,7 @@ function ecoUpdtMenuML(xhr){
 }
 
 function updateMenuML(){
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro/';
 		params.eco = ecoUpdtMenuML; 
 		params.iam = 'rMenuML';
@@ -521,7 +519,7 @@ function ecoGetTextosRepo(xhr){
 		else{
 			console.log(fila.pagina);
 			if (topol){
-				var params = local.vgApp.paramsXHR;
+				var params = vgApp.paramsXHR;
 				params.base = '/alfaAgro';
 				params.eco = ecoNouTextosRepo; 
 				params.txt = utils.o2s(topol.clase2ObjDB());
@@ -541,13 +539,13 @@ function creaTextosRepo(){
 	var stmt = "select * from textos order by 1,2;";
 	var stmtB64 = Base64.encode(stmt);
 	var body = {
-		id : 1234567, //local.vgApp.encript.sessId,
-		path : local.vgApp.sqlite.pathDB,
+		id : 1234567, //vgApp.encript.sessId,
+		path : vgApp.sqlite.pathDB,
 		db   : 'idiomas.sqlite',
 		stmt : stmtB64
 	}
-	var params = local.vgApp.paramsXHR;
-	params.base = local.vgApp.sqlite.base;
+	var params = vgApp.paramsXHR;
+	params.base = vgApp.sqlite.base;
 	params.eco = ecoGetTextosRepo; 
 
 	ajaxCmdShell(params,body);
@@ -569,7 +567,7 @@ function nuevoTextosML(){
 	if (tag){
 		utils.vgk.textosML = new rTextosML(tag,[]);
 		utils.vgk.textosML.meta.org = utils.vgk.user.org;
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro';
 		params.eco = ecoNouTextosML; 
 		params.iam = 'rTextosML';
@@ -586,7 +584,7 @@ function ecoBorraTextosML(xhr){
 }
 
 function borraTextosML(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraTextosML;
 	params.topolId = _id;
@@ -614,7 +612,7 @@ function ecoGet1TextosML(xhr){
 }
 
 function get1TextosML(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1TextosML;
 	params.topolId = _id;
@@ -638,7 +636,7 @@ function ecoGetTextosML(xhr){
 }
 
 function ajaxGetTextosML() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetTextosML;
 	params.iam = 'rTextosML';
@@ -658,7 +656,7 @@ function ecoUpdtTextosML(xhr){
 }
 
 function updateTextosML(){
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro/';
 		params.eco = ecoUpdtTextosML; 
 		params.iam = 'rTextosML';
@@ -691,7 +689,7 @@ function ecoBorraTopolML(xhr){
 }
 
 function borraTopolML(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraTopolML;
 	params.topolId = _id;
@@ -719,7 +717,7 @@ function ecoGet1TopolsML(xhr){
 }
 
 function get1TopolsML(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1TopolsML;
 	params.topolId = _id;
@@ -743,7 +741,7 @@ function ecoGetTopolsML(xhr){
 }
 
 function ajaxGetTopolsML() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro';
 	params.eco = ecoGetTopolsML;
 //	params.iam = 'rTextosML';
@@ -763,7 +761,7 @@ function ecoUpdtTopolsML(xhr){
 }
 
 function updateTopolsML(){
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro/';
 		params.eco = ecoUpdtTopolsML; 
 		params.txt = utils.o2s(utils.vgk.topolsML.clase2ObjDB());
@@ -941,7 +939,7 @@ function ecoGet1MenuPag(xhr){
 }
 
 function get1MenuPag(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1MenuPag;
 	params.topolId = _id;
@@ -971,7 +969,7 @@ function ecoGetMenuPag(xhr){
 
 function ajaxGetMenuPag(tag) {
 	utils.vgk.menuPag = tag;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetMenuPag;
 	params.iam = 'rMenuML';
@@ -997,7 +995,7 @@ function ecoGet1TextPag(xhr){
 }
 
 function get1TextPag(_id){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1TextPag;
 	params.topolId = _id;
@@ -1029,7 +1027,7 @@ function ecoGetTextPag(xhr){
 
 function ajaxGetTextPag(tag) {
 	utils.vgk.textPag = tag;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetTextPag;
 	params.iam = 'rTextosML';

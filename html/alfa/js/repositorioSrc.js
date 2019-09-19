@@ -162,21 +162,21 @@ function showInfoEspecie(gen,esp){
 }
 
 
-function floraList(){
+export function floraList(){
 	vgApp.tabla = 'FLORA';
 	getEspeciesList('FLORA');
 }
 
-function faunaList(){
+export function faunaList(){
 	vgApp.tabla = 'FAUNA';
 	getEspeciesList('FAUNA');
 }
 
-function hortaList(){
+export function hortaList(){
 	vgApp.tabla = 'HORTA';
 	getEspeciesList('HORTA');
 }
-function frutaList(){
+export function frutaList(){
 	vgApp.tabla = 'FRUTA';
 	getEspeciesList('FRUTA');
 }

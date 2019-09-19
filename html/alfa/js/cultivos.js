@@ -7,8 +7,9 @@ import src    from '/js/cultivosSrc.js'
 import plant  from '/js/plantasSrc.js'
 import suelo  from '/js/sueloSrc.js'
 import agro   from '/js/agro_Clases.js'
-import {goPag} from '/js/agro_VGlob.js'
+import {vgApp,goPag} from '/js/agro_VGlob.js'
 
+window.vgApp = vgApp;
 window.goPag = goPag;
 window.showListaEscenarios = src.showListaEscenarios;
 window.cargaEscenario = src.cargaEscenario;
@@ -16,6 +17,7 @@ window.RaizEsc = agro.RaizEsc;
 window.Task =agro.Task;
 window.TaskLnk = agro.TaskLnk;
 window.CultHorta = agro.CultHorta;
+window.editTasksCult = src.editTasksCult;
 //------------------------------------------------------------------- Init
 function sesionCultivosOK(sesion){
 	utils.vgk.postLoadTextos = plant.initAppsPlantas;

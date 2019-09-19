@@ -4,7 +4,6 @@ import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 import trazo  from '/k1/libK1_Trazo.js'
 
-import local  from '/js/agro_VGlob.js'
 import agro  from  '/js/agro_Clases.js'
 
 import {Task,TaskLnk} from '/js/agro_Clases.js'
@@ -88,7 +87,7 @@ function updateTasksGrafo(){
 		utils.vgk.grafoTasks.meta.org = utils.vgk.user.org;
 	};
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateTasksGrafo;
 	params.txt = utils.o2s(utils.vgk.grafoTasks.clase2ObjDB());
@@ -107,7 +106,7 @@ function ecoGet1TasksGrafo(xhr){
 
 function get1TasksGrafo(_id){
 	utils.vgk.grafoTasks_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1TasksGrafo;
 	params.topolId = _id;

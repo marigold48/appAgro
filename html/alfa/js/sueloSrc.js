@@ -4,7 +4,6 @@ import ajax   from '/k1/libK1_Ajax.js'
 import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 
-import local  from '/js/agro_VGlob.js'
 import agro  from  '/js/agro_Clases.js'
 import {InfoFinca,Zona,Bancal} from '/js/agro_Clases.js'
 
@@ -117,7 +116,7 @@ function ecoBorraFinca(xhr){
 }
 function borraUnaFinca(_id){
 	console.log('Borrando finca: ' + _id);
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraFinca;
 	params.topolId = _id;
@@ -133,7 +132,7 @@ function ecoUpdateFinca(xhr){
 	console.log('Eco Updt Finca: ');
 }
 function updateFinca(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateFinca;
 	params.txt = utils.o2s(utils.vgk.finca.clase2ObjDB());
@@ -161,7 +160,7 @@ function ecoGetUnaFinca(xhr){
 
 function getUnaFinca(_id){
 	utils.vgk.finca_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGetUnaFinca;
 	params.topolId = _id;
@@ -193,7 +192,7 @@ function ecoGetFincas(xhr){
 }
 
 function ajaxGetFincas() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetFincas;
 	params.iam = 'Finca';
@@ -216,7 +215,7 @@ function grabaDatosFinca(){
 		utils.vgk.finca = new Finca(raiz.tag,[raiz]);
 		utils.vgk.finca.meta.org = utils.vgk.user.org;
 	
-		var params = local.vgApp.paramsXHR;
+		var params = vgApp.paramsXHR;
 		params.base = '/alfaAgro/';
 		params.eco = ecoNuevaFinca; 
 		params.iam = 'Finca';
@@ -248,7 +247,7 @@ function ecoGetGeoFinca(xhr){
 function exportGeoFinca(){
 	var raiz = utils.vgk.finca.getRaiz();
 	var _id = raiz.obj.geo_id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGetGeoFinca;
 	params.topolId = _id;
@@ -276,7 +275,7 @@ function importGeoFinca(){
 	var geojs = new rGeoJS(tag,'rGeoJS',utils.vgk.user.org);
 	geojs.nodos = feats;
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGrabaGeoFinca; 
 	params.iam = 'rGeoJS';
@@ -305,7 +304,7 @@ function exportGeoZona(id0){
 	if (!zona.obj.geo_id){alert('No hay Geo_ID');return;}
 	utils.vgk.appPagSuelo.tabsGeo.idAct = id0;
 	var _id = zona.obj.geo_id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGetGeoZona;
 	params.topolId = _id;
@@ -334,7 +333,7 @@ function importGeoZona(id0){
 	var geojs = new rGeoJS(tag,'rGeoJS',utils.vgk.user.org);
 	geojs.nodos = feats;
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGrabaGeoZona; 
 	params.iam = 'rGeoJS';
@@ -450,7 +449,7 @@ function borraApoyos(){
 	if (!ok) return;
 
 	console.log('Borrando apoyos: ' + bancal.tag);
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraApoyos;
 	params.topolId = bancal.obj.apoyos_id;
@@ -505,7 +504,7 @@ function creaApoyos(id0){
 		}
 	}
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoCreaApoyos; 
 	params.txt = o2s(apoyos.clase2ObjDB());

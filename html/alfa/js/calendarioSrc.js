@@ -6,12 +6,14 @@ import vapps  from '/k1/libK1_vApps.js'
 import topol  from '/k1/libK1_Topol.js'
 import tempo  from '/k1/libK1_Tiempo.js'
 
-import local  from '/js/agro_VGlob.js'
 import agro   from  '/js/agro_Clases.js'
 
 import {rDia} from '/k1/libK1_Tiempo.js'
+import {vgApp,goPag}  from '/js/agro_VGlob.js'
 
 window.rDia = rDia;
+window.vgApp = vgApp;
+window.goPag = goPag;
 
 function initAppsAlmanak(){
 	if(utils.r$('divMes')){
@@ -157,7 +159,7 @@ function ecoGet1Kairos(xhr){
 
 function get1Kairos(_id){
 	utils.vgk.kairos_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1Kairos;
 	params.topolId = _id;
@@ -181,7 +183,7 @@ function ecoUpdateKairos(xhr){
 	console.log('Actualizado Kairos ');
 }
 function updateKairos(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateKairos; 
 	params.txt = utils.o2s(utils.vgk.kairos.clase2ObjDB());
@@ -194,7 +196,7 @@ function nuevoKairos(){
 	var nom = prompt('Nombre?');
 	if (!nom) return;
 	utils.vgk.kairos = new tempo.rKairos(nom,[]);
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoKairos; 
 	params.txt = utils.o2s(utils.vgk.kairos.clase2ObjDB());
@@ -208,7 +210,7 @@ function ecoGetKairos(xhr){
 }
 
 function ajaxGetKairos() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetKairos;
 	params.iam = 'rKairos';

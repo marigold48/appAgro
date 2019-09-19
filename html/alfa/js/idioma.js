@@ -4,6 +4,10 @@ import src    from '/js/idiomaSrc.js'
 
 import {adminClasesML,adminMenusML,adminTextosML,adminTopolsML} from '/js/idiomaSrc.js'
 
+import {vgApp,goPag}  from '/js/agro_VGlob.js'
+window.vgApp = vgApp;
+window.goPag = goPag;
+
 window.adminClasesML = adminClasesML;
 window.adminMenusML  = adminMenusML;
 window.adminTextosML = adminTextosML;

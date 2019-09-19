@@ -2,7 +2,6 @@ import utils  from '/k1/libK1_Utils.js'
 import ajax   from '/k1/libK1_Ajax.js'
 import vapps  from '/k1/libK1_vApps.js'
 
-import local  from '/js/agro_VGlob.js'
 import agro  from  '/js/agro_Clases.js'
 import plant  from '/js/plantasSrc.js'
 import suelo  from '/js/sueloSrc.js'
@@ -158,7 +157,7 @@ function ecoDuplicaTasks(xhr){
 	utils.vgk.grafoTasks.objDB2Clase(loTopol);
 	utils.vgk.grafoTasks.cambiaIds();
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateTasksCult; 
 	params.txt = utils.o2s(utils.vgk.grafoTasks.clase2ObjDB());
@@ -173,7 +172,7 @@ function ecoDuplicaTasks(xhr){
 
 function duplicaTasksIds(tasks_id){
 	console.log('Tasks 1: '+tasks_id)
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/clone/';
 	params.eco = ecoDuplicaTasks;
 	params.topolId = tasks_id;
@@ -191,7 +190,7 @@ function editTasksCult(){
 		var ok = confirm('No hay tareas. Crearlas?');
 		if (ok) creaTasksCult();
 	}
-	else goTasksGrafo(tasksId);
+	else goPag('TASKSG',tasksId);
 	utils.vgk.appModal.show = false;
 }
 
@@ -279,7 +278,7 @@ function ecoGet1Apoyos4Cult(xhr){
 
 function get1Apoyos4Cult(_id){
 	utils.vgk.apoyos_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1Apoyos4Cult;
 	params.topolId = _id;
@@ -333,7 +332,7 @@ function ecoUpdateEscenario(xhr){
 	console.log(JSON.parse(xhr.responseText)._id);
 }
 function updateEscenario(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoUpdateEscenario; 
 	params.txt = utils.o2s(utils.vgk.escenario.clase2ObjDB());
@@ -360,7 +359,7 @@ function nuevoEscenario(){
 		console.log('Modo Plantas no definido');
 		return;
 	}
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoEscenario; 
 	params.iam = 'Escenario';
@@ -387,7 +386,7 @@ function borraEscenario(){
 		var ok = confirm(msg+utils.vgk.escenario.meta.tag+'?');
 		if (!ok) return;
 	}
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoBorraEscenario;
 	params.topolId = utils.vgk.escenario_id;
@@ -416,7 +415,7 @@ function ecoGet1Escenario(xhr){
 
 function get1Escenario(_id){
 	utils.vgk.escenario_id = _id;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1Escenario;
 	params.topolId = _id;
@@ -438,7 +437,7 @@ function ecoGetEscenarios(xhr){
 
 function ajaxGetEscenarios() {
 	var modo = utils.vgk.appModoPlantas.modo;
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetEscenarios;
 	if (modo == 'HORTA') params.iam = 'EscHorta';
@@ -488,7 +487,7 @@ function ecoGet1Esc4Add(xhr){
 }
 
 function addEsc2AgroJar(){
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoGet1Esc4Add;
 	params.topolId = utils.vgk.appModal.idAct;
@@ -511,7 +510,7 @@ function nuevoAgroJar(){
 	var raiz = new RaizEsc('Temp '+jar);
 	var agrojar = new AgroJar('Temporada '+jar,[raiz]);
 
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoAgroJar; 
 	params.txt = utils.o2s(agrojar.clase2ObjDB());
@@ -527,7 +526,7 @@ function ecoGetAgroJars(xhr){
 }
 
 function ajaxGetAgroJars() {
-	var params = local.vgApp.paramsXHR;
+	var params = vgApp.paramsXHR;
 	params.base = '/metasByOrg/';
 	params.eco = ecoGetAgroJars;
 	params.iam = 'AgroJar';
@@ -566,5 +565,6 @@ export default {
 	initAppsSuelo4Cult,initAppEscenarios,
 	ajaxGetEscenarios,ajaxGetAgroJars,
 	crearCultivo,
-	showListaEscenarios,cargaEscenario
+	showListaEscenarios,cargaEscenario,
+	editTasksCult
 }
