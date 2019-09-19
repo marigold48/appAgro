@@ -1644,5 +1644,6 @@ export default {
 	CultHorta,CultFruta,
 	Task,TaskLnk,GrafoTasks,
 	rAlmanak,
-	Explt
+	Explt,
+	Escenario
 }
