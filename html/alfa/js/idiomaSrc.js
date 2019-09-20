@@ -2,6 +2,7 @@ import utils  from '/k1/libK1_Utils.js';
 import ajax   from '/k1/libK1_Ajax.js'
 import clases from '/k1/libK1_Clases.js'
 import topol  from '/k1/libK1_Topol.js'
+import vapps  from '/k1/libK1_vApps.js'
 
 
 //------------------------------------------------------------------- Cambio Org
@@ -803,7 +804,7 @@ function initAppsIdioma(){
 				setNodos : function(nodos){this.nodos = nodos;},
 				editLang : function(id0){
 					var lang = utils.vgk.clasesML.getNodoById(id0);
-					editaItem('LANG',lang,grabaLang,borraLang);
+					vapps.editaItem('LANG',lang,grabaLang,borraLang);
 				},
 				nuevoLang : function(){
 					var lang = new rLang('Nuevo');
@@ -830,7 +831,7 @@ function initAppsIdioma(){
 					var nodo = null;
 					if (this.visible == 'MENUS') nodo = utils.vgk.menuML.getNodoById(id0);
 					else if (this.visible == 'TEXTOS') nodo = utils.vgk.textosML.getNodoById(id0);
-					editaItem('TXTML',nodo,grabaTxtML,borraTxtML);
+					vapps.editaItem('TXTML',nodo,grabaTxtML,borraTxtML);
 					console.log('editTxtML' + id0);
 				},
 //------------------------------------------------------------------- MenusML
@@ -892,7 +893,7 @@ function initAppsIdioma(){
 					utils.vgk.appModal.keoML = this.malla[ix].keo;
 					var id0 = this.malla[ix].id0;
 					var nodo = utils.vgk.textosML.getNodoById(id0);
-					editaItem('BIGML',nodo,grabaBigTxt);
+					vapps.editaItem('BIGML',nodo,grabaBigTxt);
 //					var resp = prompt('Editar texto',txt);
 //					if (resp) this.malla[ix].txt = resp;
 				},

@@ -5,11 +5,17 @@ import idioma from '/k1/libK1_Idioma.js'
 
 import src    from '/js/explotacionSrc.js'
 import {ItemExplt} from '/js/agro_Clases.js'
+
+import {rKeos,rLang,rNodoClase,rTxtML,rDim} from '/k1/libK1_Clases.js'
 import {Reg00,Reg01A,Reg01B,Reg01C,Reg01D,Reg01E} from '/js/agro_CCPAE.js'
 import {vgApp,goPag} from '/js/agro_VGlob.js'
 
 window.vgApp = vgApp;
 window.goPag = goPag;
+
+window.rKeos = rKeos;
+window.rLang = rLang;
+window.rNodoClase = rNodoClase;
 
 window.ItemExplt = ItemExplt;
 window.Reg00 = Reg00;

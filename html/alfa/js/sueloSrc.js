@@ -5,11 +5,6 @@ import idioma from '/k1/libK1_Idioma.js'
 import vapps  from '/k1/libK1_vApps.js'
 
 import agro  from  '/js/agro_Clases.js'
-import {InfoFinca,Zona,Bancal} from '/js/agro_Clases.js'
-
-window.InfoFinca = InfoFinca;
-window.Zona = Zona;
-window.Bancal = Bancal;
 
 function initAppsSuelo(){
 	if (utils.r$('pagSuelo')){
@@ -232,7 +227,7 @@ function grabaDatosFinca(){
 function creaNuevaFinca(){
 	console.log('creaNuevaFinca');
 	var info = new InfoFinca('Finca');
-	crearItem('INFOFINCA',info,grabaDatosFinca);
+	vapps.crearItem('INFOFINCA',info,grabaDatosFinca);
 }
 
 //------------------------------------------------------------------- Geo JSON
@@ -363,7 +358,7 @@ function grabaZona(){
 function creaZona(){
 	console.log('creaZona');
 	var item = new agro.Zona('Zona');
-	vapps.crearItem('ZONA',item,grabaZona);
+	vapps.vapps.crearItem('ZONA',item,grabaZona);
 }
 
 function editZona(id0){
@@ -419,7 +414,7 @@ function grabaBancal(){
 
 function creaBancal(){
 	var bancal = new agro.Bancal();
-	vapps.crearItem('BANCAL',bancal,grabaBancal);
+	vapps.vapps.crearItem('BANCAL',bancal,grabaBancal);
 }
 
 function renderBancales(id){

@@ -1,12 +1,12 @@
-import src from '/js/repositorioSrc.js'
 import {vgApp,goPag}    from '/js/agro_VGlob.js'
 
 import {floraList,faunaList,hortaList,frutaList} from '/js/repositorioSrc.js'
+import src from '/js/repositorioSrc.js'
 
-window.vgApp = vgApp;
+window.vgApp = vgApp; // iport para Ajax
 window.goPag = goPag;
 
-window.floraList = floraList;
+window.floraList = floraList; // import para link menu
 window.faunaList = faunaList;
 window.hortaList = hortaList;
 window.frutaList = frutaList;

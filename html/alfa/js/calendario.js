@@ -7,6 +7,12 @@ import idioma from '/k1/libK1_Idioma.js'
 import src    from '/js/calendarioSrc.js'
 import agro   from  '/js/agro_Clases.js'
 
+import {rKeos,rLang,rNodoClase,rTxtML,rDim} from '/k1/libK1_Clases.js'
+
+window.rKeos = rKeos;
+window.rLang = rLang;
+window.rNodoClase = rNodoClase;
+
 window.showListaKairos = src.showListaKairos;
 window.cargaKairos = src.cargaKairos;
 window.inputOK = agro.inputOK;

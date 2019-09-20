@@ -119,21 +119,21 @@ export function goPag(pag,_id){
 			break;
 
 		case 'FRAPPE':
-			if (utils.vgk.escenario_id){
-				window.open('frappeGantt.html?idSess='+idSess+'&_id='+utils.vgk.escenario_id,'_blank');
+			if (vgk.escenario_id){
+				window.open('frappeGantt.html?idSess='+idSess+'&_id='+vgk.escenario_id,'_blank');
 			}
-			else if (utils.vgk.grafoTasks_id){
-				window.open('frappeGantt.html?idSess='+idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
+			else if (vgk.grafoTasks_id){
+				window.open('frappeGantt.html?idSess='+idSess+'&_id='+vgk.grafoTasks_id,'_blank');
 			}
 			else alert('No hay escenario / Grafo de tasks');
 			break;
 
 		case 'GANTT':
-			if (utils.vgk.escenario_id){
-				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+utils.vgk.escenario_id,'_blank');
+			if (vgk.escenario_id){
+				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+vgk.escenario_id,'_blank');
 			}
-			else if (utils.vgk.grafoTasks_id){
-				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+utils.vgk.grafoTasks_id,'_blank');
+			else if (vgk.grafoTasks_id){
+				window.open('tasks_Gantt.html?idSess='+idSess+'&_id='+vgk.grafoTasks_id,'_blank');
 			}
 			break;
 
@@ -150,7 +150,7 @@ export function goPag(pag,_id){
 			break;
 
 		case 'MAPAF':
-			window.location = 'mapa.html?idSess='+idSess+'&_id='+utils.vgk.finca_id;
+			window.location = 'mapa.html?idSess='+idSess+'&_id='+vgk.finca_id;
 			break;
 
 		case 'MATRIZ':

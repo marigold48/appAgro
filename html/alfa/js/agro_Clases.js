@@ -23,7 +23,7 @@ Para permitir espacios y no punto: [\w ]
 
 import utils  from '/k1/libK1_Utils.js'
 import topol  from '/k1/libK1_Topol.js'
-import tiempo from '/k1/libK1_Tiempo.js'
+import tempo  from '/k1/libK1_Tiempo.js'
 
 
 //------------------------------------------------------------------- Fincas
@@ -987,7 +987,7 @@ class NodoTramo extends topol.rNodo{
 /*
 	Modelizan las tareas agrícolas
 	Se representan como un Grafo, un Gantt o un Almanaque/Agenda
-	El grafo se una para UN cultivo
+	El grafo se usa para UN cultivo
 	El gantt para la campaña completa
 	El almanaque para visualizar las jornadas de las tareas para la campaña
 
@@ -1016,12 +1016,12 @@ class GrafoTasks extends topol.rGrafo{
 	setFechasTasks(nodo0){
 		var veins = this.getVecinos(nodo0); // array arcos-nodos {n: <nodo>,a:<arco>}
 		veins.map(function(vei){
-//			console.log('Veí: '+o2s(vei));
+//			console.log('Veí: '+utils.o2s(vei));
 			var nodo1 = vei.n;
 			var gap = parseInt(vei.a.obj.gap);
 			var tau = nodo0.obj.fecha.uta+nodo0.obj.fecha.tau+gap;
-			nodo1.obj.fecha = new rLapso(tau,30);
-//			console.log('Set F:' + o2s(nodo1));
+			nodo1.obj.fecha = new tempo.rLapso(tau,30);
+//			console.log('Set F:' + utils.o2s(nodo1));
 			this.setFechasTasks(nodo1);
 		}.bind(this))
 	}
@@ -1034,7 +1034,7 @@ class GrafoTasks extends topol.rGrafo{
 				nodo.dim.w = nodo.obj.fecha.tau;
 				nodo.dim.h = 30;
 			}
-//			console.log('Dims '+nodo.tag+' : '+o2s(nodo.dim))
+//			console.log('Dims '+nodo.tag+' : '+utils.o2s(nodo.dim))
 		}.bind(this))
 	}
 
@@ -1096,7 +1096,7 @@ export class Task extends topol.rDrag {
 		this.iam = 'Task';
 		this.obj = objDB.obj;
 		if (objDB.obj.fecha){
-			this.obj.fecha = new rLapso(null,null);
+			this.obj.fecha = new tempo.rLapso(null,null);
 			this.obj.fecha.objDB2Clase(objDB.obj.fecha);
 		}
 	}
@@ -1136,7 +1136,7 @@ export class Task extends topol.rDrag {
 
 }
 
-class Epoca extends topol.rDrag {
+export class Epoca extends topol.rDrag {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Epoca';
@@ -1151,7 +1151,7 @@ class Epoca extends topol.rDrag {
 		this.iam = 'Epoca';
 		this.obj = objDB.obj;
 		if (objDB.obj.lapso){
-			this.obj.lapso = new rLapso(null,null);
+			this.obj.lapso = new tempo.rLapso(null,null);
 			this.obj.lapso.objDB2Clase(objDB.obj.lapso);
 		}
 	}
@@ -1249,7 +1249,7 @@ class ItemRec extends topol.rDrag {
 }
 //=================================================================== ALMANAQUE
 //------------------------------------------------------------------- Almanaque Agro
-class rAlmanak extends tiempo.rKronos {
+export class rAlmanak extends tempo.rKronos {
 	constructor (tag,nodos,jar){
 		super(tag,nodos,jar);
 		this.meta.iam = 'rAlmanak';
@@ -1280,7 +1280,7 @@ class rAlmanak extends tiempo.rKronos {
 	}
 
 	generaFila(fila,diasIds,tagMes,iMes){
-		console.log(o2s(diasIds));
+		console.log(utils.o2s(diasIds));
 		diasIds.map(function(id){
 			var dia = this.getNodoById(id);
 			var tag = ''+dia.obj.dM+' '+tagMes; //+' '+this.jar;
@@ -1642,7 +1642,7 @@ export default {
 	Horta,GrpHorta,EspHorta,VarHorta,
 	RaizEsc,EscHorta,EscFruta,
 	CultHorta,CultFruta,
-	Task,TaskLnk,GrafoTasks,
+	Task,TaskLnk,GrafoTasks,GanttTasks,
 	rAlmanak,
 	Explt,
 	Escenario
