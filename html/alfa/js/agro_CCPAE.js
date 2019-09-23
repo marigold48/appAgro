@@ -2,6 +2,27 @@
 
 
 /*
+
+
+Reg00
+Reg01A
+Reg01B
+Reg01C
+Reg01D
+Reg01E
+Reg02
+Reg03
+Reg04
+Reg05A
+Reg05B
+Reg06
+Reg07
+Reg08
+Reg09
+Reg10A
+Reg10B
+Reg11
+
 El quadern consta dels següents registres:
 0. Portada
 	Identificació de l’operador, assessor (si s’escau) i compromisos de l’operador.
@@ -85,7 +106,7 @@ class Quadern extends topol.rArbol {
 	}
 
 	fusionaNodo(nodo){
-		console.log('Nodo: '+ o2s(nodo));
+		console.log('Nodo: '+ utils.o2s(nodo));
 		var padre = this.getPadreByIam(nodo.iam);
 		console.log('Fusiona '+nodo.tag+' en '+padre.tag);
 		this.addNodoHijo(padre,nodo);
@@ -93,7 +114,7 @@ class Quadern extends topol.rArbol {
 }
 
 //------------------------------------------------------------------- Campanya (Nodo Raiz)
-class Campanya extends topol.rNodo {
+export class Campanya extends topol.rNodo {
 	constructor(tag){
 		super(tag);
 		this.iam = 'Campanya';
@@ -1146,17 +1167,17 @@ function mkQuadern0(){
 
 	var titular = new Reg00('Titular');
 	quadern0.addNodoHijo(portada,titular);
-	console.log(o2s(titular));
+	console.log(utils.o2s(titular));
 
 	var assesor = new Reg00('Assesor');
 	quadern0.addNodoHijo(portada,assesor);
-	console.log(o2s(assesor));
+	console.log(utils.o2s(assesor));
 
 // 1. Relació de personal i maquinària de tractaments.
 
 	var pers_maq = new topol.rNodo('1: Personal i maquinària');
 	quadern0.addNodoHijo(raiz,pers_maq);
-	console.log(o2s(pers_maq));
+	console.log(utils.o2s(pers_maq));
 
 
 	var plant = new topol.rNodo('1A: Personal plantilla');
@@ -1165,7 +1186,7 @@ function mkQuadern0(){
 		var nodo = new Reg01A('R1A-'+i); nodo.obj.orden = 'A-'+i;
 //		quadern0.addNodoHijo(plant,nodo);
 	}
-	console.log(o2s(plant));
+	console.log(utils.o2s(plant));
 
 	var contr = new topol.rNodo('1B: Personal contractat');
 	quadern0.addNodoHijo(pers_maq,contr);
@@ -1173,7 +1194,7 @@ function mkQuadern0(){
 		var nodo = new Reg01B('R1B-'+i); nodo.obj.orden = 'B-'+i;
 //		quadern0.addNodoHijo(contr,nodo);
 	}
-	console.log(o2s(contr));
+	console.log(utils.o2s(contr));
 
 	var empr = new topol.rNodo('1C: Empresas serveis');
 	quadern0.addNodoHijo(pers_maq,empr);
@@ -1181,7 +1202,7 @@ function mkQuadern0(){
 		var nodo = new Reg01C('R1C-'+i); nodo.obj.orden = 'C-'+i;
 //		quadern0.addNodoHijo(empr,nodo);
 	}
-	console.log(o2s(empr));
+	console.log(utils.o2s(empr));
 
 	var maqProp = new topol.rNodo('1D: Maquinaria propia');
 	quadern0.addNodoHijo(pers_maq,maqProp);
@@ -1189,7 +1210,7 @@ function mkQuadern0(){
 		var nodo = new Reg01D('R1D-'+i); nodo.obj.orden = 'D-'+i;
 //		quadern0.addNodoHijo(maqProp,nodo);
 	}
-	console.log(o2s(maqProp));
+	console.log(utils.o2s(maqProp));
 
 	var maqLlog = new topol.rNodo('1E: Maquinaria llogada');
 	quadern0.addNodoHijo(pers_maq,maqLlog);
@@ -1197,7 +1218,7 @@ function mkQuadern0(){
 		var nodo = new Reg01E('R1E-'+i); nodo.obj.orden = 'E-'+i;
 //		quadern0.addNodoHijo(maqLlog,nodo);
 	}
-	console.log(o2s(maqLlog));
+	console.log(utils.o2s(maqLlog));
 
 // 2. Identificació de les parcel·les de cultiu ecològic.
 	var parcelas = new topol.rNodo('2: Parcelas ecologicas');
@@ -1209,7 +1230,7 @@ function mkQuadern0(){
 	var nodo2 = new Reg02('Cal Penjarella');
 	quadern0.addNodoHijo(parcelas,nodo2);
 
-	console.log(o2s(parcelas));
+	console.log(utils.o2s(parcelas));
 
 // 3. Registres de treballs i adobats
 	var tascas = new topol.rNodo('3: Treballs i adobats');
@@ -1218,7 +1239,7 @@ function mkQuadern0(){
 		var nodo = new Reg03('R3-'+i);
 		quadern0.addNodoHijo(tascas,nodo);
 	}
-	console.log(o2s(tascas));
+	console.log(utils.o2s(tascas));
 
 // 4. Registre de tractaments fitosanitaris i altres mètodes de lluita
 	var tratFS = new topol.rNodo('4: Tractaments fitosanitaris');
@@ -1227,12 +1248,12 @@ function mkQuadern0(){
 		var nodo = new Reg04('R4-'+i);
 		quadern0.addNodoHijo(tratFS,nodo);
 	}
-	console.log(o2s(tratFS));
+	console.log(utils.o2s(tratFS));
 
 // 5. Registre d’altres tractaments fitosanitaris
 	var otrosTFS = new topol.rNodo('5: Altres tractaments fitosanitaris');
 	quadern0.addNodoHijo(raiz,otrosTFS);
-	console.log(o2s(otrosTFS));
+	console.log(utils.o2s(otrosTFS));
 
 // 5A- Registre d'ús de llavor tractada
 	var tfsLlavor = new topol.rNodo('5A: Llavor tractada');
@@ -1241,7 +1262,7 @@ function mkQuadern0(){
 		var nodo = new Reg05A('R5A-'+i);
 		quadern0.addNodoHijo(tfsLlavor,nodo);
 	}
-	console.log(o2s(tfsLlavor));
+	console.log(utils.o2s(tfsLlavor));
 
 // 5B- tractaments postcollita / en locals d'emmagatzematge / en els mitjans de transport
 	var tfsPost = new topol.rNodo('5B: Postcollita, locals i transport');
@@ -1250,7 +1271,7 @@ function mkQuadern0(){
 		var nodo = new Reg05B('R5B-'+i);
 		quadern0.addNodoHijo(tfsPost,nodo);
 	}
-	console.log(o2s(tfsPost));
+	console.log(utils.o2s(tfsPost));
 
 // 6. Registre d’anàlisi de residus de productes fitosanitaris
 	var resid = new topol.rNodo('6: Anàlisi de residus');
@@ -1259,7 +1280,7 @@ function mkQuadern0(){
 		var nodo = new Reg06('R6-'+i);
 		quadern0.addNodoHijo(resid,nodo);
 	}
-	console.log(o2s(resid));
+	console.log(utils.o2s(resid));
 
 // 7. Registre de compra de matèries primeres
 	var compra = new topol.rNodo('7: Compra de matèries primeres');
@@ -1268,7 +1289,7 @@ function mkQuadern0(){
 		var nodo = new Reg07('R7-'+i);
 		quadern0.addNodoHijo(compra,nodo);
 	}
-	console.log(o2s(compra));
+	console.log(utils.o2s(compra));
 
 // 8. Registre de venda de productes
 	var venta = new topol.rNodo('8: Venda de productes');
@@ -1277,7 +1298,7 @@ function mkQuadern0(){
 		var nodo = new Reg08('R8-'+i);
 		quadern0.addNodoHijo(venta,nodo);
 	}
-	console.log(o2s(venta));
+	console.log(utils.o2s(venta));
 
 // 9. Registre de totals recol·lectats i càlcul de rendiments
 	var total = new topol.rNodo('9: Totals i rendiments');
@@ -1286,12 +1307,12 @@ function mkQuadern0(){
 		var nodo = new Reg09('R9-'+i);
 		quadern0.addNodoHijo(total,nodo);
 	}
-	console.log(o2s(total));
+	console.log(utils.o2s(total));
 
 // 10. Altres dades i incidències
 	var otrosDatos = new topol.rNodo('10: Altres dades i incidències');
 	quadern0.addNodoHijo(raiz,otrosDatos);
-	console.log(o2s(otrosDatos));
+	console.log(utils.o2s(otrosDatos));
 
 	var ambient = new topol.rNodo('10A: Dades ambientals');
 	quadern0.addNodoHijo(otrosDatos,ambient);
@@ -1312,7 +1333,7 @@ function mkQuadern0(){
 	zonaEsp.obj.situac = 'Hi ha parcel·les que totalment o parcialment es troben en zones específiques';
 	quadern0.addNodoHijo(ambient,zonaEsp);
 
-	console.log(o2s(ambient));
+	console.log(utils.o2s(ambient));
 
 	var incid = new topol.rNodo('10B: Incidències');
 	quadern0.addNodoHijo(otrosDatos,incid);
@@ -1320,7 +1341,7 @@ function mkQuadern0(){
 		var nodo = new Reg10B('R10B-'+i);
 		quadern0.addNodoHijo(incid,nodo);
 	}
-	console.log(o2s(incid));
+	console.log(utils.o2s(incid));
 
 // 11. Registre de reclamacions de clients
 	var recl = new topol.rNodo('11: Reclamacions de clients');
@@ -1329,6 +1350,8 @@ function mkQuadern0(){
 		var nodo = new Reg11('R11-'+i);
 		quadern0.addNodoHijo(recl,nodo);
 	}
-	console.log(o2s(recl));
+	console.log(utils.o2s(recl));
 	return quadern0;
 }
+
+export default {mkQuadern0, Quadern}

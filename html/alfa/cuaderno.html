@@ -5,11 +5,12 @@
 	<title>Cuaderno</title>
 
 <!--  ==================== LOCAL ==================  -->
-    <link rel="stylesheet" href="lib/bootstrap_335.min.css">
-    <link rel="stylesheet" href="lib/font-awesome_430.min.css">
-    <script src="lib/jquery_321.min.js"></script>
-    <script src="lib/bootstrap_337.min.js"></script>
-    <script src="lib/vue_2517.js"></script>
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+	<script src="lib/jquery_321.min.js"></script>
+	<script src="lib/bootstrap_337.min.js"></script>
+	<script src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src='lib/libBase64.js'></script>
 
 
 	<link rel="stylesheet" href="css/vueModal.css">
@@ -17,34 +18,18 @@
 	.table {border:3px gray solid;}
 	.table > thead {background-color:#efefef;}
 	</style>
-	<script type='text/javascript' src='lib/libBase64.js'></script>
-	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
-	<script type='text/javascript' src='k1/libK1_Random.js'></script>
-	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
-	<script type='text/javascript' src='k1/libK1_Trazo.js'></script>
-	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
-	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
-	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
-	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
-	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
-	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
-
-	<script type='text/javascript' src='js/agro_CCPAE.js'></script>
-	<script type='text/javascript' src='js/agro_Clases.js'></script>
-	<script type='text/javascript' src='js/agro_VGlob.js'></script>
-	<script type='text/javascript' src='js/agro_vApps.js'></script>
-	<script type='text/javascript' src='js/cuaderno.js'></script>
+	<script type='module' src='js/cuaderno.js'></script>
 
 
 </head>
-<body onload="initQuadern()">
+<body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">Quadern</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	      <li><a href="javascript:goHome()">Inicio</a></li>
+	      <li><a href="javascript:goPag('DASH'))">Inicio</a></li>
 	      <li class="active"><a href="javascript:showListaQuaderns()">Quaderns</a></li>
 	      <li class="active"><a href="javascript:creaQuadernOrigen()">Original</a></li>
 
@@ -52,9 +37,9 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Módulos
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="javascript:goZonas()">Zonas</a></li>
-					<li><a href="javascript:goPlantas()">Plantas</a></li>
-					<li><a href="javascript:goCultivos()">Cultivos</a></li>
+					<li><a href="javascript:goPag('SUELO')">Zonas</a></li>
+					<li><a href="javascript:goPag('PLANTAS')">Plantas</a></li>
+					<li><a href="javascript:goPag('CULTS')">Cultivos</a></li>
 				</ul>
 			</li>
 
