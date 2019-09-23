@@ -29,7 +29,7 @@
 			<a class="navbar-brand" href="#">Quadern</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	      <li><a href="javascript:goPag('DASH'))">Inicio</a></li>
+	      <li><a href="javascript:goPag('DASH')">Inicio</a></li>
 	      <li class="active"><a href="javascript:showListaQuaderns()">Quaderns</a></li>
 	      <li class="active"><a href="javascript:creaQuadernOrigen()">Original</a></li>
 
@@ -37,7 +37,7 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Módulos
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a href="javascript:goPag('SUELO')">Zonas</a></li>
+					<li><a href="javascript:goPag('SUELO')">Suelo</a></li>
 					<li><a href="javascript:goPag('PLANTAS')">Plantas</a></li>
 					<li><a href="javascript:goPag('CULTS')">Cultivos</a></li>
 				</ul>
@@ -166,7 +166,7 @@
 								<td>{{item.obj.carnet}}</td>
 								<td>{{item.obj.nivel}}</td>
 								<td style="text-align: right;">
-									<button class="btn btn-edit" v-on:click.stop="editReg(item.id0)"><i class="fa fa-pencil"></i></button>
+								<button class="btn btn-edit" v-on:click.stop="editReg(item.id0)"><i class="fa fa-pencil"></i></button>
 								</td>
 							</tr>
 							</tbody>
@@ -184,7 +184,7 @@
 									<th style="width:15%"  class="text-center">Número de carnet d'aplicador i manipulador</th>
 									<th style="width:15%"  class="text-center">Nivell de qualificació</th>
 									<th style="width:5%"  class="text-center">
-						<button @click="addReg()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+									<button @click="addReg()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
 									</th>
 								</tr>
 							</thead>
@@ -212,7 +212,8 @@
 									<th style="width:5%"  class="text-center">Número d'ordre</th>
 									<th style="width:45%"  class="text-center">Nom y cognoms</th>
 									<th style="width:15%"  class="text-center">NIF</th>
-									<th style="width:30%"  class="text-center">Número d'inscripció al Registre</th>
+									<th style="width:20%"  class="text-center">Número d'inscripció al Registre</th>
+									<th style="width:10%"  class="text-center">Nivell</th>
 									<th style="width:5%"  class="text-center">
 						<button @click="addReg()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
 									</th>
@@ -224,6 +225,7 @@
 								<td>{{item.obj.nombre}}</td>
 								<td>{{item.obj.nif}}</td>
 								<td>{{item.obj.carnet}}</td>
+								<td>{{item.obj.nivel}}</td>
 								<td style="text-align: right;">
 									<button class="btn btn-edit" v-on:click.stop="editReg(item.id0)"><i class="fa fa-pencil"></i></button>
 								</td>

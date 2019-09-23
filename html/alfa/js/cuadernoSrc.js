@@ -56,7 +56,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg01A('R1A-'+ n); nodo.obj.orden = 'A-'+n;
-					crearItem('REG01A',nodo,grabaRegQEx);
+					vapps.crearItem('REG01A',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -78,7 +78,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg01B('R1B-'+ n); nodo.obj.orden = 'B-'+n;
-					crearItem('REG01B',nodo,grabaRegQEx);
+					vapps.crearItem('REG01B',nodo,grabaRegQEx);
 				}
 
 			}
@@ -101,7 +101,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg01C('R1C-'+ n); nodo.obj.orden = 'C-'+n;
-					crearItem('REG01C',nodo,grabaRegQEx);
+					vapps.crearItem('REG01C',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -123,7 +123,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg01D('R1D-'+ n); nodo.obj.orden = 'D-'+n;
-					crearItem('REG01D',nodo,grabaRegQEx);
+					vapps.crearItem('REG01D',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -144,7 +144,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg01E('R1E-'+ n); nodo.obj.orden = 'E-'+n;
-					crearItem('REG01E',nodo,grabaRegQEx);
+					vapps.crearItem('REG01E',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -166,7 +166,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg02('R2-'+ n);
-					crearItem('REG02',nodo,grabaRegQEx);
+					vapps.crearItem('REG02',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -189,7 +189,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg03('R3-'+ n);
-					crearItem('REG03',nodo,grabaRegQEx);
+					vapps.crearItem('REG03',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -212,7 +212,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg04('R4-'+ n);
-					crearItem('REG04',nodo,grabaRegQEx);
+					vapps.crearItem('REG04',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -236,7 +236,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg05A('R5A-'+ n);
-					crearItem('REG05A',nodo,grabaRegQEx);
+					vapps.crearItem('REG05A',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -258,7 +258,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg05B('R5B-'+ n);
-					crearItem('REG05B',nodo,grabaRegQEx);
+					vapps.crearItem('REG05B',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -280,7 +280,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg06('R6-'+ n);
-					crearItem('REG06',nodo,grabaRegQEx);
+					vapps.crearItem('REG06',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -303,7 +303,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg07('R7-'+ n);
-					crearItem('REG07',nodo,grabaRegQEx);
+					vapps.crearItem('REG07',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -326,7 +326,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg08('R8-'+ n);
-					crearItem('REG08',nodo,grabaRegQEx);
+					vapps.crearItem('REG08',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -348,7 +348,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg09('R9-'+ n);
-					crearItem('REG09',nodo,grabaRegQEx);
+					vapps.crearItem('REG09',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -372,7 +372,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg10A('R10A-'+ n);
-					crearItem('REG10A',nodo,grabaRegQEx);
+					vapps.crearItem('REG10A',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -394,7 +394,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg10B('R10B-'+ n);
-					crearItem('REG10B',nodo,grabaRegQEx);
+					vapps.crearItem('REG10B',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -416,7 +416,7 @@ function initAppsQuadern(){
 				addReg : function(){
 					var n = this.items.length + 1;
 					var nodo = new Reg11('R11-'+ n); nodo.obj.orden = n;
-					crearItem('REG11',nodo,grabaRegQEx);
+					vapps.crearItem('REG11',nodo,grabaRegQEx);
 				}
 			}
 		})
@@ -441,6 +441,7 @@ function borraRegQEx(nodo){
 		actualizaAppsQuadern();
 		updateQuadern();
 	}
+	utils.vgk.appModal.show = false;
 }
 
 function grabaRegQEx(nodo){
@@ -451,6 +452,7 @@ function grabaRegQEx(nodo){
 		actualizaAppsQuadern();
 	}
 	updateQuadern();
+	utils.vgk.appModal.show = false;
 }
 
 
@@ -958,12 +960,15 @@ function cargaAgroJar(jar){
 
 //------------------------------------------------------------------- Carga Explotacion
 function fusionQuadern0(){
+	var ok = confirm("Fusionar con datos explotacion?");
+	if (!ok) return;
+
 	console.log('---------------------------- fusionQuadern0');
 	var nodos = utils.vgk.explt.nodos;
 	nodos.map(function(nodo){
 		if (/Reg/.test(nodo.iam))	utils.vgk.quadern.fusionaNodo(nodo);
 	})
-//	updateQuadern();
+	//updateQuadern();
 }
 
 function ecoCreaQuadern0(xhr){

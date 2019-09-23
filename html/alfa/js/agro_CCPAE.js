@@ -70,24 +70,25 @@ class Quadern extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
 		this.meta.iam = 'Quadern';
+		this.ixRegIam = {};
 	}
 
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
 		this.meta.iam = 'Quadern';
 	}
-
+/*
 	getPadreByIam(iam){
 		var padre = null;
-		var regNum = parseInt(iam.substr(3,2));
+		var regNum = iam.substr(3,2);
 		console.log(iam+' : '+regNum);
 		var raspa = this.getRaspa();
 		raspa.map(function(nodo1){
 			if (regNum == parseInt(nodo1.tag.split(': ')[0])){
 				switch(regNum){
-					case 1:
-					case 5:
-					case 10:
+					case '01':
+					case '05':
+					case '10':
 					console.log('regNum: '+regNum);
 						var letra = iam.substr(-1);
 						var idsHijos = nodo1.hijos;
@@ -99,18 +100,58 @@ class Quadern extends topol.rArbol {
 						break;
 					default:
 						padre = nodo1;
+						console.log('padre: ' +padre.tag+' '+regNum);
+						break;
 				}
 			}
+			else console.log('NO TRATADO regNum: ' + regNum);
 		}.bind(this))
 		return padre;
 	}
+*/
 
 	fusionaNodo(nodo){
 		console.log('Nodo: '+ utils.o2s(nodo));
-		var padre = this.getPadreByIam(nodo.iam);
-		console.log('Fusiona '+nodo.tag+' en '+padre.tag);
-		this.addNodoHijo(padre,nodo);
-	}
+		switch (nodo.iam){
+			case 'Reg00':
+				var padre = this.getNodoById(this.ixRegIam[nodo.iam]);
+				var hijos = padre.hijos;
+				if (nodo.tag == 'Titular'){
+					console.log ('Titular: '+nodo.tag)
+					var titular = this.getNodoById(hijos[0]);
+					titular.obj = nodo.obj;
+				}
+				else if (nodo.tag == 'Assesor'){
+					console.log ('Assesor: '+nodo.tag)
+					var asesor = this.getNodoById(hijos[1]);
+					asesor.obj = nodo.obj;
+				}
+				else console.log ('No vale: '+nodo.tag)
+				break;
+			case 'Reg01A':
+			case 'Reg01B':
+			case 'Reg01C':
+			case 'Reg01D':
+			case 'Reg01E':
+			case 'Reg02':
+			case 'Reg03':
+			case 'Reg04':
+			case 'Reg05A':
+			case 'Reg05B':
+			case 'Reg06':
+			case 'Reg07':
+			case 'Reg08':
+			case 'Reg09':
+			case 'Reg10A':
+			case 'Reg10B':
+			case 'Reg11':
+				var padre = this.getNodoById(this.ixRegIam[nodo.iam]);
+				console.log('Fusiona '+nodo.tag+' en '+padre.tag);
+				this.addNodoHijo(padre,nodo);
+				break;
+
+		}
+	};
 }
 
 //------------------------------------------------------------------- Campanya (Nodo Raiz)
@@ -1163,6 +1204,7 @@ function mkQuadern0(){
 // Portada
 	var portada = new topol.rNodo('0: Portada');
 	quadern0.addNodoHijo(raiz,portada);
+	quadern0.ixRegIam['Reg00'] = portada.id0;
 	console.log(portada.tag);
 
 	var titular = new Reg00('Titular');
@@ -1182,52 +1224,59 @@ function mkQuadern0(){
 
 	var plant = new topol.rNodo('1A: Personal plantilla');
 	quadern0.addNodoHijo(pers_maq,plant);
+	quadern0.ixRegIam['Reg01A'] = plant.id0;
+
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01A('R1A-'+i); nodo.obj.orden = 'A-'+i;
-//		quadern0.addNodoHijo(plant,nodo);
+		quadern0.addNodoHijo(plant,nodo);
 	}
 	console.log(utils.o2s(plant));
 
 	var contr = new topol.rNodo('1B: Personal contractat');
 	quadern0.addNodoHijo(pers_maq,contr);
+	quadern0.ixRegIam['Reg01B'] = contr.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01B('R1B-'+i); nodo.obj.orden = 'B-'+i;
-//		quadern0.addNodoHijo(contr,nodo);
+		quadern0.addNodoHijo(contr,nodo);
 	}
 	console.log(utils.o2s(contr));
 
 	var empr = new topol.rNodo('1C: Empresas serveis');
 	quadern0.addNodoHijo(pers_maq,empr);
+	quadern0.ixRegIam['Reg01C'] = empr.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01C('R1C-'+i); nodo.obj.orden = 'C-'+i;
-//		quadern0.addNodoHijo(empr,nodo);
+		quadern0.addNodoHijo(empr,nodo);
 	}
 	console.log(utils.o2s(empr));
 
 	var maqProp = new topol.rNodo('1D: Maquinaria propia');
 	quadern0.addNodoHijo(pers_maq,maqProp);
+	quadern0.ixRegIam['Reg01D'] = maqProp.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01D('R1D-'+i); nodo.obj.orden = 'D-'+i;
-//		quadern0.addNodoHijo(maqProp,nodo);
+		quadern0.addNodoHijo(maqProp,nodo);
 	}
 	console.log(utils.o2s(maqProp));
 
 	var maqLlog = new topol.rNodo('1E: Maquinaria llogada');
 	quadern0.addNodoHijo(pers_maq,maqLlog);
+	quadern0.ixRegIam['Reg01E'] = maqLlog.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg01E('R1E-'+i); nodo.obj.orden = 'E-'+i;
-//		quadern0.addNodoHijo(maqLlog,nodo);
+		quadern0.addNodoHijo(maqLlog,nodo);
 	}
 	console.log(utils.o2s(maqLlog));
 
 // 2. Identificació de les parcel·les de cultiu ecològic.
 	var parcelas = new topol.rNodo('2: Parcelas ecologicas');
 	quadern0.addNodoHijo(raiz,parcelas);
+	quadern0.ixRegIam['Reg02'] = parcelas.id0;
 	
 	// Pendiente de poner loop a los bancales
-	var nodo1 = new Reg02('La Rectoria');
+	var nodo1 = new Reg02('La Rectoria');nodo1.orden = 'LR';
 	quadern0.addNodoHijo(parcelas,nodo1);
-	var nodo2 = new Reg02('Cal Penjarella');
+	var nodo2 = new Reg02('Cal Penjarella');nodo2.orden = 'CP';
 	quadern0.addNodoHijo(parcelas,nodo2);
 
 	console.log(utils.o2s(parcelas));
@@ -1235,6 +1284,7 @@ function mkQuadern0(){
 // 3. Registres de treballs i adobats
 	var tascas = new topol.rNodo('3: Treballs i adobats');
 	quadern0.addNodoHijo(raiz,tascas);
+	quadern0.ixRegIam['Reg03'] = tascas.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg03('R3-'+i);
 		quadern0.addNodoHijo(tascas,nodo);
@@ -1244,6 +1294,7 @@ function mkQuadern0(){
 // 4. Registre de tractaments fitosanitaris i altres mètodes de lluita
 	var tratFS = new topol.rNodo('4: Tractaments fitosanitaris');
 	quadern0.addNodoHijo(raiz,tratFS);
+	quadern0.ixRegIam['Reg04'] = tratFS.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg04('R4-'+i);
 		quadern0.addNodoHijo(tratFS,nodo);
@@ -1258,6 +1309,7 @@ function mkQuadern0(){
 // 5A- Registre d'ús de llavor tractada
 	var tfsLlavor = new topol.rNodo('5A: Llavor tractada');
 	quadern0.addNodoHijo(otrosTFS,tfsLlavor);
+	quadern0.ixRegIam['Reg05A'] = tfsLlavor.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg05A('R5A-'+i);
 		quadern0.addNodoHijo(tfsLlavor,nodo);
@@ -1267,6 +1319,7 @@ function mkQuadern0(){
 // 5B- tractaments postcollita / en locals d'emmagatzematge / en els mitjans de transport
 	var tfsPost = new topol.rNodo('5B: Postcollita, locals i transport');
 	quadern0.addNodoHijo(otrosTFS,tfsPost);
+	quadern0.ixRegIam['Reg05B'] = tfsPost.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg05B('R5B-'+i);
 		quadern0.addNodoHijo(tfsPost,nodo);
@@ -1276,6 +1329,7 @@ function mkQuadern0(){
 // 6. Registre d’anàlisi de residus de productes fitosanitaris
 	var resid = new topol.rNodo('6: Anàlisi de residus');
 	quadern0.addNodoHijo(raiz,resid);
+	quadern0.ixRegIam['Reg06'] = resid.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg06('R6-'+i);
 		quadern0.addNodoHijo(resid,nodo);
@@ -1285,6 +1339,7 @@ function mkQuadern0(){
 // 7. Registre de compra de matèries primeres
 	var compra = new topol.rNodo('7: Compra de matèries primeres');
 	quadern0.addNodoHijo(raiz,compra);
+	quadern0.ixRegIam['Reg07'] = compra.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg07('R7-'+i);
 		quadern0.addNodoHijo(compra,nodo);
@@ -1294,6 +1349,7 @@ function mkQuadern0(){
 // 8. Registre de venda de productes
 	var venta = new topol.rNodo('8: Venda de productes');
 	quadern0.addNodoHijo(raiz,venta);
+	quadern0.ixRegIam['Reg08'] = venta.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg08('R8-'+i);
 		quadern0.addNodoHijo(venta,nodo);
@@ -1303,6 +1359,7 @@ function mkQuadern0(){
 // 9. Registre de totals recol·lectats i càlcul de rendiments
 	var total = new topol.rNodo('9: Totals i rendiments');
 	quadern0.addNodoHijo(raiz,total);
+	quadern0.ixRegIam['Reg09'] = total.id0;
 	for (var i=1;i<5;i++){
 		var nodo = new Reg09('R9-'+i);
 		quadern0.addNodoHijo(total,nodo);
