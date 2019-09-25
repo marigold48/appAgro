@@ -29,8 +29,8 @@ function grabaTask(){
 
 function editTask(id){
 	var task = utils.vgk.grafoTasks.getNodoById(id);
-	if (task.obj.fase == 'SEED') editaItem('TASK0',task,grabaTask,borraTask);
-	else editaItem('TASK1',task,grabaTask,borraTask);
+	if (task.obj.fase == 'SEED') vapps.editaItem('TASK0',task,grabaTask,borraTask);
+	else vapps.editaItem('TASK1',task,grabaTask,borraTask);
 }
 
 function grabaLink(){
@@ -51,7 +51,7 @@ function borraLink(){
 
 function editLink(link){
 	console.log('Link: '+ utils.o2s(link));
-	editaItem('LINK',link,grabaLink,borraLink);
+	vapps.editaItem('LINK',link,grabaLink,borraLink);
 }
 
 function showTasks(){

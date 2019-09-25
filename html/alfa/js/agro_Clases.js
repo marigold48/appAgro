@@ -77,12 +77,12 @@ export class InfoFinca extends topol.rNodo {
 	}
 	
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codFinca.ok = inputOK('COD',this.obj.codFinca);
-		conds.valid.descripc.ok = inputOK('DSC',this.obj.descripc);
-		conds.valid.area.ok = inputOK('INT',this.obj.area);
-		conds.valid.lat.ok =inputOK('DEC',this.obj.lat);
-		conds.valid.lon.ok =inputOK('DEC',this.obj.lon);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codFinca.ok = utils.inputOK('COD',this.obj.codFinca);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
+		conds.valid.area.ok = utils.inputOK('INT',this.obj.area);
+		conds.valid.lat.ok =utils.inputOK('DEC',this.obj.lat);
+		conds.valid.lon.ok =utils.inputOK('DEC',this.obj.lon);
 		return conds;
 	}
 
@@ -131,9 +131,9 @@ export class Zona extends topol.rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codZona.ok = inputOK('COD',this.obj.codZona);
-		conds.valid.area.ok = inputOK('INT',this.obj.area);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codZona.ok = utils.inputOK('COD',this.obj.codZona);
+		conds.valid.area.ok = utils.inputOK('INT',this.obj.area);
 		return conds;
 	}
 
@@ -187,9 +187,9 @@ export class Bancal extends topol.rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codBancal.ok = inputOK('COD',this.obj.codBancal);
-		conds.valid.area.ok = inputOK('INT',this.obj.area);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codBancal.ok = utils.inputOK('COD',this.obj.codBancal);
+		conds.valid.area.ok = utils.inputOK('INT',this.obj.area);
 		conds.valid.sigpac.ok = this.obj.sigpac.length < 20;
 		return conds;
 	}
@@ -248,8 +248,8 @@ export class GrpHorta extends topol.rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.descripc.ok = inputOK('DSC',this.obj.descripc);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
 		return conds;
 	}
 
@@ -293,11 +293,11 @@ export class EspHorta extends topol.rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codEspec.ok = inputOK('COD',this.obj.codEspec);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codEspec.ok = utils.inputOK('COD',this.obj.codEspec);
 		conds.valid.genero.ok = this.obj.genero.length < 20;
 		conds.valid.especie.ok = this.obj.especie.length < 20;
-		conds.valid.img.ok = inputOK('IMG',this.obj.img);
+		conds.valid.img.ok = utils.inputOK('IMG',this.obj.img);
 		return conds;
 	}
 	getNodoML(){
@@ -359,16 +359,16 @@ export class VarHorta extends topol.rNodo {
 		return nodo;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codVard.ok = inputOK('COD',this.obj.codVard);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codVard.ok = utils.inputOK('COD',this.obj.codVard);
 		conds.valid.genero.ok = this.obj.genero.length < 20;
 		conds.valid.especie.ok = this.obj.especie.length < 20;
-		conds.valid.coste.ok = inputOK('INT',this.obj.coste);
-		conds.valid.dPlts.ok = inputOK('INT',this.obj.dPlts);
-		conds.valid.dLins.ok = inputOK('INT',this.obj.dLins);
-		conds.valid.venta.ok = inputOK('INT',this.obj.venta);
-		conds.valid.rendm.ok = inputOK('INT',this.obj.rendm);
-		conds.valid.img.ok = inputOK('IMG',this.obj.img);
+		conds.valid.coste.ok = utils.inputOK('INT',this.obj.coste);
+		conds.valid.dPlts.ok = utils.inputOK('INT',this.obj.dPlts);
+		conds.valid.dLins.ok = utils.inputOK('INT',this.obj.dLins);
+		conds.valid.venta.ok = utils.inputOK('INT',this.obj.venta);
+		conds.valid.rendm.ok = utils.inputOK('INT',this.obj.rendm);
+		conds.valid.img.ok = utils.inputOK('IMG',this.obj.img);
 		return conds;
 	}
 
@@ -436,8 +436,8 @@ class GrpFruta extends topol.rNodo {
 		this.obj = objDB.obj;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.descripc.ok = inputOK('DSC',this.obj.descripc);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
 		return conds;
 	}
 
@@ -482,11 +482,11 @@ class EspFruta extends topol.rNodo {
 		this.obj = objDB.obj;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codEspec.ok = inputOK('COD',this.obj.codEspec);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codEspec.ok = utils.inputOK('COD',this.obj.codEspec);
 		conds.valid.genero.ok = this.obj.genero.length < 20;
 		conds.valid.especie.ok = this.obj.especie.length < 20;
-		conds.valid.img.ok = inputOK('IMG',this.obj.img);
+		conds.valid.img.ok = utils.inputOK('IMG',this.obj.img);
 		return conds;
 	}
 	getNodoML(){
@@ -548,16 +548,16 @@ class VarFruta extends topol.rNodo {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codVard.ok = inputOK('COD',this.obj.codVard);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codVard.ok = utils.inputOK('COD',this.obj.codVard);
 		conds.valid.genero.ok = this.obj.genero.length < 20;
 		conds.valid.especie.ok = this.obj.especie.length < 20;
-		conds.valid.coste.ok = inputOK('INT',this.obj.coste);
-		conds.valid.dPlts.ok = inputOK('INT',this.obj.dPlts);
-		conds.valid.dLins.ok = inputOK('INT',this.obj.dLins);
-		conds.valid.venta.ok = inputOK('INT',this.obj.venta);
-		conds.valid.rendm.ok = inputOK('INT',this.obj.rendm);
-		conds.valid.img.ok = inputOK('IMG',this.obj.img);
+		conds.valid.coste.ok = utils.inputOK('INT',this.obj.coste);
+		conds.valid.dPlts.ok = utils.inputOK('INT',this.obj.dPlts);
+		conds.valid.dLins.ok = utils.inputOK('INT',this.obj.dLins);
+		conds.valid.venta.ok = utils.inputOK('INT',this.obj.venta);
+		conds.valid.rendm.ok = utils.inputOK('INT',this.obj.rendm);
+		conds.valid.img.ok = utils.inputOK('IMG',this.obj.img);
 		return conds;
 	}
 
@@ -613,16 +613,16 @@ class Planton extends VarFruta {
 
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.codVard.ok = inputOK('COD',this.obj.codVard);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.codVard.ok = utils.inputOK('COD',this.obj.codVard);
 		conds.valid.genero.ok = this.obj.genero.length < 20;
 		conds.valid.especie.ok = this.obj.especie.length < 20;
-		conds.valid.coste.ok = inputOK('INT',this.obj.coste);
-		conds.valid.dPlts.ok = inputOK('INT',this.obj.dPlts);
-		conds.valid.dLins.ok = inputOK('INT',this.obj.dLins);
-		conds.valid.venta.ok = inputOK('INT',this.obj.venta);
-		conds.valid.rendm.ok = inputOK('INT',this.obj.rendm);
-		conds.valid.img.ok = inputOK('IMG',this.obj.img);
+		conds.valid.coste.ok = utils.inputOK('INT',this.obj.coste);
+		conds.valid.dPlts.ok = utils.inputOK('INT',this.obj.dPlts);
+		conds.valid.dLins.ok = utils.inputOK('INT',this.obj.dLins);
+		conds.valid.venta.ok = utils.inputOK('INT',this.obj.venta);
+		conds.valid.rendm.ok = utils.inputOK('INT',this.obj.rendm);
+		conds.valid.img.ok = utils.inputOK('IMG',this.obj.img);
 		return conds;
 	}
 
@@ -1053,8 +1053,8 @@ export class TaskLnk extends topol.rArco {
 		this.obj.gap = objDB.obj.gap;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.gap.ok = inputOK('INT',this.obj.gap);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.gap.ok = utils.inputOK('INT',this.obj.gap);
 		return conds;
 	}
 
@@ -1106,10 +1106,10 @@ export class Task extends topol.rDrag {
 		this.dim.w = this.obj.fecha.tau;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.pages.ok = inputOK('COD',this.obj.pages);
-		conds.valid.ratio.ok = inputOK('INT',this.obj.ratio);
-		conds.valid.coste.ok =inputOK('DEC',this.obj.coste);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.pages.ok = utils.inputOK('COD',this.obj.pages);
+		conds.valid.ratio.ok = utils.inputOK('INT',this.obj.ratio);
+		conds.valid.coste.ok =utils.inputOK('DEC',this.obj.coste);
 		return conds;
 	}
 
@@ -1184,8 +1184,8 @@ class Canal extends topol.rArco {
 		this.obj = objDB.obj;
 	}
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.largo.ok =inputOK('INT',this.obj.largo);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.largo.ok =utils.inputOK('INT',this.obj.largo);
 		return conds;
 	}
 
@@ -1224,8 +1224,8 @@ class ItemRec extends topol.rDrag {
 	}
 
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.caudal.ok =inputOK('INT',this.obj.caudal);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.caudal.ok =utils.inputOK('INT',this.obj.caudal);
 		return conds;
 	}
 
@@ -1463,8 +1463,8 @@ export class ItemExplt extends topol.rNodo {
 	}
 	
 	vale(conds){
-		conds.valid.tag.ok =  inputOK('TAG',this.tag);
-		conds.valid.descripc.ok = inputOK('DSC',this.obj.descripc);
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
 		return conds;
 	}
 

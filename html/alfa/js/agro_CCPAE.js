@@ -77,38 +77,6 @@ class Quadern extends topol.rArbol {
 		super.objDB2Clase(objDB);
 		this.meta.iam = 'Quadern';
 	}
-/*
-	getPadreByIam(iam){
-		var padre = null;
-		var regNum = iam.substr(3,2);
-		console.log(iam+' : '+regNum);
-		var raspa = this.getRaspa();
-		raspa.map(function(nodo1){
-			if (regNum == parseInt(nodo1.tag.split(': ')[0])){
-				switch(regNum){
-					case '01':
-					case '05':
-					case '10':
-					console.log('regNum: '+regNum);
-						var letra = iam.substr(-1);
-						var idsHijos = nodo1.hijos;
-						idsHijos.map(function(idH){
-							var nodo2 = this.getNodoById(idH);
-//							console.log(nodo2.tag.split(': ')[0]+' ? '+(regNum+letra))
-							if (nodo2.tag.split(': ')[0] == (regNum+letra)) padre = nodo2
-						}.bind(this))
-						break;
-					default:
-						padre = nodo1;
-						console.log('padre: ' +padre.tag+' '+regNum);
-						break;
-				}
-			}
-			else console.log('NO TRATADO regNum: ' + regNum);
-		}.bind(this))
-		return padre;
-	}
-*/
 
 	fusionaNodo(nodo){
 		console.log('Nodo: '+ utils.o2s(nodo));
