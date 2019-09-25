@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<meta name='viewport' content='width=device-width, user-scalable=no'>
+	<title>Plantas</title>
+
+	<style>
+		div.crop {
+		  max-width: 100%;
+		  overflow: hidden;
+		  margin: 0 auto;
+		  padding: 0;
+		  position: relative;
+		}
+		div.crop img{  
+			display: block;
+  		max-width: none !important;
+		 }	
+	</style>
+
+	<!--  ==================== Librerias externas ==================== -->
+	<link rel="stylesheet" href="lib/bootstrap_335.min.css">
+	<link rel="stylesheet" href="lib/font-awesome_430.min.css">
+
+	<script type='text/javascript' src="lib/jquery_321.min.js"></script>
+	<script type='text/javascript' src="lib/bootstrap_337.min.js"></script>
+	<script type='text/javascript' src="lib/vue_2517.js"></script>
+	<script type='text/javascript' src='lib/libBase64.js'></script>
+
+	<link rel="stylesheet" href="css/vueModal.css">
+
+	<!--  ==================== Librerias kernel =====================  -->
+	<script type='text/javascript' src='k1/libK1_Ajax.js'></script>
+	<script type='text/javascript' src='k1/libK1_Random.js'></script>
+	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
+	<script type='text/javascript' src='k1/libK1_Clases.js'></script>
+	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='text/javascript' src='k1/libK1_Tiempo.js'></script>
+	<script type='text/javascript' src='k1/libK1_Sesion.js'></script>
+	<script type='text/javascript' src='k1/libK1_vApps.js'></script>
+	<script type='text/javascript' src='k1/libK1_Idioma.js'></script>
+
+	<!--  ==================== Lbrerias aplicación ================== -->
+	<script type='text/javascript' src='js/agro_vApps.js'></script>
+	<script type='text/javascript' src='js/agro_VGlob.js'></script>
+	<script type='text/javascript' src='js/agro_Clases.js'></script>
+	<script type='text/javascript' src='js/pkg_Plantas.js'></script>
+	<script type='text/javascript' src='js/mod_plantas.js'></script>
+</head>
+<body onload='initPlantas()'>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><span id="BRAND">Plantas**</span></a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="javascript:goHome()"><span id="INICI">Inicio**</span></a></li>
+
+	      <li class="dropdown" >
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	        <span id="MODO">Modo**</span>
+	        <span class="caret"></span></a>
+	        <ul id="modoPlantas" class="dropdown-menu">
+	          <li @click="toggle('FRUTA')">
+	          	<i class="fa fa-check" v-if="modo==='FRUTA'"></i> 
+	          	<span id="FRUTA">Frutales**</span></a></li>
+	          <li @click="toggle('HORTA')">
+	          	<i class="fa fa-check" v-if="modo==='HORTA'"></i>
+	          	<span id="HORTA">Hortalizas**</span></a></li>
+	        </ul>
+	      </li>
+
+	      <li  class="active"><a href="http://www.mapama.gob.es/app/regVar/BusRegVar.aspx?id=es" target="_blank">
+	      	<span id="REGIST"> Reg. Variedades</span></a></li>
+
+	      <li><a href="javascript:goIncompatibles()"><span id="INCOMP">Incompatibles</span></a></li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		        <span id="MODULS">Módulos</span>
+		        <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+						<li><a href="javascript:goZonas()"><span id="ZONAS">Zonas**</span></a></li>
+						<li><a href="javascript:goCultivos()"><span id="CULTS">Cultivos**</span></a></li>
+						<li><a href="javascript:goMatrices()"><span id="MATRIUS">Matrices**</span></a></li>
+		        </ul>
+		      </li>
+
+	    </ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-user">&nbsp;</i>
+						<span id="usrMenu"> User</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="javascript:cambiaPwdUser()">
+								<span id="CHPWD" >Cambiar password**</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:cierraSesion()">
+								<span id="EXIT">Cerrar sesión**</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+	  </div>
+	</nav> 
+<!------------------------------------------------------------------>
+	<div class="container">
+		<div class="row">
+		<div class="col-md-3">
+
+		<div id="lstGrupo">
+			<h3 v-if="modo==='HORTA'"><span id="H3HORTA">Hortalizas</span></h3>
+			<h3 v-else="modo==='FRUTA'"><span id="H3FRUTA">Frutales</span></h3>
+			
+			<button @click="crearItem()" class="btn btn-success pull-right btn-mas"><i class="fa fa-plus"> </i></button>
+			<form  v-if="items.length" class="form">
+			<select  v-model="idAct">
+				<option class="form-control" @click="showHijos()" v-for="item in items" v-bind:value="item.id0">
+					{{ item.tag }}
+				</option>
+			</select>
+			<button  type="button" class="btn pull-right" @click="editaItem()"><i class="fa fa-pencil"></i></button>
+			</form>
+			
+			<span id="NOGRUPO" v-else><br>No hay Grupos creados</span>
+
+	
+			<!-- ul class="list-group">
+				<li class="list-group-item" v-for="item in items">
+				 <span @click="getUnGrpH(item._id)">{{ item.meta.tag }}  ({{item.meta.org}})</span>
+				</li>
+			</ul  -->
+		</div>
+		<div id="h3Espec">
+			<h4  style="display:inline-block">{{tag}}</h4>
+			<button @click="crearItem()" class="btn btn-success pull-right btn-mas" ><i class="fa fa-plus"> </i></button>
+		</div>
+		<div id="divEspec">
+			<div v-if="items.length > 0">
+				<div style="width: 70%; padding: 8px;border:2px gray solid;margin:3px" v-for="item in items" >
+					<img style="width:90%" v-bind:src="item.obj.img" alt="foto" />
+					<span v-on:click.stop="showHijos(item.id0)"><br><b>{{item.tag}}</b></span>
+					<button class="btn pull-right" v-on:click.stop="editItem(item.id0)"><i class="fa fa-pencil"></i></button>
+				</div>
+			</div>
+			<span id="NOESPEC" v-else>No hay Especies en este Grupo</span>
+		</div>
+
+		</div> <!--md3 -->
+
+
+		<div class="col-md-9">
+
+		<div id="h3Vardd">
+			<h4  style="display:inline-block">{{tag}}</h4>
+			<button @click="crearItem()" class="btn btn-success pull-right btn-mas" ><i class="fa fa-plus"> </i></button>
+		</div>
+
+		<div id="divVardd">
+			<div v-if="items.length > 0">
+				<div v-for="item in items" >
+					<div class="col-md-3" style="align-text:center;border:2px gray solid;margin:3px">
+						<img @click="editItem(item.id0)" style="width:100%" v-bind:src="item.obj.img" alt="foto" />
+						<b>{{item.tag}}</b>
+					</div>
+				</div>
+			</div>
+			<span id="NOVARD" v-else>No hay Variedades de esta Especie</span>
+		</div>
+
+
+
+
+		</div> <!-- md8 -->
+		</div> <!-- row -->
+	</div> <!-- container -->
+
+
+	
+
+	<!-- appEdit -->
+	<div id="appModal">
+		<modal v-bind:clase="modo" v-if="show" @close="show = false" @graba="graba()" @borra="borra()">
+			<h3 slot="header">{{conds.retol}}</h3>
+
+			<div slot="body">
+				<form	v-if="edit_t === 'USER'" class="form">
+					<input class="form-control" v-model="item.tag" type="text" name="usr"	placeholder="Usuario">
+					<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+					<input class="form-control" v-model="item.obj.pwd" type="text" name="pwd" placeholder="Password">
+					<span class="error" v-if="(!conds.valid.pwd.ok)">{{conds.valid.pwd.txt}}</span>
+					<input class="form-control" v-model="item.obj.conf" type="text" name="conf" placeholder="Confirmac.">
+					<span class="error" v-if="(!conds.valid.conf.ok)">{{conds.valid.conf.txt}}</span>
+				</form>
+
+
+			<form	v-else-if="edit_t === 'HORTA0'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="descripc" placeholder="Descripc">
+				<span class="error" v-if="(!conds.valid.descripc.ok)">{{conds.valid.descripc.txt}}</span>
+				<select  class="form-control" multiple v-model="items" size="6">
+					<option v-for="esph in lista" v-bind:value="esph.tag">
+						{{ esph.tag }}
+					</option>
+				</select>
+			</form>
+
+			<form	v-else-if="edit_t === 'FRUTA0'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="descripc" placeholder="Descripc">
+				<span class="error" v-if="(!conds.valid.descripc.ok)">{{conds.valid.descripc.txt}}</span>
+				<select  class="form-control" multiple v-model="items" size="6">
+					<option v-for="espf in lista" v-bind:value="espf.tag">
+						{{ espf.tag }}
+					</option>
+				</select>
+			</form>
+
+			<form	v-else-if="edit_t === 'HORTA1'" class="form">
+				<input v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" type="button" value="Crear Tareas" onclick="editTasksSeed()">
+			</form>
+
+			<form	v-else-if="edit_t === 'HORTA2'" class="form">
+				<input v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" type="button" value="Editar Tareas" onclick="editTasksSeed()">
+				<input class="form-control" type="button" value="Reset Tareas" onclick="resetTasksSeed()">
+			</form>
+
+			<form	v-else-if="edit_t === 'ESPH'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag"	placeholder="Alias">
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+				<input class="form-control" v-model="item.obj.genero" type="text" name="genero" placeholder="Genero">
+				<span class="error" v-if="(!conds.valid.genero.ok)">{{conds.valid.genero.txt}}</span>
+				<input class="form-control" v-model="item.obj.especie" type="text" name="especie" placeholder="EspH">
+				<span class="error" v-if="(!conds.valid.especie.ok)">{{conds.valid.especie.txt}}</span>
+				<input class="form-control" v-model="item.obj.img" type="text" name="lamina" placeholder="Lamina">
+				<span class="error" v-if="(!conds.valid.img.ok)">{{conds.valid.img.txt}}</span>
+			</form>
+
+
+			<form	v-else-if="edit_t === 'VARH'" class="form-inline" action="#">
+				<div class="form-group">
+					<label for="tag">Tag</label>
+					<input class="form-control" v-model="item.tag" type="text" name="tag"	placeholder="Alias">
+				</div>
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+
+				<div class="form-group">
+					<label for="codigo">Código</label>
+					<input class="form-control" v-model="item.obj.codVard" type="text" name="codigo"	placeholder="Codigo">
+				</div>
+				<span class="error" v-if="(!conds.valid.codVard.ok)">{{conds.valid.codVard.txt}}</span>
+
+				<div class="form-group">
+					<label for="genero">Género</label>
+					<input class="form-control" v-model="item.obj.genero" type="text" name="genero" placeholder="Genero">
+				</div>
+				<span class="error" v-if="(!conds.valid.genero.ok)">{{conds.valid.genero.txt}}</span>
+
+				<div class="form-group">
+					<label for="especie">Especie</label>
+					<input class="form-control" v-model="item.obj.especie" type="text" name="especie" placeholder="EspH">
+				</div>
+				<span class="error" v-if="(!conds.valid.especie.ok)">{{conds.valid.especie.txt}}</span>
+
+				<div class="form-group">
+					<label for="img">Imagen</label>
+					<input class="form-control" v-model="item.obj.img" type="text" name="img" placeholder="Imagen">
+				</div>
+				<span class="error" v-if="(!conds.valid.img.ok)">{{conds.valid.img.txt}}</span>
+
+				<div class="form-group">
+					<label for="coste">Semillas (cts)</label>
+					<input class="form-control" v-model="item.obj.coste" type="text" name="coste" placeholder="Coste">
+				</div>
+				<span class="error" v-if="(!conds.valid.coste.ok)">{{conds.valid.coste.txt}}</span>
+
+				<div class="form-group">
+					<label for="dPlts">Dist plantas</label>
+					<input class="form-control" v-model="item.obj.dPlts" type="text" name="dPlts" placeholder="Dist. plantas">
+				</div>
+				<span class="error" v-if="(!conds.valid.dPlts.ok)">{{conds.valid.dPlts.txt}}</span>
+
+				<div class="form-group">
+					<label for="dLins">Dist filas</label>
+					<input class="form-control" v-model="item.obj.dLins" type="text" name="dLins" placeholder="Dist. filas">
+				</div>
+				<span class="error" v-if="(!conds.valid.dLins.ok)">{{conds.valid.dLins.txt}}</span>
+
+				<div class="form-group">
+					<label for="rendm">Rendimiento</label>
+					<input class="form-control" v-model="item.obj.rendm" type="text" name="rendm" placeholder="Rendimiento">
+				</div>
+				<span class="error" v-if="(!conds.valid.rendm.ok)">{{conds.valid.rendm.txt}}</span>
+
+			</form>
+
+			<form	v-else-if="edit_t === 'VARF'" class="form-inline" action="#">
+				<div class="form-group">
+					<label for="tag">Tag</label>
+					<input class="form-control" v-model="item.tag" type="text" name="tag"	placeholder="Alias">
+				</div>
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+
+				<div class="form-group">
+					<label for="codigo">Código</label>
+					<input class="form-control" v-model="item.obj.codVard" type="text" name="codigo"	placeholder="Codigo">
+				</div>
+				<span class="error" v-if="(!conds.valid.codVard.ok)">{{conds.valid.codVard.txt}}</span>
+
+				<div class="form-group">
+					<label for="genero">Género</label>
+					<input class="form-control" v-model="item.obj.genero" type="text" name="genero" placeholder="Genero">
+				</div>
+				<span class="error" v-if="(!conds.valid.genero.ok)">{{conds.valid.genero.txt}}</span>
+
+				<div class="form-group">
+					<label for="especie">Especie</label>
+					<input class="form-control" v-model="item.obj.especie" type="text" name="especie" placeholder="EspH">
+				</div>
+				<span class="error" v-if="(!conds.valid.especie.ok)">{{conds.valid.especie.txt}}</span>
+
+				<div class="form-group">
+					<label for="img">Imagen</label>
+					<input class="form-control" v-model="item.obj.img" type="text" name="img" placeholder="Imagen">
+				</div>
+				<span class="error" v-if="(!conds.valid.img.ok)">{{conds.valid.img.txt}}</span>
+
+				<div class="form-group">
+					<label for="coste">Semillas (cts)</label>
+					<input class="form-control" v-model="item.obj.coste" type="text" name="coste" placeholder="Coste">
+				</div>
+				<span class="error" v-if="(!conds.valid.coste.ok)">{{conds.valid.coste.txt}}</span>
+
+				<div class="form-group">
+					<label for="dPlts">Dist plantas</label>
+					<input class="form-control" v-model="item.obj.dPlts" type="text" name="dPlts" placeholder="Dist. plantas">
+				</div>
+				<span class="error" v-if="(!conds.valid.dPlts.ok)">{{conds.valid.dPlts.txt}}</span>
+
+				<div class="form-group">
+					<label for="dLins">Dist filas</label>
+					<input class="form-control" v-model="item.obj.dLins" type="text" name="dLins" placeholder="Dist. filas">
+				</div>
+				<span class="error" v-if="(!conds.valid.dLins.ok)">{{conds.valid.dLins.txt}}</span>
+
+				<div class="form-group">
+					<label for="rendm">Rendimiento</label>
+					<input class="form-control" v-model="item.obj.rendm" type="text" name="rendm" placeholder="Rendimiento">
+				</div>
+				<span class="error" v-if="(!conds.valid.rendm.ok)">{{conds.valid.rendm.txt}}</span>
+
+			</form>
+
+		</div>
+		</modal>
+	</div> <!-- appEdit -->
+
+
+
+</body>
+</html>
