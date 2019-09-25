@@ -55,14 +55,14 @@ function ecoGetOldDocument(xhr){
 
 
 	if (!loTopol.length){
-		ajaxPostTopol(params);
+		ajax.ajaxPostTopol(params);
 	}
 	else if (loTopol.length == 1)	{
 		if (loTopol[0].meta.tag == tagPag){
 			params.topolId = loTopol[0]._id;
-			ajaxPutTopol(params);
+			ajax.ajaxPutTopol(params);
 			}
-		else ajaxPostTopol(params);
+		else ajax.ajaxPostTopol(params);
 	}
 	else {
 		var la_id = null;
@@ -76,7 +76,7 @@ function ecoGetOldDocument(xhr){
 			console.log(utils.o2s(topol));
 			if (topol.meta.tag == tagPag){
 				params.topolId = loTopol[ix]._id;
-				ajaxPutTopol(params);
+				ajax.ajaxPutTopol(params);
 				ok = false;
 			}
 		})
@@ -84,9 +84,9 @@ function ecoGetOldDocument(xhr){
 		if (ok){
 
 			params.topolId = la_id;
-			ajaxPutTopol(params);
+			ajax.ajaxPutTopol(params);
 		}
-		else ajaxPostTopol(params);// si no se ha encontrado
+		else ajax.ajaxPostTopol(params);// si no se ha encontrado
 	}
 
 }
@@ -203,7 +203,7 @@ function updateClasesML(){
 	params.eco = ecoUpdateClasesML;
 	params.txt = utils.o2s(utils.vgk.clasesML.clase2ObjDB());
 	params.topolId = utils.vgk.clasesML_id;
-	ajaxPutTopol(params);
+	ajax.ajaxPutTopol(params);
 	return false;
 }
 
@@ -248,7 +248,7 @@ function grabaDatosClasesML(){
 		params.eco = ecoNuevaClasesML; 
 		params.iam = 'rClasesML';
 		params.txt = utils.o2s(utils.vgk.clasesML.clase2ObjDB());
-		ajaxPostTopol(params);
+		ajax.ajaxPostTopol(params);
 	}
 }
 
@@ -268,9 +268,9 @@ function creaClasesML(otro){
 	console.log(params.txt);
 	if (utils.vgk.clasesML_id){
 		params.topolId = utils.vgk.clasesML_id;
-		ajaxPutTopol(params);
+		ajax.ajaxPutTopol(params);
 	}
-	else ajaxPostTopol(params);
+	else ajax.ajaxPostTopol(params);
 
 }
 
@@ -357,7 +357,7 @@ function ecoGetMenusRepo(xhr){
 				params.base = '/alfaAgro';
 				params.eco = ecoNouTextosRepo; 
 				params.txt = utils.o2s(topol.clase2ObjDB());
-				ajaxPostTopol(params);
+				ajax.ajaxPostTopol(params);
 			}
 			txtML = new rTxtML(fila.opcion,fila.codigo);
 			txtML.lng[fila.idioma]= fila.texto;
@@ -404,7 +404,7 @@ function nuevoMenuML(){
 		params.eco = ecoNouMenuML; 
 		params.iam = 'rMenuML';
 		params.txt = utils.o2s(utils.vgk.menuML.clase2ObjDB());
-		ajaxPostTopol(params);
+		ajax.ajaxPostTopol(params);
 
 	}
 }
@@ -485,7 +485,7 @@ function updateMenuML(){
 		params.iam = 'rMenuML';
 		params.txt = utils.o2s(utils.vgk.menuML.clase2ObjDB());
 		params.topolId = utils.vgk.menuML_id;
-		ajaxPutTopol(params);
+		ajax.ajaxPutTopol(params);
 }
 
 function grabaOpcML(){
@@ -524,7 +524,7 @@ function ecoGetTextosRepo(xhr){
 				params.base = '/alfaAgro';
 				params.eco = ecoNouTextosRepo; 
 				params.txt = utils.o2s(topol.clase2ObjDB());
-				ajaxPostTopol(params);
+				ajax.ajaxPostTopol(params);
 			}
 			txtML = new rTxtML(fila.opcion,fila.codigo);
 			txtML.lng[fila.idioma]= fila.texto;
@@ -573,7 +573,7 @@ function nuevoTextosML(){
 		params.eco = ecoNouTextosML; 
 		params.iam = 'rTextosML';
 		params.txt = utils.o2s(utils.vgk.textosML.clase2ObjDB());
-		ajaxPostTopol(params);
+		ajax.ajaxPostTopol(params);
 
 	}
 }
@@ -649,7 +649,7 @@ function ajaxGetTextosML() {
 function ecoUpdtTextosML(xhr){
 	var respTxt = xhr.responseText;
 	var loTopol = JSON.parse(respTxt);
-	utils.vgk.textosML = new rTextosML("",[]);
+	utils.vgk.textosML = new idioma.rTextosML("",[]);
 	utils.vgk.textosML.objDB2Clase(loTopol);
 	console.log('eco updt: '+utils.o2s(utils.vgk.textosML.meta));
 	utils.vgk.appPagIdiomas.malla = utils.vgk.textosML.getMatriz();
@@ -663,7 +663,7 @@ function updateTextosML(){
 		params.iam = 'rTextosML';
 		params.txt = utils.o2s(utils.vgk.textosML.clase2ObjDB());
 		params.topolId = utils.vgk.textos_id;
-		ajaxPutTopol(params);
+		ajax.ajaxPutTopol(params);
 }
 
 function grabaTextosML(){
@@ -767,7 +767,7 @@ function updateTopolsML(){
 		params.eco = ecoUpdtTopolsML; 
 		params.txt = utils.o2s(utils.vgk.topolsML.clase2ObjDB());
 		params.topolId = utils.vgk.textos_id;
-		ajaxPutTopol(params);
+		ajax.ajaxPutTopol(params);
 }
 
 function grabaTopolsML(){
