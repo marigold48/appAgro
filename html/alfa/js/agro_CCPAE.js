@@ -1161,7 +1161,42 @@ function addClasesQuadern(){
 
 }
 
+//------------------------------------------------------------------- Explotacion CCPAE
+function mkExpltCCPAE(){
+	var raiz = new ItemCCPAE('Datos '+utils.vgk.user.org);
+	var CCPAE = new agro.CCPAE('CCPAE_'+utils.vgk.user.org,[raiz]);
 
+	var portada = new topol.rNodo('Portada'); CCPAE.addNodoHijo(raiz,portada);
+	var prop = new Reg00('Propiet');CCPAE.addNodoHijo(portada,prop);
+	var tecn = new Reg00('Tecnico');CCPAE.addNodoHijo(portada,tecn);
+
+	var personal = new topol.rNodo('Personal');CCPAE.addNodoHijo(raiz,personal);
+	var pers1 = new Reg01A('Pers 1');CCPAE.addNodoHijo(personal,pers1);
+	var pers2 = new Reg01A('Pers 1');CCPAE.addNodoHijo(personal,pers2);
+	var pers3 = new Reg01A('Pers 1');CCPAE.addNodoHijo(personal,pers3);
+
+	var contrat = new topol.rNodo('Contratados');CCPAE.addNodoHijo(raiz,contrat);
+	var contr1 = new Reg01B('Contr 1');CCPAE.addNodoHijo(contrat,contr1);
+	var contr2 = new Reg01B('Contr 2');CCPAE.addNodoHijo(contrat,contr2);
+	var contr3 = new Reg01B('Contr 3');CCPAE.addNodoHijo(contrat,contr3);
+
+	var empresas = new topol.rNodo('Empresas');CCPAE.addNodoHijo(raiz,empresas);
+	var empr1 = new Reg01C('Empr 1');CCPAE.addNodoHijo(empresas,empr1);
+	var empr2 = new Reg01C('Empr 2');CCPAE.addNodoHijo(empresas,empr2);
+	var empr3 = new Reg01C('Empr 3');CCPAE.addNodoHijo(empresas,empr3);
+
+	var maquinas = new topol.rNodo('Maquinas');CCPAE.addNodoHijo(raiz,maquinas);
+	var maqn1 = new Reg01D('Máqn 1');CCPAE.addNodoHijo(maquinas,maqn1);
+	var maqn2 = new Reg01D('Máqn 2');CCPAE.addNodoHijo(maquinas,maqn2);
+	var maqn3 = new Reg01D('Máqn 3');CCPAE.addNodoHijo(maquinas,maqn3);
+
+	var mlloguer = new topol.rNodo('Maq. lloguer');CCPAE.addNodoHijo(raiz,mlloguer);
+	var llog1 = new Reg01E('Lloguer 1');CCPAE.addNodoHijo(mlloguer,llog1);
+	var llog2 = new Reg01E('Lloguer 2');CCPAE.addNodoHijo(mlloguer,llog2);
+	var llog3 = new Reg01E('Lloguer 3');CCPAE.addNodoHijo(mlloguer,llog3);
+
+	return CCPAE;
+}
 //------------------------------------------------------------------- Quadern Original
 function mkQuadern0(){
 

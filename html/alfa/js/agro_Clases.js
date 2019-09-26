@@ -1410,11 +1410,10 @@ class GanttTasks extends topol.rGrafo {
 
 //=================================================================== Explotacion
 
-
-class Explt extends topol.rArbol {
+class ArbolItems extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
-		this.meta.iam = 'Explt';
+		this.meta.iam = 'ArbolItems';
 	}
 
 	objDB2Clase(objDB){
@@ -1447,10 +1446,11 @@ class Explt extends topol.rArbol {
 
 }
 
-export class ItemExplt extends topol.rNodo {
+
+export class ItemCCPAE extends topol.rNodo {
 	constructor(tag){
 		super(tag);
-		this.iam = 'ItemExplt'
+		this.iam = 'ItemCCPAE'
 		this.obj = {
 			descripc : ''
 		}
@@ -1470,7 +1470,7 @@ export class ItemExplt extends topol.rNodo {
 
 	getNodoML(){
 		var nodoML = new rNodoClase('Finca');
-		nodoML.obj.clase = 'ItemExplt'
+		nodoML.obj.clase = 'ItemCCPAE'
 		nodoML.obj.retol =  {ES : 'Item',CAT :'Item'};
 		nodoML.obj.valid = {
 			ES : {
@@ -1487,6 +1487,19 @@ export class ItemExplt extends topol.rNodo {
 
 }
 
+class CCPAE extends ArbolItems {
+	constructor(tag,nodos){
+		super(tag,nodos);
+		this.meta.iam = 'CCPAE';
+	}
+}
+
+class Invent extends ArbolItems {
+	constructor(tag,nodos){
+		super(tag,nodos);
+		this.meta.iam = 'Invent';
+	}
+}
 
 //=================================================================== MATRIZ COMPRAS
 //------------------------------------------------------------------- Proveedor
@@ -1602,7 +1615,7 @@ function addClasesCultivos(){
 }
 
 function addClasesExplotacion(){
-	var clase = new ItemExplt('x');
+	var clase = new ItemCCPAE('x');
 	var nodoML = clase.getNodoML();
 	vgk.clasesML.addTextosEdit(nodoML);
 }
@@ -1644,6 +1657,6 @@ export default {
 	CultHorta,CultFruta,
 	Task,TaskLnk,GrafoTasks,GanttTasks,
 	rAlmanak,
-	Explt,
+	CCPAE,Invent,
 	Escenario
 }

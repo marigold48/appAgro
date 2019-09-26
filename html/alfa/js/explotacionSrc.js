@@ -1,15 +1,17 @@
 import utils  from '/k1/libK1_Utils.js'
 import ajax   from '/k1/libK1_Ajax.js'
+import topol  from '/k1/libK1_Topol.js'
 import vapps  from '/k1/libK1_vApps.js'
 
+import CCPAE from '/js/agro_CCPAE.js'
 import agro from '/js/agro_Clases.js'
 
 
-function initAppsExplt(){
-	utils.vgk.dataExplt = {};
+function initAppsExplotacion(){
+	utils.vgk.dataExplotacion = {};
 
 // define the item component
-	utils.vgk.itemExplt = Vue.component('item', {
+	utils.vgk.item = Vue.component('item', {
 		template: '#item-template',
 		props: {
 			model: Object
@@ -39,12 +41,12 @@ function initAppsExplt(){
 				addNuevoItem(this.model.id0);
 			},
 			editItem: function () {
-				var item = utils.vgk.explt.getNodoById(this.model.id0);
+				var item = utils.vgk.CCPAE.getNodoById(this.model.id0);
 				switch(item.iam){
 					case 'rNodo':
 						vapps.editaItem('NODO',item,grabaNuevoItem,borraItem);
 						break;
-					case 'ItemExplt':
+					case 'ItemCCPAE':
 						vapps.editaItem('EXPLT',item,grabaNuevoItem,borraItem);
 						break;
 					case 'Reg00':
@@ -71,46 +73,45 @@ function initAppsExplt(){
 	}) // Vue.component
 
 // boot up the demo
-utils.vgk.appExplt = new Vue({
-	el: '#explt',
+utils.vgk.appExplotacion = new Vue({
+	el: '#explotacion',
 		data: {
-			treeData: utils.vgk.dataExplt
+			treeData: utils.vgk.dataExplotacion
 		},
 	methods : {
-		actualiza : function(explt){this.treeData = explt}
+		actualiza : function(arbol){this.treeData = arbol}
 	}
 })
 
 } // function
 
 
-//===================================================================	Show/Edit Explt (Inventario)
+//===================================================================	Show/Edit CCPAE (Inventario)
 
-function showExpltVue(){
-	var vueExplt = utils.vgk.explt.reto2vue();
-	utils.vgk.appExplt.actualiza(vueExplt);
+function showExplotacion(modo){
+	utils.vgk.appExplotacion.actualiza(utils.vgk.explt.reto2vue());
 }
-//------------------------------------------------------------------- Crear Explt / Propietario
+//------------------------------------------------------------------- Crear CCPAE / Propietario
 function borraItem(){
 	alert('borraItem');
 }
 function addNuevoItem(id0){
-	var item = new ItemExplt('Nuevo');
-	var padre = utils.vgk.explt.getNodoById(id0);
-	utils.vgk.explt.addNodoHijo(padre,item);
-	showExpltVue(utils.vgk.explt);
-	updateExplt();
+	var item = new ItemCCPAE('Nuevo');
+	var padre = utils.vgk.CCPAE.getNodoById(id0);
+	utils.vgk.CCPAE.addNodoHijo(padre,item);
+	showExplotacion(utils.vgk.modoExplt);
+	updateExplotacion();
 }
 
 function grabaNuevoItem(){
 	var item = utils.vgk.appModal.item;
 
-	if (utils.vgk.appModal.editON) utils.vgk.explt.updtNodoSelf(item);
+	if (utils.vgk.appModal.editON) utils.vgk.CCPAE.updtNodoSelf(item);
 	else{ 
 		alert('No es Edit??');
 	}
-	showExpltVue(utils.vgk.explt);
-	updateExplt();
+	showExplotacion(utils.vgk.modoExplt);
+	updateExplotacion();
 	utils.vgk.appModal.show = false;
 
 }
@@ -119,20 +120,20 @@ function addNuevoHijo(){
 	var item = utils.vgk.appModal.item;
 
 	if (utils.vgk.appModal.editON){
-		var nuevo = new ItemExplt('Nuevo');
-		utils.vgk.explt.addNodoHijo(item,nuevo);
+		var nuevo = new ItemCCPAE('Nuevo');
+		utils.vgk.CCPAE.addNodoHijo(item,nuevo);
 	}
 	else{ 
 		alert('No es Edit??');
 	}
-	showExpltVue(utils.vgk.explt);
-	updateExplt();
+	showExplotacion(utils.vgk.modoExplt);
+	updateExplotacion();
 	utils.vgk.appModal.show = false;
 
 }
 
 function editItem(model){
-	var item = utils.vgk.explt.getNodoById(model.id0);
+	var item = utils.vgk.CCPAE.getNodoById(model.id0);
 	utils.vgk.appModal.item = item;
 	utils.vgk.appModal.edit_t = "ITEM";
 	utils.vgk.appModal.editON = true;
@@ -140,54 +141,52 @@ function editItem(model){
 }
 
 //------------------------------------------------------------------- Nueva Explotacion
-function ecoGrabaExplt(xhr){
+function ecoGrabaCCPAE(xhr){
 	var resp = JSON.parse(xhr.responseText);
 	utils.vgk.explt_id = resp._id;
-	console.log ('Grabado nuevo explt: ' + resp._id);
+	console.log ('Grabado nuevo CCPAE: ' + resp._id);
 	return false;
 }
 
-function grabaNuevaExplt(){
-	var raiz = new ItemExplt('Datos '+utils.vgk.user.org);
-	utils.vgk.explt = new Explt('Explt_'+utils.vgk.user.org,[raiz]);
-
-	var portada = new rNodo('Portada'); utils.vgk.explt.addNodoHijo(raiz,portada);
-	var prop = new Reg00('Propiet');utils.vgk.explt.addNodoHijo(portada,prop);
-	var tecn = new Reg00('Tecnico');utils.vgk.explt.addNodoHijo(portada,tecn);
-
-	var personal = new rNodo('Personal');utils.vgk.explt.addNodoHijo(raiz,personal);
-	var pers1 = new Reg01A('Pers 1');utils.vgk.explt.addNodoHijo(personal,pers1);
-	var pers2 = new Reg01A('Pers 1');utils.vgk.explt.addNodoHijo(personal,pers2);
-	var pers3 = new Reg01A('Pers 1');utils.vgk.explt.addNodoHijo(personal,pers3);
-
-	var contrat = new rNodo('Contratados');utils.vgk.explt.addNodoHijo(raiz,contrat);
-	var contr1 = new Reg01B('Contr 1');utils.vgk.explt.addNodoHijo(contrat,contr1);
-	var contr2 = new Reg01B('Contr 2');utils.vgk.explt.addNodoHijo(contrat,contr2);
-	var contr3 = new Reg01B('Contr 3');utils.vgk.explt.addNodoHijo(contrat,contr3);
-
-	var empresas = new rNodo('Empresas');utils.vgk.explt.addNodoHijo(raiz,empresas);
-	var empr1 = new Reg01C('Empr 1');utils.vgk.explt.addNodoHijo(empresas,empr1);
-	var empr2 = new Reg01C('Empr 2');utils.vgk.explt.addNodoHijo(empresas,empr2);
-	var empr3 = new Reg01C('Empr 3');utils.vgk.explt.addNodoHijo(empresas,empr3);
-
-	var maquinas = new rNodo('Maquinas');utils.vgk.explt.addNodoHijo(raiz,maquinas);
-	var maqn1 = new Reg01D('Máqn 1');utils.vgk.explt.addNodoHijo(maquinas,maqn1);
-	var maqn2 = new Reg01D('Máqn 2');utils.vgk.explt.addNodoHijo(maquinas,maqn2);
-	var maqn3 = new Reg01D('Máqn 3');utils.vgk.explt.addNodoHijo(maquinas,maqn3);
-
-	var mlloguer = new rNodo('Maq. lloguer');utils.vgk.explt.addNodoHijo(raiz,mlloguer);
-	var llog1 = new Reg01E('Lloguer 1');utils.vgk.explt.addNodoHijo(mlloguer,llog1);
-	var llog2 = new Reg01E('Lloguer 2');utils.vgk.explt.addNodoHijo(mlloguer,llog2);
-	var llog3 = new Reg01E('Lloguer 3');utils.vgk.explt.addNodoHijo(mlloguer,llog3);
-
-	showExpltVue();
+function grabaNuevoCCPAE(){
+	utils.vgk.explt = CCPAE.mkExpltCCPAE();
+	utils.vgk.modoExplt = 'CCPAE';
+	showExplotacion('CCPAE');
 
 	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
-	params.eco = ecoGrabaExplt; 
+	params.eco = ecoGrabaCCPAE; 
 	params.txt = utils.o2s(utils.vgk.explt.clase2ObjDB());
-	if (utils.vgk.explt_id){
-		params.topolId = utils.vgk.explt_id;
+	ajax.ajaxPostTopol(params);
+
+	utils.vgk.appModal.show = false;
+}
+
+//------------------------------------------------------------------- Nuevo Inventario
+function ecoGrabaInvent(xhr){
+	var resp = JSON.parse(xhr.responseText);
+	utils.vgk.explt_id = resp._id;
+	console.log ('Grabado nuevo inventario: ' + resp._id);
+	return false;
+}
+
+function grabaNuevoInvent(){
+	var raiz = new ItemCCPAE('Datos '+utils.vgk.user.org);
+	utils.vgk.invent = new agro.Invent('Invent_'+utils.vgk.user.org,[raiz]);
+
+	var portada = new topol.rNodo('Portada'); utils.vgk.invent.addNodoHijo(raiz,portada);
+	var prop = new Reg00('Propiet');utils.vgk.invent.addNodoHijo(portada,prop);
+	var tecn = new Reg00('Tecnico');utils.vgk.invent.addNodoHijo(portada,tecn);
+
+
+	showExplotacion('INVENT');
+
+	var params = vgApp.paramsXHR;
+	params.base = '/alfaAgro/';
+	params.eco = ecoGrabaInvent; 
+	params.txt = utils.o2s(utils.vgk.invent.clase2ObjDB());
+	if (utils.vgk.invent_id){
+		params.topolId = utils.vgk.invent_id;
 		ajax.ajaxPutTopol(params);
 	}
 	else ajax.ajaxPostTopol(params);
@@ -197,71 +196,129 @@ function grabaNuevaExplt(){
 
 //------------------------------------------------------------------- Update Explotacion
 
-function ecoUpdateExplt(xhr){
+function ecoUpdateCCPAE(xhr){
 	var resp = JSON.parse(xhr.responseText);
-	console.log('Actualizado explt: ' + resp._id);
+	console.log('Actualizado CCPAE: ' + resp._id);
 	return false;
 }
 
-function updateExplt(){
-	if (utils.vgk.explt.meta.org != utils.vgk.user.org){
-		alert('Explt sin ORG:' + utils.vgk.explt.meta.org +':'+ utils.vgk.user.org);
-		utils.vgk.explt.meta.org = utils.vgk.user.org;
-	};
-
+function updateCCPAE(){
 	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
-	params.eco = ecoUpdateExplt;
-	params.txt = utils.o2s(utils.vgk.explt.clase2ObjDB());
-	params.topolId = utils.vgk.explt_id;
+	params.eco = ecoUpdateCCPAE;
+	params.txt = utils.o2s(utils.vgk.CCPAE.clase2ObjDB());
+	params.topolId = utils.vgk.CCPAE_id;
 	ajax.ajaxPutTopol(params);
 	return false;
 }
 
-//------------------------------------------------------------------- Pick Explt
-function ecoGetUnExplt(xhr){
-		var respTxt = xhr.responseText;
-		utils.vgk.loTopol = JSON.parse(respTxt);
-		utils.vgk.explt_id = utils.vgk.loTopol._id;
-		utils.vgk.explt = new agro.Explt("",[]);
-		utils.vgk.explt.objDB2Clase(utils.vgk.loTopol);
 
-		utils.vgk.postGetLaExplt();
+function ecoUpdateInvent(xhr){
+	var resp = JSON.parse(xhr.responseText);
+	console.log('Actualizado Invent: ' + resp._id);
+	return false;
 }
 
-function getUnaExplt(_id){
-	utils.vgk.explt_id = _id;
+function updateInvent(){
+
 	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
-	params.eco = ecoGetUnExplt;
+	params.eco = ecoUpdateInvent;
+	params.txt = utils.o2s(utils.vgk.invent.clase2ObjDB());
+	params.topolId = utils.vgk.invent_id;
+	ajax.ajaxPutTopol(params);
+	return false;
+}
+
+//------------------------------------------------------------------- Pick CCPAE
+function ecoGetExplotacion(xhr){
+	console.log('ecoGetExplotacion: '+utils.vgk.modoExplt);
+	utils.vgk.loTopol = JSON.parse(xhr.responseText);
+	console.log(utils.o2s(utils.vgk.loTopol.meta));
+	utils.vgk.explt_id = utils.vgk.loTopol._id;
+	switch (utils.vgk.loTopol.meta.iam){
+		case 'Explt':
+		case 'CCPAE':
+			utils.vgk.explt = new agro.CCPAE("",[]);
+			break;
+		case 'Invent':
+			utils.vgk.explt = new agro.Invent("",[]);
+			break;
+		}
+		
+		utils.vgk.explt.objDB2Clase(utils.vgk.loTopol);
+		showExplotacion(utils.vgk.modoExplt);
+}
+
+
+//------------------------------------------------------------------- Get CCPAEs
+function getUnCCPAE(_id){
+	utils.vgk.CCPAE_id = _id;
+	var params = vgApp.paramsXHR;
+	params.base = '/alfaAgro/';
+	params.eco = ecoGetExplotacion;
 	params.topolId = _id;
 
 	ajax.ajaxGet1Topol(params);
 
 	return false;
 }
-
-function ecoGetLaExplt(xhr){
+function ecoGetCCPAEs(xhr){
 	var respTxt = xhr.responseText;
 	var objs = JSON.parse(respTxt);
 	var items = [];
 	objs.map(function(obj){
-		if (obj.meta.org == utils.vgk.user.org && obj.meta.iam == 'Explt') items.push(obj);
+		if (obj.meta.org == utils.vgk.user.org && obj.meta.iam == 'CCPAE') items.push(obj);
 	})
 	if (items.length > 0){
-		getUnaExplt(items[0]._id); // hay una sola lista
+		getUnCCPAE(items[0]._id); // hay una sola lista
 	}
 	else {
-		grabaNuevaExplt();
+		grabaNuevoCCPAE();
 	}
 }
 
-function ajaxGetLaExplt() {
 
+function ajaxGetCCPAEs() {
 	var params = vgApp.paramsXHR;
 	params.base = '/metas/';
-	params.eco = ecoGetLaExplt;
-	params.iam = 'Explt';
+	params.eco = ecoGetCCPAEs;
+	params.iam = 'CCPAE';
+
+	ajax.ajaxGetMetas(params);
+}
+//------------------------------------------------------------------- Get Invents
+function getUnInvent(_id){
+	utils.vgk.invent_id = _id;
+	var params = vgApp.paramsXHR;
+	params.base = '/alfaAgro/';
+	params.eco = ecoGetExplotacion;
+	params.topolId = _id;
+
+	ajax.ajaxGet1Topol(params);
+
+	return false;
+}
+function ecoGetInvents(xhr){
+	var respTxt = xhr.responseText;
+	var objs = JSON.parse(respTxt);
+	var items = [];
+	objs.map(function(obj){
+		if (obj.meta.org == utils.vgk.user.org && obj.meta.iam == 'Invent') items.push(obj);
+	})
+	if (items.length > 0){
+		getUnInvent(items[0]._id); // hay una sola lista
+	}
+	else {
+		grabaNuevoInvent();
+	}
+}
+
+function ajaxGetInvents() {
+	var params = vgApp.paramsXHR;
+	params.base = '/metas/';
+	params.eco = ecoGetInvents;
+	params.iam = 'Invent';
 
 	ajax.ajaxGetMetas(params);
  }
@@ -269,10 +326,22 @@ function ajaxGetLaExplt() {
 
 
 //------------------------------------------------------------------- userMenu/vueApp cascade
-function mostrarExplt(){
-	utils.vgk.treeData = utils.vgk.explt.reto2vue();
-	utils.vgk.appExplt.actualiza(utils.vgk.treeData);
+function mostrarCCPAE(){
+	utils.vgk.modoExplt = 'CCPAE';
+	ajaxGetCCPAEs();
+	console.log('Modo Explt. '+ utils.vgk.modoExplt)
+//	utils.vgk.treeData = utils.vgk.CCPAE.reto2vue();
+//	utils.vgk.appCCPAE.actualiza(utils.vgk.treeData);
 }
 
-export default {initAppsExplt,ajaxGetLaExplt,mostrarExplt}
+function mostrarInvent(){
+	utils.vgk.modoExplt = 'Invent';
+	ajaxGetInvents();
+	console.log('Modo Explt. '+ utils.vgk.modoExplt)
+//	utils.vgk.treeData = utils.vgk.invent.reto2vue();
+//	utils.vgk.appExplotacion.actualiza(utils.vgk.treeData);
+}
+
+
+export default {initAppsExplotacion,ajaxGetCCPAEs,ajaxGetInvents,mostrarCCPAE,mostrarInvent}
 

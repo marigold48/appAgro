@@ -37,11 +37,13 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Datos explotación</a>
+			<a class="navbar-brand" href="#">Explotación</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="javascript:goPag('DASH')">Inicio</a></li>
-				<li class="active"><a href="javascript:grabaNuevaExplt()">Regenera</a></li>
+				<li class="active"><a href="javascript:showCCPAE()">CCPAE</a></li>
+				<li class="active"><a href="javascript:showInventario()">Inventario</a></li>
+
 
 
 			</ul>
@@ -65,7 +67,7 @@
 
 <div class="col-md-12">
 <!-- the demo root element -->
-<ul id="explt">
+<ul id="explotacion">
 	<item class="item" :model="treeData"> </item>
 </ul>
 </div> <!-- col-md-10 -->
