@@ -113,8 +113,17 @@
 
 			<form v-else-if="edit_t === 'NODO'" class="form">
 				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="tag" placeholder="Descripc">
 				<input v-if="item.hijos.length == 0"	class="btn btn-default" type="button" value="+ Hijo" onclick = "javascript:addNuevoHijo()">
 			</form>
+
+			<form v-else-if="edit_t === 'ItemArbol'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<input class="form-control" v-model="item.obj.descripc" type="text" name="tag" placeholder="Descripc">
+				<input class="form-control" v-model="item.obj.iamHijos" type="text" name="tag" placeholder="Iam Hijos">
+				<input v-if="item.hijos.length == 0"	class="btn btn-default" type="button" value="+ Hijo" onclick = "javascript:addNuevoHijo()">
+			</form>
+
 			<form v-else-if="edit_t === 'EXPLT'" class="form">
 				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
 				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>

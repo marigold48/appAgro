@@ -68,6 +68,14 @@ function initAppsExplotacion(){
 					case 'Reg01E':
 						vapps.editaItem('REG01E',item,grabaNuevoItem,borraItem);
 						break;
+					case 'ItemCCPAE':
+						console.log('Entra por ItemCCPAE');
+						vapps.editaItem('ItemArbol',item,grabaNuevoItem,borraItem);
+						break;
+					case 'ItemInvent':
+						console.log('Entra por ItemInvent');
+						vapps.editaItem('ItemArbol',item,grabaNuevoItem,borraItem);
+						break;
 					case 'Tractor':
 						console.log('Entra por Tractor');
 						vapps.editaItem('TRACTOR',item,grabaNuevoItem,borraItem);
@@ -176,10 +184,12 @@ function ecoGrabaInvent(xhr){
 }
 
 function grabaNuevoInvent(){
-	var raiz = new ItemInvent('Datos inventario'+utils.vgk.user.org);
+	var raiz = new topol.rNodo('Datos inventario : '+utils.vgk.user.org);
 	utils.vgk.invent = new agro.Invent('Invent_'+utils.vgk.user.org,[raiz]);
 
-	var tracts = new topol.rNodo('Tractores'); utils.vgk.invent.addNodoHijo(raiz,tracts);
+	var tracts = new ItemInvent('Tractores');
+	tracts.obj.iamHijos = 'Tractor';
+	utils.vgk.invent.addNodoHijo(raiz,tracts);
 	var jdeere = new Tractor('John Deere');utils.vgk.invent.addNodoHijo(tracts,jdeere);
 	console.log(utils.o2s(jdeere));
 	var kubota = new Tractor('Kubota');utils.vgk.invent.addNodoHijo(tracts,kubota);

@@ -1452,7 +1452,8 @@ export class ItemArbol extends topol.rNodo {
 		super(tag);
 		this.iam = 'ItemArbol'
 		this.obj = {
-			descripc : ''
+			descripc : '',
+			iamHijos : ''
 		}
 	}
 
@@ -1463,23 +1464,27 @@ export class ItemArbol extends topol.rNodo {
 	}
 	
 	vale(conds){
+		console.log(utils.o2s(conds));
 		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
 		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
+		conds.valid.iamHijos.ok = utils.inputOK('DSC',this.obj.iamHijos);
 		return conds;
 	}
 
 	getNodoML(){
-		var nodoML = new rNodoClase('Finca');
-		nodoML.obj.clase = 'ItemCCPAE'
+		var nodoML = new rNodoClase('ItemArbol');
+		nodoML.obj.clase = 'ItemArbol'
 		nodoML.obj.retol =  {ES : 'Item',CAT :'Item'};
 		nodoML.obj.valid = {
 			ES : {
 				tag:'Err:Obligatorio. Deben ser letras a-z',
 				descripc:'Err: Max caracteres =  20',
+				iamHijos:'Err: Max caracteres =  20',
 			},
 			CAT : {
 				tag:'Err:Obligatori. Deuen ser lletras a-z',
 				descripc:'Err: Max caracters = 20',
+				iamHijos:'Err: Max caracters =  20',
 			}
 		};
 		return nodoML;
@@ -1491,14 +1496,36 @@ export class ItemCCPAE extends ItemArbol {
 	constructor(tag){
 		super(tag);
 		this.iam = 'ItemCCPAE'
-		this.obj = {
-			descripc : ''
-		}
 	}
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
 		this.iam = objDB.iam;
-		this.obj = objDB.obj;	
+	}
+	vale(conds){
+		console.log(utils.o2s(conds));
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
+		conds.valid.iamHijos.ok = utils.inputOK('DSC',this.obj.iamHijos);
+		return conds;
+	}
+
+	getNodoML(){
+		var nodoML = new rNodoClase('ItemCCPAE');
+		nodoML.obj.clase = 'ItemCCPAE'
+		nodoML.obj.retol =  {ES : 'Item',CAT :'Item'};
+		nodoML.obj.valid = {
+			ES : {
+				tag:'Err:Obligatorio. Deben ser letras a-z',
+				descripc:'Err: Max caracteres =  20',
+				iamHijos:'Err: Max caracteres =  20',
+			},
+			CAT : {
+				tag:'Err:Obligatori. Deuen ser lletras a-z',
+				descripc:'Err: Max caracters = 20',
+				iamHijos:'Err: Max caracters =  20',
+			}
+		};
+		return nodoML;
 	}
 }
 
@@ -1506,14 +1533,36 @@ export class ItemInvent extends ItemArbol {
 	constructor(tag){
 		super(tag);
 		this.iam = 'ItemInvent'
-		this.obj = {
-			descripc : ''
-		}
 	}
 	objDB2Clase(objDB){
 		super.objDB2Clase(objDB);
 		this.iam = objDB.iam;
-		this.obj = objDB.obj;	
+	}
+	vale(conds){
+		console.log(utils.o2s(conds));
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.descripc.ok = utils.inputOK('DSC',this.obj.descripc);
+		conds.valid.iamHijos.ok = utils.inputOK('DSC',this.obj.iamHijos);
+		return conds;
+	}
+
+	getNodoML(){
+		var nodoML = new rNodoClase('ItemInvent');
+		nodoML.obj.clase = 'ItemInvent'
+		nodoML.obj.retol =  {ES : 'Item',CAT :'Item'};
+		nodoML.obj.valid = {
+			ES : {
+				tag:'Err:Obligatorio. Deben ser letras a-z',
+				descripc:'Err: Max caracteres =  20',
+				iamHijos:'Err: Max caracteres =  20',
+			},
+			CAT : {
+				tag:'Err:Obligatori. Deuen ser lletras a-z',
+				descripc:'Err: Max caracters = 20',
+				iamHijos:'Err: Max caracters =  20',
+			}
+		};
+		return nodoML;
 	}
 }
 //-------------------------------------------------------------------Maquinas y Aperos
@@ -1690,6 +1739,11 @@ function addClasesCultivos(){
 }
 
 function addClasesExplotacion(){
+	var clase = new ItemArbol('x');
+	var nodoML = clase.getNodoML();
+	console.log(utils.o2s(nodoML));
+	utils.vgk.clasesML.addTextosEdit(nodoML);
+
 	var clase = new ItemCCPAE('x');
 	var nodoML = clase.getNodoML();
 	console.log(utils.o2s(nodoML));

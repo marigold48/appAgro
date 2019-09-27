@@ -18,6 +18,7 @@ window.rLang = rLang;
 window.rNodoClase = rNodoClase;
 
 window.ItemCCPAE  = ItemCCPAE;
+window.ItemInvent = ItemInvent;
 
 
 window.Reg00  = Reg00;
