@@ -25,7 +25,7 @@ import utils  from '/k1/libK1_Utils.js'
 import topol  from '/k1/libK1_Topol.js'
 import tempo  from '/k1/libK1_Tiempo.js'
 
-
+import ccpae from '/js/agro_CCPAE.js'
 //------------------------------------------------------------------- Fincas
 class Finca extends topol.rArbol {
 	constructor(tag,nodos){
@@ -1447,10 +1447,10 @@ class ArbolItems extends topol.rArbol {
 }
 
 
-export class ItemCCPAE extends topol.rNodo {
+export class ItemArbol extends topol.rNodo {
 	constructor(tag){
 		super(tag);
-		this.iam = 'ItemCCPAE'
+		this.iam = 'ItemArbol'
 		this.obj = {
 			descripc : ''
 		}
@@ -1487,6 +1487,80 @@ export class ItemCCPAE extends topol.rNodo {
 
 }
 
+export class ItemCCPAE extends ItemArbol {
+	constructor(tag){
+		super(tag);
+		this.iam = 'ItemCCPAE'
+		this.obj = {
+			descripc : ''
+		}
+	}
+	objDB2Clase(objDB){
+		super.objDB2Clase(objDB);
+		this.iam = objDB.iam;
+		this.obj = objDB.obj;	
+	}
+}
+
+export class ItemInvent extends ItemArbol {
+	constructor(tag){
+		super(tag);
+		this.iam = 'ItemInvent'
+		this.obj = {
+			descripc : ''
+		}
+	}
+	objDB2Clase(objDB){
+		super.objDB2Clase(objDB);
+		this.iam = objDB.iam;
+		this.obj = objDB.obj;	
+	}
+}
+//-------------------------------------------------------------------Maquinas y Aperos
+
+export class Tractor extends topol.rNodo {
+	constructor(tag){
+		super(tag);
+		this.iam = 'Tractor'
+		this.obj = {
+			descripc : '',
+			marca : '',
+			matric : '',
+			potenc : 0,
+			jarFab : ''
+		}
+	}
+	objDB2Clase(objDB){
+		super.objDB2Clase(objDB);
+		this.iam = objDB.iam;
+		this.obj = objDB.obj;	
+	}
+	vale(conds){
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.marca.ok = utils.inputOK('DSC',this.obj.marca);
+		return conds;
+	}
+
+	getNodoML(){
+		var nodoML = new rNodoClase('Tractor');
+		nodoML.obj.clase = 'Tractor'
+		nodoML.obj.retol =  {ES : 'Tractor',CAT :'Tractor'};
+		nodoML.obj.valid = {
+			ES : {
+				tag:'Err:Obligatorio. Deben ser letras a-z',
+				marca:'Err: Max caracteres =  20',
+			},
+			CAT : {
+				tag:'Err:Obligatori. Deuen ser lletras a-z',
+				marca:'Err: Max caracters = 20',
+			}
+		};
+		return nodoML;
+	}
+
+}
+
+//------------------------------------------------------------------- Arboles Explotación
 class CCPAE extends ArbolItems {
 	constructor(tag,nodos){
 		super(tag,nodos);
@@ -1500,6 +1574,7 @@ class Invent extends ArbolItems {
 		this.meta.iam = 'Invent';
 	}
 }
+
 
 //=================================================================== MATRIZ COMPRAS
 //------------------------------------------------------------------- Proveedor
@@ -1563,81 +1638,92 @@ class Compras extends topol.rMalla {
 function addClasesSuelo(){
 	var clase = new InfoFinca('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Zona('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Bancal('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClasesPlantas(){
 	var clase = new GrpHorta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new EspHorta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new VarHorta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new GrpFruta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new EspFruta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new VarFruta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClasesCultivos(){
 	var clase = new Cultivo('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new CultHorta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new CultFruta('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClasesExplotacion(){
 	var clase = new ItemCCPAE('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	console.log(utils.o2s(nodoML));
+	utils.vgk.clasesML.addTextosEdit(nodoML);
+
+	var clase = new ItemInvent('x');
+	var nodoML = clase.getNodoML();
+	console.log(utils.o2s(nodoML));
+	utils.vgk.clasesML.addTextosEdit(nodoML);
+
+	var clase = new Tractor('x');
+	var nodoML = clase.getNodoML();
+	console.log(utils.o2s(nodoML));
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClasesTasks(){
 	var clase = new TaskLnk('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Task('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClasesRiego(){
 	var clase = new Canal('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new ItemRec('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 }
 
 function addClases2Clases(){
@@ -1647,7 +1733,7 @@ function addClases2Clases(){
 	addClasesExplotacion();
 	addClasesTasks();
 	addClasesRiego();
-	addClasesQuadern(); // agro_CCPAE.js
+	ccpae.addClasesQuadern(); // agro_CCPAE.js
 }
 
 export default {
@@ -1658,5 +1744,6 @@ export default {
 	Task,TaskLnk,GrafoTasks,GanttTasks,
 	rAlmanak,
 	CCPAE,Invent,
-	Escenario
+	Escenario,
+	addClases2Clases
 }

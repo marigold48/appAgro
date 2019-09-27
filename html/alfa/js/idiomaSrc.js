@@ -3,8 +3,9 @@ import ajax   from '/k1/libK1_Ajax.js'
 import clases from '/k1/libK1_Clases.js'
 import topol  from '/k1/libK1_Topol.js'
 import vapps  from '/k1/libK1_vApps.js'
+import idioma  from '/k1/libK1_Idioma.js'
 
-
+import agro from '/js/agro_Clases.js'
 //------------------------------------------------------------------- Cambio Org
 /*
 	Se busca el documento previo de la Clase y Org tratadas (getMetasByOrg). 
@@ -256,16 +257,16 @@ function ecoNuevoClasesML(xhr){
 	utils.vgk.clasesML_id = JSON.parse(xhr.responseText)._id;
 }
 
-function creaClasesML(otro){
-	utils.vgk.clasesML = mkClasesML();
-	addClases2Clases();
+export function creaClasesML(otro){
+	utils.vgk.clasesML = idioma.mkClasesML();
+	agro.addClases2Clases();
 	
 	var params = vgApp.paramsXHR;
 	params.base = '/alfaAgro/';
 	params.eco = ecoNuevoClasesML; 
 	params.iam = 'rClasesML';
 	params.txt = utils.o2s(utils.vgk.clasesML.clase2ObjDB());
-	console.log(params.txt);
+
 	if (utils.vgk.clasesML_id){
 		params.topolId = utils.vgk.clasesML_id;
 		ajax.ajaxPutTopol(params);
@@ -369,7 +370,7 @@ function ecoGetMenusRepo(xhr){
 	})
 }
 
-function creaMenusRepo(){
+export function creaMenusRepo(){
 	var stmt = "select * from menus order by 1,2;";
 	var stmtB64 = Base64.encode(stmt);
 	var body = {
@@ -536,7 +537,7 @@ function ecoGetTextosRepo(xhr){
 	})
 }
 
-function creaTextosRepo(){
+export function creaTextosRepo(){
 	var stmt = "select * from textos order by 1,2;";
 	var stmtB64 = Base64.encode(stmt);
 	var body = {

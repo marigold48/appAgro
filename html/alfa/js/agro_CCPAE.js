@@ -145,7 +145,7 @@ export class Campanya extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Campanya');
+		var nodoML = new rNodoClase('Campanya');
 		nodoML.obj.clase = 'Campanya'
 		nodoML.obj.retol =  {ES : 'Campaña',CAT :'Campanya'};
 		nodoML.obj.valid = {
@@ -184,7 +184,7 @@ export class Reg00 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg00');
+		var nodoML = new rNodoClase('Reg00');
 		nodoML.obj.clase = 'Reg00'
 		nodoML.obj.retol =  {ES : 'Reg00',CAT :'Reg00'};
 		nodoML.obj.valid = {
@@ -226,7 +226,7 @@ export class Reg01A extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg01A');
+		var nodoML = new rNodoClase('Reg01A');
 		nodoML.obj.clase = 'Reg01A'
 		nodoML.obj.retol =  {ES : 'Reg01A',CAT :'Reg01A'};
 		nodoML.obj.valid = {
@@ -266,7 +266,7 @@ export class Reg01B extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg01B');
+		var nodoML = new rNodoClase('Reg01B');
 		nodoML.obj.clase = 'Reg01B'
 		nodoML.obj.retol =  {ES : 'Reg01B',CAT :'Reg01B'};
 		nodoML.obj.valid = {
@@ -304,7 +304,7 @@ export class Reg01C extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg01C');
+		var nodoML = new rNodoClase('Reg01C');
 		nodoML.obj.clase = 'Reg01C'
 		nodoML.obj.retol =  {ES : 'Reg01C',CAT :'Reg01C'};
 		nodoML.obj.valid = {
@@ -344,7 +344,7 @@ export class Reg01D extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg01D');
+		var nodoML = new rNodoClase('Reg01D');
 		nodoML.obj.clase = 'Reg01D'
 		nodoML.obj.retol =  {ES : 'Reg01D',CAT :'Reg01D'};
 		nodoML.obj.valid = {
@@ -384,7 +384,7 @@ export class Reg01E extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg01E');
+		var nodoML = new rNodoClase('Reg01E');
 		nodoML.obj.clase = 'Reg01E'
 		nodoML.obj.retol =  {ES : 'Reg01E',CAT :'Reg01E'};
 		nodoML.obj.valid = {
@@ -436,7 +436,7 @@ export class Reg02 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg02');
+		var nodoML = new rNodoClase('Reg02');
 		nodoML.obj.clase = 'Reg02'
 		nodoML.obj.retol =  {ES : 'Reg02',CAT :'Reg02'};
 		nodoML.obj.valid = {
@@ -509,7 +509,7 @@ export class Reg03 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg03');
+		var nodoML = new rNodoClase('Reg03');
 		nodoML.obj.clase = 'Reg03'
 		nodoML.obj.retol =  {ES : 'Reg03',CAT :'Reg03'};
 		nodoML.obj.valid = {
@@ -598,7 +598,7 @@ export class Reg04 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg04');
+		var nodoML = new rNodoClase('Reg04');
 		nodoML.obj.clase = 'Reg04'
 		nodoML.obj.retol =  {ES : 'Reg04',CAT :'Reg04'};
 		nodoML.obj.valid = {
@@ -644,7 +644,7 @@ export class Reg05A extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg05A');
+		var nodoML = new rNodoClase('Reg05A');
 		nodoML.obj.clase = 'Reg05A'
 		nodoML.obj.retol =  {ES : 'Reg05A',CAT :'Reg05A'};
 		nodoML.obj.valid = {
@@ -691,7 +691,7 @@ export class Reg05B extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg05B');
+		var nodoML = new rNodoClase('Reg05B');
 		nodoML.obj.clase = 'Reg05B'
 		nodoML.obj.retol =  {ES : 'Reg05B',CAT :'Reg05B'};
 		nodoML.obj.valid = {
@@ -748,7 +748,7 @@ export class Reg06 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg06');
+		var nodoML = new rNodoClase('Reg06');
 		nodoML.obj.clase = 'Reg06'
 		nodoML.obj.retol =  {ES : 'Reg06',CAT :'Reg06'};
 		nodoML.obj.valid = {
@@ -816,7 +816,7 @@ export class Reg07 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg07');
+		var nodoML = new rNodoClase('Reg07');
 		nodoML.obj.clase = 'Reg07'
 		nodoML.obj.retol =  {ES : 'Reg07',CAT :'Reg07'};
 		nodoML.obj.valid = {
@@ -878,7 +878,7 @@ export class Reg08 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg08');
+		var nodoML = new rNodoClase('Reg08');
 		nodoML.obj.clase = 'Reg08'
 		nodoML.obj.retol =  {ES : 'Reg08',CAT :'Reg08'};
 		nodoML.obj.valid = {
@@ -943,7 +943,7 @@ export class Reg09 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg09');
+		var nodoML = new rNodoClase('Reg09');
 		nodoML.obj.clase = 'Reg09'
 		nodoML.obj.retol =  {ES : 'Reg09',CAT :'Reg09'};
 		nodoML.obj.valid = {
@@ -993,7 +993,7 @@ export class Reg10A extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg10A');
+		var nodoML = new rNodoClase('Reg10A');
 		nodoML.obj.clase = 'Reg10A'
 		nodoML.obj.retol =  {ES : 'Reg10A',CAT :'Reg10A'};
 		nodoML.obj.valid = {
@@ -1029,7 +1029,7 @@ export class Reg10B extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg10B');
+		var nodoML = new rNodoClase('Reg10B');
 		nodoML.obj.clase = 'Reg10B'
 		nodoML.obj.retol =  {ES : 'Reg10B',CAT :'Reg10B'};
 		nodoML.obj.valid = {
@@ -1071,7 +1071,7 @@ export class Reg11 extends topol.rNodo {
 	}
 
 	getNodoML(){
-		var nodoML = new topol.rNodoClase('Reg11');
+		var nodoML = new rNodoClase('Reg11');
 		nodoML.obj.clase = 'Reg11'
 		nodoML.obj.retol =  {ES : 'Reg11',CAT :'Reg11'};
 		nodoML.obj.valid = {
@@ -1089,75 +1089,75 @@ export class Reg11 extends topol.rNodo {
 function addClasesQuadern(){
 	var clase = new Reg00('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg01A('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg01B('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg01C('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg01D('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg01E('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg02('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg03('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg04('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg05A('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg05B('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg06('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg07('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg08('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg09('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg10A('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg10B('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Reg11('x');
 	var nodoML = clase.getNodoML();
-	vgk.clasesML.addTextosEdit(nodoML);
+	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 }
 
@@ -1414,4 +1414,4 @@ function mkQuadern0(){
 	return quadern0;
 }
 
-export default {mkQuadern0, Quadern}
+export default {mkQuadern0, Quadern,addClasesQuadern}

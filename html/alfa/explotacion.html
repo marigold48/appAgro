@@ -43,6 +43,7 @@
 				<li class="active"><a href="javascript:goPag('DASH')">Inicio</a></li>
 				<li class="active"><a href="javascript:showCCPAE()">CCPAE</a></li>
 				<li class="active"><a href="javascript:showInventario()">Inventario</a></li>
+				<li class="active"><a href="javascript:regenera()">Regenera</a></li>
 
 
 
@@ -159,7 +160,7 @@
 				<input class="form-control" v-model="item.obj.fecha" type="text" name="fecha" placeholder="fecha">
 				<input class="form-control" v-model="item.obj.nROMA" type="text" name="nROMA" placeholder="nROMA">
 				<input class="form-control" v-model="item.obj.fInsp" type="text" name="fInsp" placeholder="fInsp">
-	</form>
+			</form>
 			<form v-else-if="edit_t === 'REG01E'" class="form">
 				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
 				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
@@ -168,7 +169,14 @@
 				<input class="form-control" v-model="item.obj.fecha" type="text" name="fecha" placeholder="fecha">
 				<input class="form-control" v-model="item.obj.nROMA" type="text" name="nROMA" placeholder="nROMA">
 				<input class="form-control" v-model="item.obj.fInsp" type="text" name="fInsp" placeholder="fInsp">
-		</form>
+			</form>
+
+			<form v-else-if="edit_t === 'TRACTOR'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+				<input class="form-control" v-model="item.obj.marca" type="text" name="marca" placeholder="Marca y mod.">
+				<input class="form-control" v-model="item.obj.matric" type="text" name="matric" placeholder="Matricula">
+			</form>
 
 
 		</div>
