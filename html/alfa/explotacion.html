@@ -187,6 +187,12 @@
 				<input class="form-control" v-model="item.obj.matric" type="text" name="matric" placeholder="Matricula">
 			</form>
 
+			<form v-else-if="edit_t === 'OPERARIO'" class="form">
+				<input class="form-control" v-model="item.tag" type="text" name="tag" placeholder="Tag">
+				<span class="error" v-if="(!conds.valid.tag.ok)">{{conds.valid.tag.txt}}</span>
+				<input class="form-control" v-model="item.obj.nombre" type="text" name="nombre" placeholder="Nombre">
+				<input class="form-control" v-model="item.obj.dni" type="text" name="dni" placeholder="DNI">
+			</form>
 
 		</div>
 		</modal>

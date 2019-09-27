@@ -1409,7 +1409,15 @@ class GanttTasks extends topol.rGrafo {
 }
 
 //=================================================================== Explotacion
+/* Para definir las tareas, se define el Inventario de la explotación
+	En principio: Tractores, Aperos y Operarios.
+	Mediante matrices, se asocian Operarios x Aperos y Aperos x Tractores
+	Al crear el Agro - Sudoku, se tienen en cuenta estas restricciones
 
+	Tanto el Inventario como los registros por defecto del Quadern (CCPAE), 
+	se implementan como un Arbol de Items, y se comparte la funcionalidad de este
+
+*/
 class ArbolItems extends topol.rArbol {
 	constructor(tag,nodos){
 		super(tag,nodos);
@@ -1609,6 +1617,50 @@ export class Tractor extends topol.rNodo {
 
 }
 
+//------------------------------------------------------------------- Operarios
+
+export class Operario extends topol.rNodo {
+	constructor(tag){
+		super(tag);
+		this.iam = 'Operario'
+		this.obj = {
+			nombre : '',
+			dni : '',
+		}
+	}
+	objDB2Clase(objDB){
+		super.objDB2Clase(objDB);
+		this.iam = objDB.iam;
+		this.obj = objDB.obj;	
+	}
+	vale(conds){
+		conds.valid.tag.ok =  utils.inputOK('TAG',this.tag);
+		conds.valid.nombre.ok = utils.inputOK('DSC',this.obj.nombre);
+		conds.valid.dni.ok = utils.inputOK('DSC',this.obj.dni);
+		return conds;
+	}
+
+	getNodoML(){
+		var nodoML = new rNodoClase('Operario');
+		nodoML.obj.clase = 'Operario'
+		nodoML.obj.retol =  {ES : 'Operario',CAT :'Operari'};
+		nodoML.obj.valid = {
+			ES : {
+				tag:'Err:Obligatorio. Deben ser letras a-z',
+				nombre:'Err: Max caracteres =  20',
+				dni:'Err: Max caracteres =  20',
+			},
+			CAT : {
+				tag:'Err:Obligatori. Deuen ser lletras a-z',
+				nombre:'Err: Max caracters = 20',
+				dni:'Err: Max caracters = 20',
+			}
+		};
+		return nodoML;
+	}
+
+}
+
 //------------------------------------------------------------------- Arboles Explotación
 class CCPAE extends ArbolItems {
 	constructor(tag,nodos){
@@ -1755,6 +1807,11 @@ function addClasesExplotacion(){
 	utils.vgk.clasesML.addTextosEdit(nodoML);
 
 	var clase = new Tractor('x');
+	var nodoML = clase.getNodoML();
+	console.log(utils.o2s(nodoML));
+	utils.vgk.clasesML.addTextosEdit(nodoML);
+
+	var clase = new Operario('x');
 	var nodoML = clase.getNodoML();
 	console.log(utils.o2s(nodoML));
 	utils.vgk.clasesML.addTextosEdit(nodoML);

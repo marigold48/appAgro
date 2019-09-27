@@ -80,6 +80,10 @@ function initAppsExplotacion(){
 						console.log('Entra por Tractor');
 						vapps.editaItem('TRACTOR',item,grabaNuevoItem,borraItem);
 						break;
+					case 'Operario':
+						console.log('Entra por Operario');
+						vapps.editaItem('OPERARIO',item,grabaNuevoItem,borraItem);
+						break;
 				}
 			}
 		} // methods
@@ -195,6 +199,15 @@ function grabaNuevoInvent(){
 	var kubota = new Tractor('Kubota');utils.vgk.invent.addNodoHijo(tracts,kubota);
 	console.log(utils.o2s(kubota));
 
+	var opers = new ItemInvent('Operarios');
+	opers.obj.iamHijos = 'Operario';
+	utils.vgk.invent.addNodoHijo(raiz,opers);
+	var pepe = new Operario('Pepe');
+	pepe.obj = {nombre:'Jose Garcia',dni:'12345678X'}
+	utils.vgk.invent.addNodoHijo(opers,pepe);
+	var juan = new Operario('Juan');
+	juan.obj = {nombre:'Juan Sanchez',dni:'56781234K'}
+	utils.vgk.invent.addNodoHijo(opers,juan);
 
 	showExplotacion('INVENT');
 
