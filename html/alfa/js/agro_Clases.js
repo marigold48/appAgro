@@ -1735,6 +1735,20 @@ class Compras extends topol.rMalla {
 	}
 }
 
+//------------------------------------------------------------------- Malla Operario/Apero
+class MallaOA extends topol.rMallaTree {
+	constructor (nombre,nodos){
+		super(nombre,nodos);
+		this.meta.iam = 'MallaOA';
+		this.meta.org = utils.vgk.user.org;
+	}
+
+	objDB2Clase(objDB){
+		super.objDB2Clase(objDB);
+		this.meta = objDB.meta;
+	}
+}
+
 //===================================================================  Add Clases a Idiomas
 function addClasesSuelo(){
 	var clase = new InfoFinca('x');
@@ -1854,7 +1868,7 @@ export default {
 	CultHorta,CultFruta,
 	Task,TaskLnk,GrafoTasks,GanttTasks,
 	rAlmanak,
-	CCPAE,Invent,
+	CCPAE,Invent,MallaOA,
 	Escenario,
 	addClases2Clases
 }

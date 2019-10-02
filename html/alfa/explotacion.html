@@ -44,6 +44,13 @@
 				<li class="active"><a href="javascript:showCCPAE()">CCPAE</a></li>
 				<li class="active"><a href="javascript:showInventario()">Inventario</a></li>
 				<li class="active"><a href="javascript:regenera()">Regenera</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="MALLAS"> Matrices</span>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:malla_OxA()">Operarios/Aperos</a></li>
+					</ul>
+				</li>
 
 
 
@@ -74,6 +81,17 @@
 </div> <!-- col-md-10 -->
 
 </div> <!--row -->
+
+<div class="row">
+	<div id="appMalla">
+		<div>{{tabla.length}}</div>
+		<table class="table">
+			<tr v-for="(fila,ixRow) in tabla">
+				<td v-for="(campo,ixCol) in fila" @click="onOff(ixRow,ixCol)">{{campo}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
 </div> <!-- container -->
 
 <script type="text/x-template" id="item-template">
