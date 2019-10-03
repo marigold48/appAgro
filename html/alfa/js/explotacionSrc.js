@@ -105,9 +105,10 @@ function initAppsExplotacion(){
 			tabla : []
 		},
 		methods : {
-			onOff : function(row,col){
-				if (!row || !col) return;
-				else console.log('On Off '+row+','+col);
+			onOff : function(iRow,iCol){
+				if (!iRow || !iCol) return;
+				utils.vgk.mallaOA.onOff(iRow,iCol);
+				utils.vgk.appMalla.tabla = utils.vgk.mallaOA.getMatrizVue();
 			}
 		}
 	})
@@ -357,7 +358,7 @@ function ajaxGetInvents() {
 
 
 
-//------------------------------------------------------------------- userMenu/vueApp cascade
+//------------------------------------------------------------------- Mostrar
 function mostrarCCPAE(){
 	utils.vgk.modoExplt = 'CCPAE';
 	ajaxGetCCPAEs();
@@ -392,6 +393,7 @@ function malla_OxA(){
 		var nudo33 = new topol.rNudo('Nudo 3-3',row3,col3,0);	mallaOA.addNudo(nudo33);
 		
 		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue();
+		utils.vgk.mallaOA = mallaOA;
 	}
 
 

@@ -1747,6 +1747,21 @@ class MallaOA extends topol.rMallaTree {
 		super.objDB2Clase(objDB);
 		this.meta = objDB.meta;
 	}
+
+	onOff(iRow,iCol){
+		var cols = this.getNodosCols();
+		var rows = this.getNodosRows();
+		var row = rows[iRow-1];
+		console.log('Row: '+row.tag);
+		var col = cols[iCol-1];
+		console.log('Col: '+col.tag);
+		var nudo = this.getNudoByIds(row.id0,col.id0);
+		if (nudo) this.borraNudo(nudo);
+		else {
+			var nudo = new topol.rNudo('Nudo '+iRow+'-'+iCol,row,col,0);
+			this.addNudo(nudo);
+		}
+	}
 }
 
 //===================================================================  Add Clases a Idiomas
