@@ -105,10 +105,11 @@ function initAppsExplotacion(){
 			tabla : []
 		},
 		methods : {
+			grabaMallaOA(){alert('grabaMallaOA')},
 			onOff : function(iRow,iCol){
 				if (!iRow || !iCol) return;
 				utils.vgk.mallaOA.onOff(iRow,iCol);
-				utils.vgk.appMalla.tabla = utils.vgk.mallaOA.getMatrizVue();
+				utils.vgk.appMalla.tabla = utils.vgk.mallaOA.getMatrizVue(true);
 			}
 		}
 	})
@@ -376,9 +377,9 @@ function mostrarInvent(){
 }
 
 //------------------------------------------------------------------- Malla Operarios/Aperos
-function malla_OxA(){
+function old_malla_OxA(){
 	if (utils.vgk.modoExplt == 'INVENT'){
-		var raiz = new topol.rNodo('Raiz');
+		var raiz = new topol.rNodo('Op/Aperos');
 		var mallaOA = new agro.MallaOA('MallaOA_'+utils.vgk.user.org,[raiz]);
 		var row1 = new topol.rNodo('Row 1'); mallaOA.addNodoRow(row1);
 		var row2 = new topol.rNodo('Row 2'); mallaOA.addNodoRow(row2);
@@ -392,11 +393,34 @@ function malla_OxA(){
 		var nudo22 = new topol.rNudo('Nudo 2-2',row2,col2,0);	mallaOA.addNudo(nudo22);
 		var nudo33 = new topol.rNudo('Nudo 3-3',row3,col3,0);	mallaOA.addNudo(nudo33);
 		
-		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue();
+		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
 		utils.vgk.mallaOA = mallaOA;
 	}
+}
 
 
+function malla_OxA(){
+	var rows = [];
+	var cols = [];
+	var raspa = utils.vgk.explt.getRaspa();
+	raspa.map(function(nodo){
+		     if (nodo.obj.iamHijos == 'Tractor') rows = utils.vgk.explt.getHijosNodo(nodo);
+		else if (nodo.obj.iamHijos == 'Operario') cols = utils.vgk.explt.getHijosNodo(nodo);
+	})
+	var raiz = new topol.rNodo('Op/Aperos');
+	var mallaOA = new agro.MallaOA('MallaOA_'+utils.vgk.user.org,[raiz]);
+
+	rows.map(function(row){
+		mallaOA.addNodoRow(row);
+	})
+
+	console.log(utils.o2s(cols));
+	cols.map(function(col){
+		mallaOA.addNodoCol(col);
+	})
+
+	utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
+	utils.vgk.mallaOA = mallaOA;
 }
 
 export default {

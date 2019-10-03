@@ -84,10 +84,10 @@
 
 <div class="row">
 	<div id="appMalla">
-		<div>{{tabla.length}}</div>
+		<button v-if="tabla.length" class="button" @click="grabaMallaOA()">Grabar</button>
 		<table class="table">
 			<tr v-for="(fila,ixRow) in tabla">
-				<td v-for="(campo,ixCol) in fila" @click="onOff(ixRow,ixCol)">{{campo}}</td>
+				<td v-for="(campo,ixCol) in fila" @click="onOff(ixRow,ixCol)" v-html="campo"></td>
 			</tr>
 		</table>
 	</div>
