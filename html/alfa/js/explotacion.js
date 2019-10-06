@@ -4,6 +4,7 @@ import vapps  from '/k1/libK1_vApps.js'
 import idioma from '/k1/libK1_Idioma.js'
 
 import src    from '/js/explotacionSrc.js'
+
 import {ItemCCPAE,ItemInvent,Tractor,Operario} from '/js/agro_Clases.js'
 
 import {rKeos,rLang,rNodoClase,rTxtML,rDim} from '/k1/libK1_Clases.js'
@@ -50,3 +51,4 @@ window.onload = initExplotacion;
 window.showCCPAE = src.mostrarCCPAE;
 window.showInventario = src.mostrarInvent;
 window.regenera = src.regenera;
+window.malla_OxA = src.malla_OxA;

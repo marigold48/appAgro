@@ -8,68 +8,14 @@
 	<script type='text/javascript' src="lib/vue_2517.js"></script>
 
 	<!--  ==================== Librerias kernel =====================  -->
-	<script type='text/javascript' src='k1/libK1_Topol.js'></script>
-	<script type='text/javascript' src='k1/libK1_Utils.js'></script>
+	<script type='module' src='js/pbaMallaTree.js'></script>
 	<script>
 
 
-		function init(){
-
-		var appMalla = new Vue({
-			el: "#appMalla",
-			data:{
-		    tabla : []
-		  }
-		})
-
-		class myMalla extends rMallaTree{
-			constructor(tag,nodos){
-				super(tag,nodos);
-				this.meta.tag = 'myMalla';
-				this.init();
-			}
-
-			init(){
-				var raiz = this.getRaiz();
-				console.log('Raiz: '+o2s(raiz));
-				var rows = new rNodo('Rows'); rows.cod = 'ROWS';
-				var cols = new rNodo('Cols'); cols.cod = 'COLS';
-				var nudos = new rNodo('Nudos'); nudos.cod = 'NUDOS';
-
-				this.addNodoHijo(raiz,rows);
-				this.addNodoHijo(raiz,cols);
-				this.addNodoHijo(raiz,nudos);
-
-			}
-
-		}
-			var raiz = new rNodo('Raiz');
-			var malla = new myMalla('Malla1',[raiz]);
-			var rows = new rNodo('Rows'); rows.cod = 'ROWS';
-			var cols = new rNodo('Cols'); cols.cod = 'COLS';
-			var nudos = new rNodo('Nudos'); nudos.cod = 'NUDOS';
-
-			malla.addNodoHijo(raiz,rows);
-			malla.addNodoHijo(raiz,cols);
-			malla.addNodoHijo(raiz,nudos);
-
-			var row1 = new rNodo('Row 1');
-			var col1 = new rNodo('Col 1');
-			var nudo11 = new rNudo('Nudo 1.1',row1,col1,0,0);
-			console.log(o2s(row1));
-			console.log(o2s(col1));
-			console.log(o2s(nudo11)+':'+nudo11.getId0Real());
-			malla.addNodoRow(row1);
-			malla.addNodoCol(col1);
-			malla.addNudo(nudo11);
-			var matriz = malla.getMatrizVue()
-			console.log(o2s(matriz));
-			appMalla.tabla = matriz;
-		}
 	</script>
 </head>
 
-<body onload='init()'>
+<body>
 	<div id="appMalla">
 		<div>{{tabla.length}}</div>
 		<table>

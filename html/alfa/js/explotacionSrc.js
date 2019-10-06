@@ -89,16 +89,30 @@ function initAppsExplotacion(){
 		} // methods
 	}) // Vue.component
 
-// boot up the demo
-utils.vgk.appExplotacion = new Vue({
-	el: '#explotacion',
-		data: {
-			treeData: utils.vgk.dataExplotacion
+	utils.vgk.appExplotacion = new Vue({
+		el: '#explotacion',
+			data: {
+				treeData: utils.vgk.dataExplotacion
+			},
+		methods : {
+			actualiza : function(arbol){this.treeData = arbol}
+		}
+	})
+
+	utils.vgk.appMalla = new Vue({
+		el: "#appMalla",
+		data:{
+			tabla : []
 		},
-	methods : {
-		actualiza : function(arbol){this.treeData = arbol}
-	}
-})
+		methods : {
+			grabaMallaOA(){alert('grabaMallaOA')},
+			onOff : function(iRow,iCol){
+				if (!iRow || !iCol) return;
+				utils.vgk.mallaOA.onOff(iRow,iCol);
+				utils.vgk.appMalla.tabla = utils.vgk.mallaOA.getMatrizVue(true);
+			}
+		}
+	})
 
 } // function
 
@@ -113,8 +127,9 @@ function borraItem(){
 	alert('borraItem');
 }
 function addNuevoItem(id0){
-	var item = new ItemCCPAE('Nuevo');
 	var padre = utils.vgk.explt.getNodoById(id0);
+	console.log('addNuevoItem: '+ utils.o2s(padre));
+	var item = eval('new '+padre.obj.iamHijos);
 	utils.vgk.explt.addNodoHijo(padre,item);
 	showExplotacion(utils.vgk.modoExplt);
 	updateExplotacion();
@@ -151,10 +166,7 @@ function addNuevoHijo(){
 
 function editItem(model){
 	var item = utils.vgk.explt.getNodoById(model.id0);
-	utils.vgk.appModal.item = item;
-	utils.vgk.appModal.edit_t = "ITEM";
-	utils.vgk.appModal.editON = true;
-	utils.vgk.appModal.show = true;
+	vapps.editaItem('ITEM',item,grabaNuevoItem,borraItem);
 }
 
 //------------------------------------------------------------------- Nueva Explotacion
@@ -347,7 +359,7 @@ function ajaxGetInvents() {
 
 
 
-//------------------------------------------------------------------- userMenu/vueApp cascade
+//------------------------------------------------------------------- Mostrar
 function mostrarCCPAE(){
 	utils.vgk.modoExplt = 'CCPAE';
 	ajaxGetCCPAEs();
@@ -364,6 +376,56 @@ function mostrarInvent(){
 //	utils.vgk.appExplotacion.actualiza(utils.vgk.treeData);
 }
 
+//------------------------------------------------------------------- Malla Operarios/Aperos
+function old_malla_OxA(){
+	if (utils.vgk.modoExplt == 'INVENT'){
+		var raiz = new topol.rNodo('Op/Aperos');
+		var mallaOA = new agro.MallaOA('MallaOA_'+utils.vgk.user.org,[raiz]);
+		var row1 = new topol.rNodo('Row 1'); mallaOA.addNodoRow(row1);
+		var row2 = new topol.rNodo('Row 2'); mallaOA.addNodoRow(row2);
+		var row3 = new topol.rNodo('Row 3'); mallaOA.addNodoRow(row3);
 
-export default {initAppsExplotacion,ajaxGetCCPAEs,ajaxGetInvents,mostrarCCPAE,mostrarInvent,regenera}
+		var col1 = new topol.rNodo('Col 1'); mallaOA.addNodoCol(col1);
+		var col2 = new topol.rNodo('Col 2'); mallaOA.addNodoCol(col2);
+		var col3 = new topol.rNodo('Col 3'); mallaOA.addNodoCol(col3);
+
+		var nudo11 = new topol.rNudo('Nudo 1-1',row1,col1,0);	mallaOA.addNudo(nudo11);
+		var nudo22 = new topol.rNudo('Nudo 2-2',row2,col2,0);	mallaOA.addNudo(nudo22);
+		var nudo33 = new topol.rNudo('Nudo 3-3',row3,col3,0);	mallaOA.addNudo(nudo33);
+		
+		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
+		utils.vgk.mallaOA = mallaOA;
+	}
+}
+
+
+function malla_OxA(){
+	var rows = [];
+	var cols = [];
+	var raspa = utils.vgk.explt.getRaspa();
+	raspa.map(function(nodo){
+		     if (nodo.obj.iamHijos == 'Tractor') rows = utils.vgk.explt.getHijosNodo(nodo);
+		else if (nodo.obj.iamHijos == 'Operario') cols = utils.vgk.explt.getHijosNodo(nodo);
+	})
+	var raiz = new topol.rNodo('Op/Aperos');
+	var mallaOA = new agro.MallaOA('MallaOA_'+utils.vgk.user.org,[raiz]);
+
+	rows.map(function(row){
+		mallaOA.addNodoRow(row);
+	})
+
+	console.log(utils.o2s(cols));
+	cols.map(function(col){
+		mallaOA.addNodoCol(col);
+	})
+
+	utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
+	utils.vgk.mallaOA = mallaOA;
+}
+
+export default {
+	initAppsExplotacion,
+	ajaxGetCCPAEs,ajaxGetInvents,
+	mostrarCCPAE,mostrarInvent,regenera,malla_OxA
+}
 
