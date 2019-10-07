@@ -1753,6 +1753,7 @@ class MallaOA extends topol.rMallaTree {
 		var rows = this.getNodosRows();
 		var row = rows[iRow-1];
 		var col = cols[iCol-1];
+		console.log('onOff: '+row.id0+':'+col.id0);
 		var nudo = this.getNudoByIds(row.id0,col.id0);
 		if (nudo) this.borraNudo(nudo);
 		else {

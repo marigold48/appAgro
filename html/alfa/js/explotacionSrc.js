@@ -105,7 +105,7 @@ function initAppsExplotacion(){
 			tabla : []
 		},
 		methods : {
-			grabaMallaOA(){alert('grabaMallaOA')},
+			grabaMallaOA(){updateMallaOA()},
 			onOff : function(iRow,iCol){
 				if (!iRow || !iCol) return;
 				utils.vgk.mallaOA.onOff(iRow,iCol);
@@ -344,7 +344,7 @@ function ecoGetInvents(xhr){
 	else if (items.length== 1){getUnInvent(items[0]._id);}  // hay una sola lista
 	else {
 		alert ('Hay varios !!!');
-		getUnInvente(items[0]._id);
+		getUnInvent(items[0]._id);
 	}
 }
 
@@ -377,7 +377,7 @@ function mostrarInvent(){
 }
 
 //------------------------------------------------------------------- Malla Operarios/Aperos
-function old_malla_OxA(){
+function demo_malla_OxA(){
 	if (utils.vgk.modoExplt == 'INVENT'){
 		var raiz = new topol.rNodo('Op/Aperos');
 		var mallaOA = new agro.MallaOA('MallaOA_'+utils.vgk.user.org,[raiz]);
@@ -393,13 +393,91 @@ function old_malla_OxA(){
 		var nudo22 = new topol.rNudo('Nudo 2-2',row2,col2,0);	mallaOA.addNudo(nudo22);
 		var nudo33 = new topol.rNudo('Nudo 3-3',row3,col3,0);	mallaOA.addNudo(nudo33);
 		
-		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
+		utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);  // true : presenta los simbolos de check/no-check
 		utils.vgk.mallaOA = mallaOA;
 	}
 }
 
 
+function ecoUpdateMallaOA(xhr){
+	var resp = JSON.parse(xhr.responseText);
+	utils.vgk.mallaOA_id = resp._id;
+	console.log('Actualizado: ' + resp.meta.tag+ ' :: ' +resp._id);
+	return false;
+}
+
+function updateMallaOA(){
+	var params = vgApp.paramsXHR;
+	params.base = '/alfaAgro/';
+	params.eco = ecoUpdateMallaOA;
+	params.txt = utils.o2s(utils.vgk.mallaOA.clase2ObjDB());
+	if (utils.vgk.mallaOA_id){
+		params.topolId = utils.vgk.mallaOA_id;
+		ajax.ajaxPutTopol(params);
+	}
+	else ajax.ajaxPostTopol(params);
+	return false;
+}
+
+function ecoGetMallaOA(xhr){
+	utils.vgk.loTopol = JSON.parse(xhr.responseText);
+	console.log(utils.o2s(utils.vgk.loTopol.meta));
+	utils.vgk.mallaOA_id = utils.vgk.loTopol._id;
+	utils.vgk.mallaOA = new agro.MallaOA("",[]);
+
+	utils.vgk.mallaOA.objDB2Clase(utils.vgk.loTopol);
+	
+	var nudos= utils.vgk.mallaOA.getNudos();
+	nudos.map(function(nudo){
+		console.log(utils.o2s(nudo));
+	})
+
+	utils.vgk.appMalla.tabla = utils.vgk.mallaOA.getMatrizVue(true);
+}
+
+
+function get1mallaOA(_id){
+	utils.vgk.invent_id = _id;
+	var params = vgApp.paramsXHR;
+	params.base = '/alfaAgro/';
+	params.eco = ecoGetMallaOA;
+	params.topolId = _id;
+
+	ajax.ajaxGet1Topol(params);
+
+	return false;
+}
+function ecoGetMallasOA(xhr){
+	var respTxt = xhr.responseText;
+	var objs = JSON.parse(respTxt);
+	var items = [];
+	objs.map(function(obj){
+		if (obj.meta.org == utils.vgk.user.org && obj.meta.iam == 'MallaOA') items.push(obj);
+	})
+	if (!items.length){
+		var ok = confirm('No existe Malla Op/Aperos. Crearla?');
+		if (ok)	nuevaMallaOA();
+	}
+	else if (items.length== 1){get1mallaOA(items[0]._id);}  // hay una sola lista
+	else {
+		alert ('Hay varios !!!');
+		get1mallaOA(items[0]._id);
+	}
+}
+
+function ajaxGetMallasOA() {
+	var params = vgApp.paramsXHR;
+	params.base = '/metas/';
+	params.eco = ecoGetMallasOA;
+	params.iam = 'MallaOA';
+
+	ajax.ajaxGetMetas(params);
+ }
+
 function malla_OxA(){
+	ajaxGetMallasOA();
+}
+function nuevaMallaOA(){
 	var rows = [];
 	var cols = [];
 	var raspa = utils.vgk.explt.getRaspa();
@@ -421,8 +499,10 @@ function malla_OxA(){
 
 	utils.vgk.appMalla.tabla = mallaOA.getMatrizVue(true);
 	utils.vgk.mallaOA = mallaOA;
-}
 
+	updateMallaOA();
+}
+//------------------------------------------------------------------- Export default
 export default {
 	initAppsExplotacion,
 	ajaxGetCCPAEs,ajaxGetInvents,
